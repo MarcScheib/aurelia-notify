@@ -1,0 +1,26 @@
+{
+  "name": "aurelia-notification",
+  "version": "0.0.1",
+  "description": "A notification plugin for Aurelia.",
+  "keywords": [
+    "aurelia",
+    "notification",
+    "plugin"
+  ],
+  "homepage": "http://aurelia.io",
+  "license": "MIT",
+  "authors": [
+    "Marc Scheib <marc.scheib@cycrilab.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarcScheib/aurelia-notification"
+  },
+  "dependencies": {
+    "aurelia-dependency-injection": "^1.0.0-beta.1",
+    "aurelia-framework": "^1.0.0-beta.1",
+    "aurelia-metadata": "^1.0.0-beta.1",
+    "aurelia-pal": "^1.0.0-beta.1",
+    "aurelia-templating": "^1.0.0-beta.1"
+  }
+}
