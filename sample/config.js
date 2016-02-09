@@ -4,12 +4,26 @@ System.config({
   babelOptions: {
     "optional": [
       "runtime",
-      "optimisation.modules.system"
+      "optimisation.modules.system",
+      "es7.decorators",
+      "es7.classProperties"
     ]
   },
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
+  },
+
+  packages: {
+    "/aurelia-notification": {
+      "main": "index",
+      "dependencies": {
+        "aurelia-framework": "npm:aurelia-framework@1.0.0-beta.1.0.2",
+        "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.0.0-beta.1",
+        "aurelia-metadata": "npm:aurelia-metadata@1.0.0-beta.1",
+        "aurelia-templating": "npm:aurelia-templating@1.0.0-beta.1"
+      }
+    }
   },
 
   map: {
