@@ -1,18 +1,12 @@
 # aurelia-notification
 
-[![Join the chat at https://gitter.im/aurelia/discuss](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aurelia/discuss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 A notification plugin for [Aurelia](http://www.aurelia.io/).
-
-> To keep up to date on [Aurelia](http://www.aurelia.io/), please visit and subscribe to [the official blog](http://blog.durandal.io/). If you have questions, we invite you to [join us on Gitter](https://gitter.im/aurelia/discuss). If you would like to have deeper insight into our development process, please install the [ZenHub](https://zenhub.io) Chrome Extension and visit any of our repository's boards. You can get an overview of all Aurelia work by visiting [the framework board](https://github.com/aurelia/framework#boards).
-
-## Documentation
 
 ## Dependencies
 
 ## Used By
 
-This library isn't used by Aurelia. It is an optional plugin.
+This library is a plugin and not used by the core framework.
 
 ## Platform Support
 
@@ -61,9 +55,31 @@ To run the unit tests, first ensure that you have followed the steps above in or
   ```shell
   jspm install
   ```
+4. Ensure that you have Chrome installed. Karma runs the test suite in Chrome.
 
-4. You can now run the tests with this command:
+5. You can now run the tests with this command:
 
   ```shell
   karma start
   ```
+
+## Running The Sample
+
+To run the sample code using this plugin proceed with these additional steps:
+
+1. Go to the `sample` directory and install dependencies using `jspm`:
+
+  ```shell
+  cd sample
+  jspm install
+  ```
+2. Go back to the root of the project and use gulp to serve the sample project:
+
+  ```shell
+  cd ..
+  gulp watch
+  ```
+
+## Documentation
+
+Coming Soon.
