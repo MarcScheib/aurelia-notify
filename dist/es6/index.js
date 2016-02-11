@@ -1,5 +1,8 @@
 export * from './notification-service';
+export * from './notification';
 
 export function configure(config) {
-  config.globalResources('./notifications');
+  config.globalResources(
+    './notification'
+  );
 }

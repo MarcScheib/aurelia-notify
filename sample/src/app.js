@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import {NotificationService} from 'aurelia-notification';
+import {NotificationService, Notification} from 'aurelia-notification';
 
 @inject(NotificationService)
 export class App {
@@ -7,7 +7,7 @@ export class App {
     this.notificationService = notificationService;
   }
 
-  submit(){
-    this.notificationService.info("blub");
+  submit() {
+    this.notificationService.notify({ viewModel: Notification, model: 'Johohoo'});
   }
 }

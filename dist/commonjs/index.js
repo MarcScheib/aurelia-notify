@@ -11,6 +11,10 @@ var _notificationService = require('./notification-service');
 
 _defaults(exports, _interopExportWildcard(_notificationService, _defaults));
 
+var _notification = require('./notification');
+
+_defaults(exports, _interopExportWildcard(_notification, _defaults));
+
 function configure(config) {
-  config.globalResources('./notifications');
+  config.globalResources('./notification');
 }

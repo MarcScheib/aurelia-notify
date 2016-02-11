@@ -1,4 +1,4 @@
-define(['exports', './notification-service'], function (exports, _notificationService) {
+define(['exports', './notification-service', './notification'], function (exports, _notificationService, _notification) {
   'use strict';
 
   exports.__esModule = true;
@@ -10,7 +10,9 @@ define(['exports', './notification-service'], function (exports, _notificationSe
 
   _defaults(exports, _interopExportWildcard(_notificationService, _defaults));
 
+  _defaults(exports, _interopExportWildcard(_notification, _defaults));
+
   function configure(config) {
-    config.globalResources('./notifications');
+    config.globalResources('./notification');
   }
 });
