@@ -1,7 +1,7 @@
 System.register(['aurelia-framework', './notification-controller'], function (_export) {
   'use strict';
 
-  var inject, NotificationController, Notification;
+  var inject, NotificationController, BSNotification;
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -12,23 +12,24 @@ System.register(['aurelia-framework', './notification-controller'], function (_e
       NotificationController = _notificationController.NotificationController;
     }],
     execute: function () {
-      Notification = (function () {
-        function Notification(controller) {
-          _classCallCheck(this, _Notification);
+      BSNotification = (function () {
+        function BSNotification(controller) {
+          _classCallCheck(this, _BSNotification);
 
           this.controller = controller;
         }
 
-        Notification.prototype.activate = function activate(notification) {
-          this.notification = notification;
+        BSNotification.prototype.activate = function activate(model) {
+          this.level = model.level;
+          this.notification = model.notification;
         };
 
-        var _Notification = Notification;
-        Notification = inject(NotificationController)(Notification) || Notification;
-        return Notification;
+        var _BSNotification = BSNotification;
+        BSNotification = inject(NotificationController)(BSNotification) || BSNotification;
+        return BSNotification;
       })();
 
-      _export('Notification', Notification);
+      _export('BSNotification', BSNotification);
     }
   };
 });
