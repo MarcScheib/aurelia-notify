@@ -30,6 +30,11 @@ System.register(['aurelia-templating'], function (_export) {
             _this.notificationControllers.push(notificationController);
             notificationController.slot.attached();
 
+            var timeout = 2000;
+            if (timeout > 0) {
+              setTimeout(notificationController.close.bind(notificationController), timeout);
+            }
+
             return Promise.resolve();
           };
 

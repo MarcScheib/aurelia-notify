@@ -16,6 +16,11 @@ export class NotificationRenderer {
       this.notificationControllers.push(notificationController);
       notificationController.slot.attached();
 
+      let timeout = 2000;
+      if (timeout > 0) {
+        setTimeout(notificationController.close.bind(notificationController), timeout);
+      }
+
       return Promise.resolve();
     };
 
