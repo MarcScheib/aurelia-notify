@@ -29,7 +29,7 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
     NotificationService.prototype.notify = function notify(settings) {
       var _this = this;
 
-      var _settings = Object.assign({}, settings);
+      var _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
       return new Promise(function (resolve, reject) {
         var notificationController = new _notificationController.NotificationController(_this.notificationRenderer, _settings, resolve, reject);

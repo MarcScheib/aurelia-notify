@@ -1,13 +1,22 @@
 import {ViewSlot} from 'aurelia-templating';
 
+export let globalSettings = {
+  notificationHost: document.body,
+  timeout: 10000
+};
+
 export class NotificationRenderer {
+  defaultSettings = globalSettings;
+
   constructor() {
     this.notificationControllers = [];
   }
 
   createNotificationHost(notificationController) {
+    let settings = notificationController.settings;
     let notificationContainer = document.createElement('notification-container');
-    document.body.appendChild(notificationContainer);
+
+    settings.notificationHost.appendChild(notificationContainer);
 
     notificationController.slot = new ViewSlot(notificationContainer, true);
     notificationController.slot.add(notificationController.view);
@@ -16,7 +25,7 @@ export class NotificationRenderer {
       this.notificationControllers.push(notificationController);
       notificationController.slot.attached();
 
-      let timeout = 2000;
+      let timeout = settings.timeout;
       if (timeout > 0) {
         setTimeout(notificationController.close.bind(notificationController), timeout);
       }
@@ -34,7 +43,7 @@ export class NotificationRenderer {
     };
 
     notificationController.destroyNotificationHost = () => {
-      document.body.removeChild(notificationContainer);
+      settings.notificationHost.removeChild(notificationContainer);
       notificationController.slot.detached();
 
       return Promise.resolve();

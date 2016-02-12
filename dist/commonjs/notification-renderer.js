@@ -6,9 +6,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var _aureliaTemplating = require('aurelia-templating');
 
+var globalSettings = {
+  notificationHost: document.body,
+  timeout: 10000
+};
+
+exports.globalSettings = globalSettings;
+
 var NotificationRenderer = (function () {
   function NotificationRenderer() {
     _classCallCheck(this, NotificationRenderer);
+
+    this.defaultSettings = globalSettings;
 
     this.notificationControllers = [];
   }
@@ -16,8 +25,10 @@ var NotificationRenderer = (function () {
   NotificationRenderer.prototype.createNotificationHost = function createNotificationHost(notificationController) {
     var _this = this;
 
+    var settings = notificationController.settings;
     var notificationContainer = document.createElement('notification-container');
-    document.body.appendChild(notificationContainer);
+
+    settings.notificationHost.appendChild(notificationContainer);
 
     notificationController.slot = new _aureliaTemplating.ViewSlot(notificationContainer, true);
     notificationController.slot.add(notificationController.view);
@@ -26,7 +37,7 @@ var NotificationRenderer = (function () {
       _this.notificationControllers.push(notificationController);
       notificationController.slot.attached();
 
-      var timeout = 2000;
+      var timeout = settings.timeout;
       if (timeout > 0) {
         setTimeout(notificationController.close.bind(notificationController), timeout);
       }
@@ -44,7 +55,7 @@ var NotificationRenderer = (function () {
     };
 
     notificationController.destroyNotificationHost = function () {
-      document.body.removeChild(notificationContainer);
+      settings.notificationHost.removeChild(notificationContainer);
       notificationController.slot.detached();
 
       return Promise.resolve();

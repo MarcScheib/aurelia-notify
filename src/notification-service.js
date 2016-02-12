@@ -28,8 +28,7 @@ export class NotificationService {
   }
 
   notify(settings) {
-    // Todo: default settings needed here
-    let _settings = Object.assign({}, settings);
+    let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
     return new Promise((resolve, reject) => {
       let notificationController = new NotificationController(this.notificationRenderer, _settings, resolve, reject);

@@ -1,7 +1,7 @@
 System.register(['aurelia-templating'], function (_export) {
   'use strict';
 
-  var ViewSlot, NotificationRenderer;
+  var ViewSlot, globalSettings, NotificationRenderer;
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -10,9 +10,18 @@ System.register(['aurelia-templating'], function (_export) {
       ViewSlot = _aureliaTemplating.ViewSlot;
     }],
     execute: function () {
+      globalSettings = {
+        notificationHost: document.body,
+        timeout: 10000
+      };
+
+      _export('globalSettings', globalSettings);
+
       NotificationRenderer = (function () {
         function NotificationRenderer() {
           _classCallCheck(this, NotificationRenderer);
+
+          this.defaultSettings = globalSettings;
 
           this.notificationControllers = [];
         }
@@ -20,8 +29,10 @@ System.register(['aurelia-templating'], function (_export) {
         NotificationRenderer.prototype.createNotificationHost = function createNotificationHost(notificationController) {
           var _this = this;
 
+          var settings = notificationController.settings;
           var notificationContainer = document.createElement('notification-container');
-          document.body.appendChild(notificationContainer);
+
+          settings.notificationHost.appendChild(notificationContainer);
 
           notificationController.slot = new ViewSlot(notificationContainer, true);
           notificationController.slot.add(notificationController.view);
@@ -30,7 +41,7 @@ System.register(['aurelia-templating'], function (_export) {
             _this.notificationControllers.push(notificationController);
             notificationController.slot.attached();
 
-            var timeout = 2000;
+            var timeout = settings.timeout;
             if (timeout > 0) {
               setTimeout(notificationController.close.bind(notificationController), timeout);
             }
@@ -48,7 +59,7 @@ System.register(['aurelia-templating'], function (_export) {
           };
 
           notificationController.destroyNotificationHost = function () {
-            document.body.removeChild(notificationContainer);
+            settings.notificationHost.removeChild(notificationContainer);
             notificationController.slot.detached();
 
             return Promise.resolve();
