@@ -1,12 +1,14 @@
-System.register([], function (_export) {
+System.register(['./lifecycle'], function (_export) {
   'use strict';
 
-  var NotificationController;
+  var invokeLifecycle, NotificationController;
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   return {
-    setters: [],
+    setters: [function (_lifecycle) {
+      invokeLifecycle = _lifecycle.invokeLifecycle;
+    }],
     execute: function () {
       NotificationController = (function () {
         function NotificationController(renderer, settings, resolve, reject) {

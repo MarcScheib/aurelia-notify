@@ -45,7 +45,7 @@ var NotificationService = (function () {
     var _settings = Object.assign({}, settings);
 
     return new Promise(function (resolve, reject) {
-      var notificationController = new _notificationController.NotificationController(_this.renderer, _settings, resolve, reject);
+      var notificationController = new _notificationController.NotificationController(_this.notificationRenderer, _settings, resolve, reject);
       var childContainer = _this.container.createChild();
       var compositionContext = {
         viewModel: _settings.viewModel,

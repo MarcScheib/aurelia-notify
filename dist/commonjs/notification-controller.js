@@ -4,6 +4,8 @@ exports.__esModule = true;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+var _lifecycle = require('./lifecycle');
+
 var NotificationController = (function () {
   function NotificationController(renderer, settings, resolve, reject) {
     _classCallCheck(this, NotificationController);
@@ -17,9 +19,9 @@ var NotificationController = (function () {
   NotificationController.prototype.close = function close() {
     var _this = this;
 
-    return invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
+    return _lifecycle.invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
       if (canDeactivate) {
-        return invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
+        return _lifecycle.invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
           return _this._renderer.hideNotification(_this).then(function () {
             return _this._renderer.destroyNotificationHost(_this).then(function () {
               _this.controller.unbind();

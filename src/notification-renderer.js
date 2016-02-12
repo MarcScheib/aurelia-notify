@@ -6,19 +6,32 @@ export class NotificationRenderer {
   }
 
   createNotificationHost(notificationController) {
-    notificationController.slot = new ViewSlot(document.body, true);
+    let notificationContainer = document.createElement('notification-container');
+    document.body.appendChild(notificationContainer);
+
+    notificationController.slot = new ViewSlot(notificationContainer, true);
     notificationController.slot.add(notificationController.view);
 
     notificationController.showNotification = () => {
       this.notificationControllers.push(notificationController);
       notificationController.slot.attached();
+
+      return Promise.resolve();
     };
 
     notificationController.hideNotification = () => {
+      let i = this.notificationControllers.indexOf(notificationController);
+      if (i !== -1) {
+        this.notificationControllers.splice(i, 1);
+      }
+
+      return Promise.resolve();
     };
 
     notificationController.destroyNotificationHost = () => {
+      document.body.removeChild(notificationContainer);
       notificationController.slot.detached();
+
       return Promise.resolve();
     };
 
@@ -34,6 +47,6 @@ export class NotificationRenderer {
   }
 
   destroyNotificationHost(notificationController) {
-    return notificationController.destroyDialogHost();
+    return notificationController.destroyNotificationHost();
   }
 }

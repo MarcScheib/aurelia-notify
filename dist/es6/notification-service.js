@@ -32,7 +32,7 @@ export class NotificationService {
     let _settings = Object.assign({}, settings);
 
     return new Promise((resolve, reject) => {
-      let notificationController = new NotificationController(this.renderer, _settings, resolve, reject);
+      let notificationController = new NotificationController(this.notificationRenderer, _settings, resolve, reject);
       let childContainer = this.container.createChild();
       let compositionContext = {
         viewModel: _settings.viewModel,

@@ -1,3 +1,5 @@
+import {invokeLifecycle} from './lifecycle';
+
 export class NotificationController {
   constructor(renderer, settings, resolve, reject) {
     this._renderer = renderer;

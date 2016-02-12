@@ -49,7 +49,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
           var _settings = Object.assign({}, settings);
 
           return new Promise(function (resolve, reject) {
-            var notificationController = new NotificationController(_this.renderer, _settings, resolve, reject);
+            var notificationController = new NotificationController(_this.notificationRenderer, _settings, resolve, reject);
             var childContainer = _this.container.createChild();
             var compositionContext = {
               viewModel: _settings.viewModel,

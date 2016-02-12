@@ -15,18 +15,32 @@ define(['exports', 'aurelia-templating'], function (exports, _aureliaTemplating)
     NotificationRenderer.prototype.createNotificationHost = function createNotificationHost(notificationController) {
       var _this = this;
 
-      notificationController.slot = new _aureliaTemplating.ViewSlot(document.body, true);
+      var notificationContainer = document.createElement('notification-container');
+      document.body.appendChild(notificationContainer);
+
+      notificationController.slot = new _aureliaTemplating.ViewSlot(notificationContainer, true);
       notificationController.slot.add(notificationController.view);
 
       notificationController.showNotification = function () {
         _this.notificationControllers.push(notificationController);
         notificationController.slot.attached();
+
+        return Promise.resolve();
       };
 
-      notificationController.hideNotification = function () {};
+      notificationController.hideNotification = function () {
+        var i = _this.notificationControllers.indexOf(notificationController);
+        if (i !== -1) {
+          _this.notificationControllers.splice(i, 1);
+        }
+
+        return Promise.resolve();
+      };
 
       notificationController.destroyNotificationHost = function () {
+        document.body.removeChild(notificationContainer);
         notificationController.slot.detached();
+
         return Promise.resolve();
       };
 
@@ -42,7 +56,7 @@ define(['exports', 'aurelia-templating'], function (exports, _aureliaTemplating)
     };
 
     NotificationRenderer.prototype.destroyNotificationHost = function destroyNotificationHost(notificationController) {
-      return notificationController.destroyDialogHost();
+      return notificationController.destroyNotificationHost();
     };
 
     return NotificationRenderer;
