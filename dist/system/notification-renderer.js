@@ -1,18 +1,21 @@
-System.register(['aurelia-templating'], function (_export) {
+System.register(['aurelia-templating', './bs-notification'], function (_export) {
   'use strict';
 
-  var ViewSlot, globalSettings, NotificationRenderer;
+  var ViewSlot, BSNotification, globalSettings, NotificationRenderer;
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   return {
     setters: [function (_aureliaTemplating) {
       ViewSlot = _aureliaTemplating.ViewSlot;
+    }, function (_bsNotification) {
+      BSNotification = _bsNotification.BSNotification;
     }],
     execute: function () {
       globalSettings = {
         notificationHost: document.body,
-        timeout: 10000
+        timeout: 0,
+        viewModel: BSNotification
       };
 
       _export('globalSettings', globalSettings);
@@ -43,7 +46,7 @@ System.register(['aurelia-templating'], function (_export) {
 
             var timeout = settings.timeout;
             if (timeout > 0) {
-              setTimeout(notificationController.close.bind(notificationController), timeout);
+              notificationController.timer = setTimeout(notificationController.close.bind(notificationController), timeout);
             }
 
             return Promise.resolve();

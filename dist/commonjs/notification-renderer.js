@@ -6,9 +6,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var _aureliaTemplating = require('aurelia-templating');
 
+var _bsNotification = require('./bs-notification');
+
 var globalSettings = {
   notificationHost: document.body,
-  timeout: 10000
+  timeout: 0,
+  viewModel: _bsNotification.BSNotification
 };
 
 exports.globalSettings = globalSettings;
@@ -39,7 +42,7 @@ var NotificationRenderer = (function () {
 
       var timeout = settings.timeout;
       if (timeout > 0) {
-        setTimeout(notificationController.close.bind(notificationController), timeout);
+        notificationController.timer = setTimeout(notificationController.close.bind(notificationController), timeout);
       }
 
       return Promise.resolve();

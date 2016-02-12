@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-templating'], function (exports, _aureliaTemplating) {
+define(['exports', 'aurelia-templating', './bs-notification'], function (exports, _aureliaTemplating, _bsNotification) {
   'use strict';
 
   exports.__esModule = true;
@@ -7,7 +7,8 @@ define(['exports', 'aurelia-templating'], function (exports, _aureliaTemplating)
 
   var globalSettings = {
     notificationHost: document.body,
-    timeout: 10000
+    timeout: 0,
+    viewModel: _bsNotification.BSNotification
   };
 
   exports.globalSettings = globalSettings;
@@ -38,7 +39,7 @@ define(['exports', 'aurelia-templating'], function (exports, _aureliaTemplating)
 
         var timeout = settings.timeout;
         if (timeout > 0) {
-          setTimeout(notificationController.close.bind(notificationController), timeout);
+          notificationController.timer = setTimeout(notificationController.close.bind(notificationController), timeout);
         }
 
         return Promise.resolve();

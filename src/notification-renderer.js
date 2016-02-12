@@ -1,8 +1,11 @@
 import {ViewSlot} from 'aurelia-templating';
 
+import {BSNotification} from './bs-notification';
+
 export let globalSettings = {
   notificationHost: document.body,
-  timeout: 10000
+  timeout: 0,
+  viewModel: BSNotification
 };
 
 export class NotificationRenderer {
@@ -27,7 +30,7 @@ export class NotificationRenderer {
 
       let timeout = settings.timeout;
       if (timeout > 0) {
-        setTimeout(notificationController.close.bind(notificationController), timeout);
+        notificationController.timer = setTimeout(notificationController.close.bind(notificationController), timeout);
       }
 
       return Promise.resolve();

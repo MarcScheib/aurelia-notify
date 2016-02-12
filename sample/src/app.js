@@ -8,7 +8,7 @@ export class App {
   }
 
   info() {
-    this.notificationService.info('Info Message', { viewModel: Notification, model: 'Johohoo'});
+    this.notificationService.info('Info Message');
   }
 
   success() {

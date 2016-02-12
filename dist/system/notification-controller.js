@@ -23,6 +23,8 @@ System.register(['./lifecycle'], function (_export) {
         NotificationController.prototype.close = function close() {
           var _this = this;
 
+          clearTimeout(this.timer);
+
           return invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
             if (canDeactivate) {
               return invokeLifecycle(_this.viewModel, 'deactivate').then(function () {

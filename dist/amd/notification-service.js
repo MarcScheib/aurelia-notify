@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-renderer'], function (exports, _aureliaDependencyInjection, _aureliaFramework, _aureliaMetadata, _aureliaTemplating, _lifecycle, _notificationController, _notificationRenderer) {
+define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (exports, _aureliaDependencyInjection, _aureliaFramework, _aureliaMetadata, _aureliaTemplating, _lifecycle, _notificationController, _notificationLevel, _notificationRenderer) {
   'use strict';
 
   exports.__esModule = true;
@@ -26,10 +26,16 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
       return Promise.resolve(compositionContext);
     };
 
-    NotificationService.prototype.notify = function notify(settings) {
+    NotificationService.prototype.notify = function notify(message, settings, level) {
       var _this = this;
 
+      var notificationLevel = level || _notificationLevel.NotificationLevel.info;
       var _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
+
+      _settings.model = {
+        notification: message,
+        level: level
+      };
 
       return new Promise(function (resolve, reject) {
         var notificationController = new _notificationController.NotificationController(_this.notificationRenderer, _settings, resolve, reject);
@@ -61,6 +67,22 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
           });
         });
       });
+    };
+
+    NotificationService.prototype.info = function info(message, settings) {
+      this.notify(message, settings, _notificationLevel.NotificationLevel.info);
+    };
+
+    NotificationService.prototype.success = function success(message, settings) {
+      this.notify(message, settings, _notificationLevel.NotificationLevel.success);
+    };
+
+    NotificationService.prototype.warning = function warning(message, settings) {
+      this.notify(message, settings, _notificationLevel.NotificationLevel.warning);
+    };
+
+    NotificationService.prototype.danger = function danger(message, settings) {
+      this.notify(message, settings, _notificationLevel.NotificationLevel.danger);
     };
 
     var _NotificationService = NotificationService;

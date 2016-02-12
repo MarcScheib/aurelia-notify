@@ -1,7 +1,7 @@
-System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-renderer'], function (_export) {
+System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (_export) {
   'use strict';
 
-  var Container, inject, Origin, CompositionEngine, invokeLifecycle, NotificationController, NotificationRenderer, NotificationService;
+  var Container, inject, Origin, CompositionEngine, invokeLifecycle, NotificationController, NotificationLevel, NotificationRenderer, NotificationService;
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -18,6 +18,8 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
       invokeLifecycle = _lifecycle.invokeLifecycle;
     }, function (_notificationController) {
       NotificationController = _notificationController.NotificationController;
+    }, function (_notificationLevel) {
+      NotificationLevel = _notificationLevel.NotificationLevel;
     }, function (_notificationRenderer) {
       NotificationRenderer = _notificationRenderer.NotificationRenderer;
     }],
@@ -43,10 +45,16 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
           return Promise.resolve(compositionContext);
         };
 
-        NotificationService.prototype.notify = function notify(settings) {
+        NotificationService.prototype.notify = function notify(message, settings, level) {
           var _this = this;
 
+          var notificationLevel = level || NotificationLevel.info;
           var _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
+
+          _settings.model = {
+            notification: message,
+            level: level
+          };
 
           return new Promise(function (resolve, reject) {
             var notificationController = new NotificationController(_this.notificationRenderer, _settings, resolve, reject);
@@ -78,6 +86,22 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
               });
             });
           });
+        };
+
+        NotificationService.prototype.info = function info(message, settings) {
+          this.notify(message, settings, NotificationLevel.info);
+        };
+
+        NotificationService.prototype.success = function success(message, settings) {
+          this.notify(message, settings, NotificationLevel.success);
+        };
+
+        NotificationService.prototype.warning = function warning(message, settings) {
+          this.notify(message, settings, NotificationLevel.warning);
+        };
+
+        NotificationService.prototype.danger = function danger(message, settings) {
+          this.notify(message, settings, NotificationLevel.danger);
         };
 
         var _NotificationService = NotificationService;

@@ -18,6 +18,8 @@ define(['exports', './lifecycle'], function (exports, _lifecycle) {
     NotificationController.prototype.close = function close() {
       var _this = this;
 
+      clearTimeout(this.timer);
+
       return _lifecycle.invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
         if (canDeactivate) {
           return _lifecycle.invokeLifecycle(_this.viewModel, 'deactivate').then(function () {

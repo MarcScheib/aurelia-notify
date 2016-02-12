@@ -5,6 +5,7 @@ import {CompositionEngine} from 'aurelia-templating';
 
 import {invokeLifecycle} from './lifecycle';
 import {NotificationController} from './notification-controller';
+import {NotificationLevel} from './notification-level';
 import {NotificationRenderer} from './notification-renderer';
 
 @inject(CompositionEngine, Container, NotificationRenderer)
@@ -27,8 +28,14 @@ export class NotificationService {
     return Promise.resolve(compositionContext);
   }
 
-  notify(settings) {
+  notify(message, settings, level) {
+    let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
+
+    _settings.model = {
+      notification: message,
+      level: level
+    };
 
     return new Promise((resolve, reject) => {
       let notificationController = new NotificationController(this.notificationRenderer, _settings, resolve, reject);
@@ -60,5 +67,21 @@ export class NotificationService {
         });
       });
     });
+  }
+
+  info(message, settings) {
+    this.notify(message, settings, NotificationLevel.info);
+  }
+
+  success(message, settings) {
+    this.notify(message, settings, NotificationLevel.success);
+  }
+
+  warning(message, settings) {
+    this.notify(message, settings, NotificationLevel.warning);
+  }
+
+  danger(message, settings) {
+    this.notify(message, settings, NotificationLevel.danger);
   }
 }
