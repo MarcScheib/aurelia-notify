@@ -7,7 +7,19 @@ export class App {
     this.notificationService = notificationService;
   }
 
-  submit() {
-    this.notificationService.notify({ viewModel: Notification, model: 'Johohoo'});
+  info() {
+    this.notificationService.info('Info Message', { viewModel: Notification, model: 'Johohoo'});
+  }
+
+  success() {
+    this.notificationService.success('Success Message');
+  }
+
+  warning() {
+    this.notificationService.warning('Warning Message');
+  }
+
+  danger() {
+    this.notificationService.danger('Danger Message');
   }
 }
