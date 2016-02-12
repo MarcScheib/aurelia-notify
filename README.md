@@ -1,12 +1,26 @@
 # aurelia-notification
 
-A notification plugin for [Aurelia](http://www.aurelia.io/).
+A simple notification plugin for [Aurelia](http://www.aurelia.io/).
+
+
+``` javascript
+notification.info('A simple info notification');
+```
 
 ## Dependencies
 
+This plugin has no external library dependencies and is completely based on [Aurelia](http://www.aurelia.io/).
+
+Aurelia dependencies:
+
+* [aurelia-dependency-injection](https://github.com/aurelia/dependency-injection)
+* [aurelia-framework](https://github.com/aurelia/framework)
+* [aurelia-metadata](https://github.com/aurelia/metadata)
+* [aurelia-templating](https://github.com/aurelia/templating)
+
 ## Used By
 
-This library is a plugin and not used by the core framework.
+This library is an optional plugin and not used by the core framework.
 
 ## Platform Support
 
@@ -82,4 +96,6 @@ To run the sample code using this plugin proceed with these additional steps:
 
 ## Documentation
 
-Coming Soon.
+- [Installing the plugin](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#installation)
+- [Getting started](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#getting-started)
+- [Configuration](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration)
