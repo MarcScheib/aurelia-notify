@@ -42,8 +42,101 @@ export function configure(aurelia) {
 
 # Getting started
 
-TBD
+A simple introduction for the **aurelia-notification** plugin is shown by using the Aurelia demo application [skeleton-navigation](https://github.com/aurelia/skeleton-navigation).
 
+We start by setting up the project. Afterwards, we install and configure the plugin as shown in [Installation](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#installation).
+
+1. Clone the repository into your local project folder:
+
+  ```
+  git clone https://github.com/aurelia/skeleton-navigation.git
+  ```
+2. Switch into the _skeleton-navigation_ directory and choose one of your preferred starter kits. In this example, we choose the _skeleton-es2016_. Switch into that directory and install all _npm_ dependencies:
+
+  ```
+  cd skeleton-navigation
+  cd skeleton-es2016
+  npm install
+  ```
+3. In the same directory, install the _jspm_ dependencies:
+
+  ```
+  jspm install
+  ```
+4. Install the **aurelia-notification** dependency via _jspm_:
+
+  ```
+  jspm install aurelia-notification
+  ```
+
+The project is now set up together with the notification plugin and we can start using it. Via executing ```gulp watch``` you can start a server running the application.
+It is then available via the shown URL on the command line (e.g. http://localhost:9000).
+
+The next step is to configure the _aurelia-notification_ plugin. In your favored IDE, open the file _skeleton-navigation/skeleton-es2016/src/main.js_ and adjust it as follows:
+
+```javascript
+import 'bootstrap';
+
+export function configure(aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .plugin('aurelia-notification');
+
+  //Uncomment the line below to enable animation.
+  //aurelia.use.plugin('aurelia-animator-css');
+  //if the css animator is enabled, add swap-order="after" to all router-view elements
+
+  //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
+  //aurelia.use.plugin('aurelia-html-import-template-loader')
+
+  aurelia.start().then(() => aurelia.setRoot());
+}
+
+```
+
+We simply added the ```.plugin('aurelia-notification')``` line. With this basic configuration, the plugin makes use of the available Bootstrap CSS styling. In case you want to use a different configuration, see the [Configuration](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration) section.
+
+We can start adding notifications to our application now. The plugin exposes a **NotificationService** which is used to display our notifications. 
+Open the file _skeleton-navigation/skeleton-es2016/src/welcome.js_ and edit the file as follows:
+
+1. We need to import the **NotificationService** from the plugin. On top of the file, add the following line:
+
+  ```javascript
+  import {NotificationService} from 'aurelia-notification';
+  ```
+2. Inject the service into the constructor of the view-model as shown in the following snippet:
+
+  ```javascript
+  static inject = [NotificationService];
+  constructor(notificationService){
+    this.notificationService = notificationService;
+  }
+  ```
+3. Now, we can add notifications, e.g. by showing an info notification instead of an alert box when submitting our name. Adjust the ```submit()``` method as follows:
+ 
+  ```javascript
+  submit() {
+    this.previousValue = this.fullName;
+    this.notificationService.info(`Welcome, ${this.fullName}!`);
+  }
+  ```
+  > **Note:**  Make sure you use ` instead of ' for the ```info()``` method to use the ES2016 Template Literals and having the name replaced.
+
+The page should update automatically when adding those changes if you started the application via ```gulp watch```. If you press the _Submit_ button multiple times, you can see how the notifications pop up. As you can see, the display of the notifications is not optimal.
+
+By default, notifications are appended to the ```<body>``` tag. We can change this, by configuring another attachment point. Change service call in the ```submit()``` method as follows:
+
+```javascript
+this.notificationService.info(`Welcome, ${this.fullName}!`, {notificationHost: document.getElementsByClassName('page-host')[0]});
+```
+
+The notification is now display below the form and visible directly. 
+
+Beside the ```info()``` notification, there are three different methods available which in the base configuration make use of Bootstraps alert styles. Those are ```success()```, ```warning()```, and ```danger()```.
+
+For more information on the configuration, see the Section [Configuration](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration). API information will be available soon.
+ 
 # Configuration
 
 TBD
