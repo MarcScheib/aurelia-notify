@@ -121,17 +121,17 @@ Open the file _skeleton-navigation/skeleton-es2016/src/welcome.js_ and edit the 
     this.notificationService.info(`Welcome, ${this.fullName}!`);
   }
   ```
-  > **Note:**  Make sure you use ` instead of ' for the ```info()``` method to use the ES2016 Template Literals and having the name replaced.
+  > **Note:**  Make sure you use \` (backtick) instead of ' (apostrophe) for the ```info()``` method to use the ES2016 Template Literals and having the name replaced.
 
 The page should update automatically when adding those changes if you started the application via ```gulp watch```. If you press the _Submit_ button multiple times, you can see how the notifications pop up. As you can see, the display of the notifications is not optimal.
 
-By default, notifications are appended to the ```<body>``` tag. We can change this, by configuring another attachment point. Change service call in the ```submit()``` method as follows:
+By default, notifications are appended to the ```<body>``` tag. We can change this, by configuring a different attachment point. Change the service call in the ```submit()``` method as follows:
 
 ```javascript
 this.notificationService.info(`Welcome, ${this.fullName}!`, {notificationHost: document.getElementsByClassName('page-host')[0]});
 ```
 
-The notification is now display below the form and visible directly. 
+The notification is now displayed below the form and visible to the user directly. 
 
 Beside the ```info()``` notification, there are three different methods available which in the base configuration make use of Bootstraps alert styles. Those are ```success()```, ```warning()```, and ```danger()```.
 
