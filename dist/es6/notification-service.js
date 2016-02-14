@@ -34,7 +34,7 @@ export class NotificationService {
 
     _settings.model = {
       notification: message,
-      level: level
+      level: notificationLevel
     };
 
     return new Promise((resolve, reject) => {
