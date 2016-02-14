@@ -49,7 +49,7 @@ var NotificationService = (function () {
 
     _settings.model = {
       notification: message,
-      level: level
+      level: notificationLevel
     };
 
     return new Promise(function (resolve, reject) {
