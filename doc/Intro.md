@@ -167,7 +167,6 @@ Beside the global configuration, it is also possible to specify a different conf
 ```javascript
 this.notificationService.info('This notification lasts for 5s before it is closed automatically.', {timeout: 5000});
 this.notificationService.danger('This notification lasts for 10s before it is closed automatically.', {timeout: 10000});
-}
 ```
 
 For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration-parameters).
