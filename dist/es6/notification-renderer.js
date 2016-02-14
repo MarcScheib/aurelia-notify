@@ -4,7 +4,7 @@ import {BSNotification} from './bs-notification';
 
 export let globalSettings = {
   append: false,
-  notificationHost: document.body,
+  containerSelector: 'body',
   timeout: 0,
   viewModel: BSNotification
 };
@@ -18,25 +18,24 @@ export class NotificationRenderer {
 
   createNotificationHost(notificationController) {
     let settings = notificationController.settings;
-    let notificationContainer = document.createElement('notification-container');
-    let notificationHost = settings.notificationHost;
+    let notificationHost = document.createElement('notification-host');
+    let notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
     if (settings.append === true) {
-      notificationHost.appendChild(notificationContainer);
+      notificationContainer.appendChild(notificationHost);
     } else {
-      notificationHost.insertBefore(notificationContainer, settings.notificationHost.firstChild);
+      notificationContainer.insertBefore(notificationHost, notificationContainer.firstChild);
     }
 
-    notificationController.slot = new ViewSlot(notificationContainer, true);
+    notificationController.slot = new ViewSlot(notificationHost, true);
     notificationController.slot.add(notificationController.view);
 
     notificationController.showNotification = () => {
       this.notificationControllers.push(notificationController);
       notificationController.slot.attached();
 
-      let timeout = settings.timeout;
-      if (timeout > 0) {
-        notificationController.timer = setTimeout(notificationController.close.bind(notificationController), timeout);
+      if (settings.timeout > 0) {
+        notificationController.timer = setTimeout(notificationController.close.bind(notificationController), settings.timeout);
       }
 
       return Promise.resolve();
@@ -52,13 +51,22 @@ export class NotificationRenderer {
     };
 
     notificationController.destroyNotificationHost = () => {
-      settings.notificationHost.removeChild(notificationContainer);
+      notificationContainer.removeChild(notificationHost);
       notificationController.slot.detached();
 
       return Promise.resolve();
     };
 
     return Promise.resolve();
+  }
+
+  getNotificationContainer(containerSelector) {
+    let notificationContainer = document.querySelector(containerSelector);
+    if (notificationContainer === null) {
+      notificationContainer = document.body;
+    }
+
+    return notificationContainer;
   }
 
   showNotification(notificationController) {

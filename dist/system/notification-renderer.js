@@ -14,7 +14,7 @@ System.register(['aurelia-templating', './bs-notification'], function (_export) 
     execute: function () {
       globalSettings = {
         append: false,
-        notificationHost: document.body,
+        containerSelector: 'body',
         timeout: 0,
         viewModel: BSNotification
       };
@@ -34,25 +34,24 @@ System.register(['aurelia-templating', './bs-notification'], function (_export) 
           var _this = this;
 
           var settings = notificationController.settings;
-          var notificationContainer = document.createElement('notification-container');
-          var notificationHost = settings.notificationHost;
+          var notificationHost = document.createElement('notification-host');
+          var notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
           if (settings.append === true) {
-            notificationHost.appendChild(notificationContainer);
+            notificationContainer.appendChild(notificationHost);
           } else {
-            notificationHost.insertBefore(notificationContainer, settings.notificationHost.firstChild);
+            notificationContainer.insertBefore(notificationHost, notificationContainer.firstChild);
           }
 
-          notificationController.slot = new ViewSlot(notificationContainer, true);
+          notificationController.slot = new ViewSlot(notificationHost, true);
           notificationController.slot.add(notificationController.view);
 
           notificationController.showNotification = function () {
             _this.notificationControllers.push(notificationController);
             notificationController.slot.attached();
 
-            var timeout = settings.timeout;
-            if (timeout > 0) {
-              notificationController.timer = setTimeout(notificationController.close.bind(notificationController), timeout);
+            if (settings.timeout > 0) {
+              notificationController.timer = setTimeout(notificationController.close.bind(notificationController), settings.timeout);
             }
 
             return Promise.resolve();
@@ -68,13 +67,22 @@ System.register(['aurelia-templating', './bs-notification'], function (_export) 
           };
 
           notificationController.destroyNotificationHost = function () {
-            settings.notificationHost.removeChild(notificationContainer);
+            notificationContainer.removeChild(notificationHost);
             notificationController.slot.detached();
 
             return Promise.resolve();
           };
 
           return Promise.resolve();
+        };
+
+        NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
+          var notificationContainer = document.querySelector(containerSelector);
+          if (notificationContainer === null) {
+            notificationContainer = document.body;
+          }
+
+          return notificationContainer;
         };
 
         NotificationRenderer.prototype.showNotification = function showNotification(notificationController) {
