@@ -139,4 +139,31 @@ For more information on the configuration, see the Section [Configuration](https
  
 # Configuration
 
+The plugin supports global configuration for all notifications as well as a specialized configuration for each single notification.
+
+## Global Configuration
+
+The global configuration is handled together with the plugin registration during Aurelia's bootstrapping process. The following snippet shows, how configuration parameters are handed over to the plugin:
+
+```javascript
+export function configure(aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .plugin('aurelia-notification', settings => {
+      settings.timeout = 10000;
+    });
+
+  aurelia.start().then(a => a.setRoot('app', document.body));
+}
+```
+
+For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration_parameters).
+
+## Specialized Configuration
+
+TBD
+
+## Configuration Parameters
+
 TBD
