@@ -3,6 +3,7 @@ import {ViewSlot} from 'aurelia-templating';
 import {BSNotification} from './bs-notification';
 
 export let globalSettings = {
+  append: false,
   notificationHost: document.body,
   timeout: 0,
   viewModel: BSNotification
@@ -18,8 +19,13 @@ export class NotificationRenderer {
   createNotificationHost(notificationController) {
     let settings = notificationController.settings;
     let notificationContainer = document.createElement('notification-container');
+    let notificationHost = settings.notificationHost;
 
-    settings.notificationHost.appendChild(notificationContainer);
+    if (settings.append === true) {
+      notificationHost.appendChild(notificationContainer);
+    } else {
+      notificationHost.insertBefore(notificationContainer, settings.notificationHost.firstChild);
+    }
 
     notificationController.slot = new ViewSlot(notificationContainer, true);
     notificationController.slot.add(notificationController.view);

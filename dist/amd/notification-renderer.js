@@ -6,6 +6,7 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
   var globalSettings = {
+    append: false,
     notificationHost: document.body,
     timeout: 0,
     viewModel: _bsNotification.BSNotification
@@ -27,8 +28,13 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
 
       var settings = notificationController.settings;
       var notificationContainer = document.createElement('notification-container');
+      var notificationHost = settings.notificationHost;
 
-      settings.notificationHost.appendChild(notificationContainer);
+      if (settings.append === true) {
+        notificationHost.appendChild(notificationContainer);
+      } else {
+        notificationHost.insertBefore(notificationContainer, settings.notificationHost.firstChild);
+      }
 
       notificationController.slot = new _aureliaTemplating.ViewSlot(notificationContainer, true);
       notificationController.slot.add(notificationController.view);

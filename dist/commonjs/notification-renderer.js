@@ -9,6 +9,7 @@ var _aureliaTemplating = require('aurelia-templating');
 var _bsNotification = require('./bs-notification');
 
 var globalSettings = {
+  append: false,
   notificationHost: document.body,
   timeout: 0,
   viewModel: _bsNotification.BSNotification
@@ -30,8 +31,13 @@ var NotificationRenderer = (function () {
 
     var settings = notificationController.settings;
     var notificationContainer = document.createElement('notification-container');
+    var notificationHost = settings.notificationHost;
 
-    settings.notificationHost.appendChild(notificationContainer);
+    if (settings.append === true) {
+      notificationHost.appendChild(notificationContainer);
+    } else {
+      notificationHost.insertBefore(notificationContainer, settings.notificationHost.firstChild);
+    }
 
     notificationController.slot = new _aureliaTemplating.ViewSlot(notificationContainer, true);
     notificationController.slot.add(notificationController.view);

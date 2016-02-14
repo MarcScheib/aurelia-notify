@@ -125,7 +125,7 @@ Open the file _skeleton-navigation/skeleton-es2016/src/welcome.js_ and edit the 
 
 The page should update automatically when adding those changes if you started the application via ```gulp watch```. If you press the _Submit_ button multiple times, you can see how the notifications pop up. As you can see, the display of the notifications is not optimal.
 
-By default, notifications are appended to the ```<body>``` tag. We can change this, by configuring a different attachment point. Change the service call in the ```submit()``` method as follows:
+By default, notifications are added to the ```<body>``` tag as the first child. We can change this, by configuring a different attachment point. Modify the service call in the ```submit()``` method as follows:
 
 ```javascript
 this.notificationService.info(`Welcome, ${this.fullName}!`, {notificationHost: document.getElementsByClassName('page-host')[0]});
@@ -174,9 +174,11 @@ For all available configuration parameters, see Section [Configuration Parameter
 ## Configuration Parameters
 
 The **aurelia-notification** plugin provides the following configuration parameters:
-
+- `append`
+  - Specifies whether notifications should be appended to the `notificationHost` instead of inserted as the first element.
+  - **Default**: false
 - `notificationHost` 
-  - Specifies to which DOM element the created notification will be attached.
+  - Specifies to which DOM element the created notification will be attached to.
   - **Default**: document.body
 - `timeout`
   - Specifies the duration of the notification visibility. After the timeout, the notification is removed automatically if the user is not closing it. If zero is specified, the notification can only be cleared manually by the user.
