@@ -128,7 +128,7 @@ The page should update automatically when adding those changes if you started th
 By default, notifications are added to the ```<body>``` tag as the first child. We can change this, by configuring a different attachment point. Modify the service call in the ```submit()``` method as follows:
 
 ```javascript
-this.notificationService.info(`Welcome, ${this.fullName}!`, {containerSelector: 'page-host'});
+this.notificationService.info(`Welcome, ${this.fullName}!`, {containerSelector: '#page-host'});
 ```
 
 The notification is now displayed below the form and visible to the user directly. 
@@ -175,7 +175,7 @@ For all available configuration parameters, see Section [Configuration Parameter
 
 The **aurelia-notification** plugin provides the following configuration parameters:
 - `append`
-  - Specifies whether notifications should be appended to the `notificationHost` instead of inserted as the first element.
+  - Specifies whether notifications should be appended to the notification container instead of inserted as the first element.
   - **Default**: false
 - `containerSelector` 
   - Specifies to which DOM element the created notification will be attached to. The container selector is applied to DOM tree and the first element returned will be used. If no element is found, the default value is used.
