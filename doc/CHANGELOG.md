@@ -1,3 +1,13 @@
+<a name"0.0.2"></a>
+### 0.0.2 (2016-02-14)
+
+
+#### Features
+
+* **renderer:** allow to distingush inserting notifications before others or appending them ([69a516b7](https://github.com/MarcScheib/aurelia-notification/commit/69a516b7))
+* **selector:** add dynamic container selection ([3a55eece](https://github.com/MarcScheib/aurelia-notification/commit/3a55eece))
+
+
 <a name"0.0.1"></a>
 ### 0.0.1 (2016-02-14)
 
