@@ -158,12 +158,34 @@ export function configure(aurelia) {
 }
 ```
 
-For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration_parameters).
+For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration-parameters).
 
 ## Specialized Configuration
 
-TBD
+Beside the global configuration, it is also possible to specify a different configuration for each notification itself. Simply add another parameter to the notification service call holding the configuration parameters. The following snippet shows an example:
+
+```javascript
+this.notificationService.info('This notification lasts for 5s before it is closed automatically.', {timeout: 5000});
+this.notificationService.danger('This notification lasts for 10s before it is closed automatically.', {timeout: 10000});
+}
+```
+
+For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration-parameters).
 
 ## Configuration Parameters
+
+The **aurelia-notification** plugin provides the following configuration parameters:
+
+- `notificationHost` 
+  - Specifies to which DOM element the created notification will be attached.
+  - **Default**: document.body
+- `timeout`
+  - Specifies the duration of the notification visibility. After the timeout, the notification is removed automatically if the user is not closing it. If zero is specified, the notification can only be cleared manually by the user.
+  - **Default**: 0
+- `viewModel`
+  - Specifies which view model is used for the notification. This allows to specify own customized elements and data. The default settings makes use of Bootstrap styles.
+  - **Default**: BSNotification
+
+# Customization
 
 TBD
