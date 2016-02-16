@@ -37,34 +37,32 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
         level: notificationLevel
       };
 
-      return new Promise(function (resolve, reject) {
-        var notificationController = new _notificationController.NotificationController(_this.notificationRenderer, _settings, resolve, reject);
-        var childContainer = _this.container.createChild();
-        var compositionContext = {
-          viewModel: _settings.viewModel,
-          container: _this.container,
-          childContainer: childContainer,
-          model: _settings.model
-        };
+      var notificationController = new _notificationController.NotificationController(this.notificationRenderer, _settings);
+      var childContainer = this.container.createChild();
+      var compositionContext = {
+        viewModel: _settings.viewModel,
+        container: this.container,
+        childContainer: childContainer,
+        model: _settings.model
+      };
 
-        childContainer.registerInstance(_notificationController.NotificationController, notificationController);
+      childContainer.registerInstance(_notificationController.NotificationController, notificationController);
 
-        _this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
-          notificationController.viewModel = returnedCompositionContext.viewModel;
+      this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
+        notificationController.viewModel = returnedCompositionContext.viewModel;
 
-          return _lifecycle.invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
-            if (canActivate) {
-              return _this.compositionEngine.createController(returnedCompositionContext).then(function (controller) {
-                notificationController.controller = controller;
-                notificationController.view = controller.view;
-                controller.automate();
+        return _lifecycle.invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
+          if (canActivate) {
+            return _this.compositionEngine.createController(returnedCompositionContext);
+          }
+        }).then(function (controller) {
+          notificationController.controller = controller;
+          notificationController.view = controller.view;
+          controller.automate();
 
-                return _this.notificationRenderer.createNotificationHost(notificationController).then(function () {
-                  return _this.notificationRenderer.showNotification(notificationController);
-                });
-              });
-            }
-          });
+          return _this.notificationRenderer.createNotificationHost(notificationController);
+        }).then(function () {
+          return _this.notificationRenderer.showNotification(notificationController);
         });
       });
     };

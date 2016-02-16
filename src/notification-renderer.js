@@ -60,15 +60,6 @@ export class NotificationRenderer {
     return Promise.resolve();
   }
 
-  getNotificationContainer(containerSelector) {
-    let notificationContainer = document.querySelector(containerSelector);
-    if (notificationContainer === null) {
-      notificationContainer = document.body;
-    }
-
-    return notificationContainer;
-  }
-
   showNotification(notificationController) {
     return notificationController.showNotification();
   }
@@ -79,5 +70,14 @@ export class NotificationRenderer {
 
   destroyNotificationHost(notificationController) {
     return notificationController.destroyNotificationHost();
+  }
+
+  getNotificationContainer(containerSelector) {
+    let notificationContainer = document.querySelector(containerSelector);
+    if (notificationContainer === null) {
+      notificationContainer = document.body;
+    }
+
+    return notificationContainer;
   }
 }

@@ -69,15 +69,6 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
       return Promise.resolve();
     };
 
-    NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
-      var notificationContainer = document.querySelector(containerSelector);
-      if (notificationContainer === null) {
-        notificationContainer = document.body;
-      }
-
-      return notificationContainer;
-    };
-
     NotificationRenderer.prototype.showNotification = function showNotification(notificationController) {
       return notificationController.showNotification();
     };
@@ -88,6 +79,15 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
 
     NotificationRenderer.prototype.destroyNotificationHost = function destroyNotificationHost(notificationController) {
       return notificationController.destroyNotificationHost();
+    };
+
+    NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
+      var notificationContainer = document.querySelector(containerSelector);
+      if (notificationContainer === null) {
+        notificationContainer = document.body;
+      }
+
+      return notificationContainer;
     };
 
     return NotificationRenderer;

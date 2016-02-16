@@ -37,34 +37,32 @@ export class NotificationService {
       level: notificationLevel
     };
 
-    return new Promise((resolve, reject) => {
-      let notificationController = new NotificationController(this.notificationRenderer, _settings, resolve, reject);
-      let childContainer = this.container.createChild();
-      let compositionContext = {
-        viewModel: _settings.viewModel,
-        container: this.container,
-        childContainer: childContainer,
-        model: _settings.model
-      };
+    let notificationController = new NotificationController(this.notificationRenderer, _settings);
+    let childContainer = this.container.createChild();
+    let compositionContext = {
+      viewModel: _settings.viewModel,
+      container: this.container,
+      childContainer: childContainer,
+      model: _settings.model
+    };
 
-      childContainer.registerInstance(NotificationController, notificationController);
+    childContainer.registerInstance(NotificationController, notificationController);
 
-      this._getViewModel(compositionContext).then(returnedCompositionContext => {
-        notificationController.viewModel = returnedCompositionContext.viewModel;
+    this._getViewModel(compositionContext).then(returnedCompositionContext => {
+      notificationController.viewModel = returnedCompositionContext.viewModel;
 
-        return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
-          if (canActivate) {
-            return this.compositionEngine.createController(returnedCompositionContext).then(controller => {
-              notificationController.controller = controller;
-              notificationController.view = controller.view;
-              controller.automate();
+      return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
+        if (canActivate) {
+          return this.compositionEngine.createController(returnedCompositionContext);
+        }
+      }).then(controller => {
+        notificationController.controller = controller;
+        notificationController.view = controller.view;
+        controller.automate();
 
-              return this.notificationRenderer.createNotificationHost(notificationController).then(() => {
-                return this.notificationRenderer.showNotification(notificationController);
-              });
-            });
-          }
-        });
+        return this.notificationRenderer.createNotificationHost(notificationController);
+      }).then(() => {
+        return this.notificationRenderer.showNotification(notificationController);
       });
     });
   }
