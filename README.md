@@ -1,5 +1,8 @@
 # aurelia-notification
 
+[![Build Status](https://travis-ci.org/MarcScheib/aurelia-notification.svg?branch=master)](https://travis-ci.org/MarcScheib/aurelia-notification) 
+[![Coverage Status](https://coveralls.io/repos/MarcScheib/aurelia-notification/badge.svg?branch=master&service=github)](https://coveralls.io/github/MarcScheib/aurelia-notification?branch=master)
+
 A simple notification plugin for [Aurelia](http://www.aurelia.io/).
 
 
