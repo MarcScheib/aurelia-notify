@@ -26,7 +26,7 @@ module.exports = {
   extra: {
     dts: {
       packageName: paths.packageName,
-      typings: '',
+      typings: 'dist/',
       suppressModulePath: true,
       suppressComments: false,
       memberOutputFilter: /^_.*/
