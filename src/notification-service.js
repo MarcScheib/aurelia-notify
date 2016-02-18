@@ -48,7 +48,7 @@ export class NotificationService {
 
     childContainer.registerInstance(NotificationController, notificationController);
 
-    this._getViewModel(compositionContext).then(returnedCompositionContext => {
+    return this._getViewModel(compositionContext).then(returnedCompositionContext => {
       notificationController.viewModel = returnedCompositionContext.viewModel;
 
       return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {

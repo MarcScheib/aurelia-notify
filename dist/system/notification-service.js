@@ -67,7 +67,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
 
           childContainer.registerInstance(NotificationController, notificationController);
 
-          this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
+          return this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
             notificationController.viewModel = returnedCompositionContext.viewModel;
 
             return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {

@@ -63,7 +63,7 @@ var NotificationService = (function () {
 
     childContainer.registerInstance(_notificationController.NotificationController, notificationController);
 
-    this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
+    return this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
       notificationController.viewModel = returnedCompositionContext.viewModel;
 
       return _lifecycle.invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {

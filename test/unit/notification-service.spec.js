@@ -5,16 +5,16 @@ import {Container} from 'aurelia-dependency-injection';
 import {CompositionEngine} from 'aurelia-templating';
 
 describe('the Notification Service', () => {
-  let container;
   let compositionEngine;
+  let container;
   let renderer;
   let sut;
 
   beforeEach(() => {
-    container = new Container();
     compositionEngine = new CompositionEngine();
+    container = new Container();
     renderer = new NotificationRenderer();
-    sut = new NotificationService(container, compositionEngine, renderer);
+    sut = new NotificationService(compositionEngine, container, renderer);
   });
 
   it('should show a notification', () => {
