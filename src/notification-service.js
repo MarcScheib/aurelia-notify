@@ -10,7 +10,7 @@ import {NotificationRenderer} from './notification-renderer';
 
 @inject(CompositionEngine, Container, NotificationRenderer)
 export class NotificationService {
-  constructor(compositionEngine, container, notificationRenderer) {
+  constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer) {
     this.compositionEngine = compositionEngine;
     this.container = container;
     this.notificationRenderer = notificationRenderer;
@@ -28,7 +28,7 @@ export class NotificationService {
     return Promise.resolve(compositionContext);
   }
 
-  notify(message, settings, level) {
+  notify(message: string, settings: any, level: string) {
     let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
@@ -67,19 +67,19 @@ export class NotificationService {
     });
   }
 
-  info(message, settings) {
+  info(message: string, settings: any) {
     this.notify(message, settings, NotificationLevel.info);
   }
 
-  success(message, settings) {
+  success(message: string, settings: any) {
     this.notify(message, settings, NotificationLevel.success);
   }
 
-  warning(message, settings) {
+  warning(message: string, settings: any) {
     this.notify(message, settings, NotificationLevel.warning);
   }
 
-  danger(message, settings) {
+  danger(message: string, settings: any) {
     this.notify(message, settings, NotificationLevel.danger);
   }
 }

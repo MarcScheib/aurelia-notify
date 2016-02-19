@@ -4,11 +4,11 @@ import {NotificationController} from './notification-controller';
 
 @inject(NotificationController)
 export class BSNotification {
-  constructor(controller) {
+  constructor(controller: NotificationController) {
     this.controller = controller;
   }
 
-  activate(model) {
+  activate(model: any) {
     this.level = model.level;
     this.notification = model.notification;
   }

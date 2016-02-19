@@ -16,7 +16,7 @@ export class NotificationRenderer {
     this.notificationControllers = [];
   }
 
-  createNotificationHost(notificationController) {
+  createNotificationHost(notificationController: NotificationController) {
     let settings = notificationController.settings;
     let notificationHost = document.createElement('notification-host');
     let notificationContainer = this.getNotificationContainer(settings.containerSelector);
@@ -60,19 +60,19 @@ export class NotificationRenderer {
     return Promise.resolve();
   }
 
-  showNotification(notificationController) {
+  showNotification(notificationController: NotificationController) {
     return notificationController.showNotification();
   }
 
-  hideNotification(notificationController) {
+  hideNotification(notificationController: NotificationController) {
     return notificationController.hideNotification();
   }
 
-  destroyNotificationHost(notificationController) {
+  destroyNotificationHost(notificationController: NotificationController) {
     return notificationController.destroyNotificationHost();
   }
 
-  getNotificationContainer(containerSelector) {
+  getNotificationContainer(containerSelector: string) {
     let notificationContainer = document.querySelector(containerSelector);
     if (notificationContainer === null) {
       notificationContainer = document.body;
