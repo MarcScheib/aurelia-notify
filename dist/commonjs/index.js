@@ -21,6 +21,10 @@ var _notificationService = require('./notification-service');
 
 _defaults(exports, _interopExportWildcard(_notificationService, _defaults));
 
+var _notificationController = require('./notification-controller');
+
+_defaults(exports, _interopExportWildcard(_notificationController, _defaults));
+
 function configure(config, callback) {
   config.globalResources('./bs-notification');
 

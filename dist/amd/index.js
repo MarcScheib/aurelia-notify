@@ -1,4 +1,4 @@
-define(['exports', './notification-renderer', './bs-notification', './notification-level', './notification-service'], function (exports, _notificationRenderer, _bsNotification, _notificationLevel, _notificationService) {
+define(['exports', './notification-renderer', './bs-notification', './notification-level', './notification-service', './notification-controller'], function (exports, _notificationRenderer, _bsNotification, _notificationLevel, _notificationService, _notificationController) {
   'use strict';
 
   exports.__esModule = true;
@@ -13,6 +13,8 @@ define(['exports', './notification-renderer', './bs-notification', './notificati
   _defaults(exports, _interopExportWildcard(_notificationLevel, _defaults));
 
   _defaults(exports, _interopExportWildcard(_notificationService, _defaults));
+
+  _defaults(exports, _interopExportWildcard(_notificationController, _defaults));
 
   function configure(config, callback) {
     config.globalResources('./bs-notification');
