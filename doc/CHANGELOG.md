@@ -1,3 +1,13 @@
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/MarcScheib/aurelia-notification/compare/0.1.0...v0.1.1) (2016-02-26)
+
+
+### Bug Fixes
+
+* Exposed the Notification controller so a custom viewModel can use the controller ([19fbed1](https://github.com/MarcScheib/aurelia-notification/commit/19fbed1))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/MarcScheib/aurelia-notification/compare/0.0.2...v0.1.0) (2016-02-22)
 
