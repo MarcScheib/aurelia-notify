@@ -14,7 +14,7 @@ gulp.task('serve', ['build'], function(done) {
       baseDir: paths.sample,
       routes: {
         '/aurelia-notification': path.join(paths.output, 'amd')
-      },
-    },
+      }
+    }
   }, done);
 });
