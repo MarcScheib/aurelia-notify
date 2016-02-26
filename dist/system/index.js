@@ -1,4 +1,4 @@
-System.register(['./notification-renderer', './bs-notification', './notification-level', './notification-service'], function (_export) {
+System.register(['./notification-renderer', './bs-notification', './notification-level', './notification-service', './notification-controller'], function (_export) {
   'use strict';
 
   var globalSettings;
@@ -27,6 +27,10 @@ System.register(['./notification-renderer', './bs-notification', './notification
     }, function (_notificationService) {
       for (var _key3 in _notificationService) {
         if (_key3 !== 'default') _export(_key3, _notificationService[_key3]);
+      }
+    }, function (_notificationController) {
+      for (var _key4 in _notificationController) {
+        if (_key4 !== 'default') _export(_key4, _notificationController[_key4]);
       }
     }],
     execute: function () {}
