@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/MarcScheib/aurelia-notification.svg?branch=master)](https://travis-ci.org/MarcScheib/aurelia-notification) 
 [![Coverage Status](https://coveralls.io/repos/MarcScheib/aurelia-notification/badge.svg?branch=master&service=github)](https://coveralls.io/github/MarcScheib/aurelia-notification?branch=master)
+[![devDependency Status](https://img.shields.io/david/dev/MarcScheib/aurelia-notification.svg)](https://david-dm.org/MarcScheib/aurelia-notification#info=devDependencies)
 
 A simple notification plugin for [Aurelia](http://www.aurelia.io/).
 
