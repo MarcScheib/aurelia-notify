@@ -497,7 +497,7 @@
                   "type": {
                     "type": "reference",
                     "name": "CompositionEngine",
-                    "id": 1680,
+                    "id": 1675,
                     "moduleName": "\"aurelia-templating\""
                   }
                 },
@@ -510,7 +510,7 @@
                   "type": {
                     "type": "reference",
                     "name": "Container",
-                    "id": 480,
+                    "id": 506,
                     "moduleName": "\"aurelia-dependency-injection\""
                   }
                 },
