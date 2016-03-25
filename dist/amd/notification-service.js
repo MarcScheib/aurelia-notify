@@ -1,13 +1,22 @@
 define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (exports, _aureliaDependencyInjection, _aureliaFramework, _aureliaMetadata, _aureliaTemplating, _lifecycle, _notificationController, _notificationLevel, _notificationRenderer) {
   'use strict';
 
-  exports.__esModule = true;
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.NotificationService = undefined;
 
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
 
-  var NotificationService = (function () {
+  var _dec, _class;
+
+  var NotificationService = exports.NotificationService = (_dec = (0, _aureliaFramework.inject)(_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer), _dec(_class = function () {
     function NotificationService(compositionEngine, container, notificationRenderer) {
-      _classCallCheck(this, _NotificationService);
+      _classCallCheck(this, NotificationService);
 
       this.compositionEngine = compositionEngine;
       this.container = container;
@@ -51,7 +60,7 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
       return this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
         notificationController.viewModel = returnedCompositionContext.viewModel;
 
-        return _lifecycle.invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
+        return (0, _lifecycle.invokeLifecycle)(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
           if (canActivate) {
             return _this.compositionEngine.createController(returnedCompositionContext);
           }
@@ -83,10 +92,6 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
       this.notify(message, settings, _notificationLevel.NotificationLevel.danger);
     };
 
-    var _NotificationService = NotificationService;
-    NotificationService = _aureliaFramework.inject(_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer)(NotificationService) || NotificationService;
     return NotificationService;
-  })();
-
-  exports.NotificationService = NotificationService;
+  }()) || _class);
 });

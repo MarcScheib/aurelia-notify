@@ -1,16 +1,20 @@
-System.register(['./lifecycle'], function (_export) {
-  'use strict';
+'use strict';
 
+System.register(['./lifecycle'], function (_export, _context) {
   var invokeLifecycle, NotificationController;
 
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
 
   return {
     setters: [function (_lifecycle) {
       invokeLifecycle = _lifecycle.invokeLifecycle;
     }],
     execute: function () {
-      NotificationController = (function () {
+      _export('NotificationController', NotificationController = function () {
         function NotificationController(renderer, settings) {
           _classCallCheck(this, NotificationController);
 
@@ -37,7 +41,7 @@ System.register(['./lifecycle'], function (_export) {
         };
 
         return NotificationController;
-      })();
+      }());
 
       _export('NotificationController', NotificationController);
     }

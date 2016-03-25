@@ -1,12 +1,13 @@
 define(['exports'], function (exports) {
   'use strict';
 
-  exports.__esModule = true;
-  var NotificationLevel = {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var NotificationLevel = exports.NotificationLevel = {
     info: 'info',
     success: 'success',
     warning: 'warning',
     danger: 'danger'
   };
-  exports.NotificationLevel = NotificationLevel;
 });

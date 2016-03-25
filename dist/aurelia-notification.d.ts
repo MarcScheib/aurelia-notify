@@ -1,8 +1,17 @@
 declare module 'aurelia-notification' {
-  import { inject }  from 'aurelia-framework';
-  import { ViewSlot, CompositionEngine }  from 'aurelia-templating';
-  import { Container }  from 'aurelia-dependency-injection';
-  import { Origin }  from 'aurelia-metadata';
+  import {
+    inject
+  } from 'aurelia-framework';
+  import {
+    ViewSlot,
+    CompositionEngine
+  } from 'aurelia-templating';
+  import {
+    Container
+  } from 'aurelia-dependency-injection';
+  import {
+    Origin
+  } from 'aurelia-metadata';
   export class BSNotification {
     constructor(controller: NotificationController);
     activate(model: any): any;

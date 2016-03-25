@@ -1,11 +1,18 @@
 define(['exports', './lifecycle'], function (exports, _lifecycle) {
   'use strict';
 
-  exports.__esModule = true;
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.NotificationController = undefined;
 
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
 
-  var NotificationController = (function () {
+  var NotificationController = exports.NotificationController = function () {
     function NotificationController(renderer, settings) {
       _classCallCheck(this, NotificationController);
 
@@ -18,9 +25,9 @@ define(['exports', './lifecycle'], function (exports, _lifecycle) {
 
       clearTimeout(this.timer);
 
-      return _lifecycle.invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
+      return (0, _lifecycle.invokeLifecycle)(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
         if (canDeactivate) {
-          return _lifecycle.invokeLifecycle(_this.viewModel, 'deactivate');
+          return (0, _lifecycle.invokeLifecycle)(_this.viewModel, 'deactivate');
         }
       }).then(function () {
         return _this._renderer.hideNotification(_this);
@@ -32,7 +39,5 @@ define(['exports', './lifecycle'], function (exports, _lifecycle) {
     };
 
     return NotificationController;
-  })();
-
-  exports.NotificationController = NotificationController;
+  }();
 });

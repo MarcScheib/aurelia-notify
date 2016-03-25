@@ -1,16 +1,21 @@
 'use strict';
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BSNotification = undefined;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _dec, _class;
 
 var _aureliaFramework = require('aurelia-framework');
 
 var _notificationController = require('./notification-controller');
 
-var BSNotification = (function () {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var BSNotification = exports.BSNotification = (_dec = (0, _aureliaFramework.inject)(_notificationController.NotificationController), _dec(_class = function () {
   function BSNotification(controller) {
-    _classCallCheck(this, _BSNotification);
+    _classCallCheck(this, BSNotification);
 
     this.controller = controller;
   }
@@ -20,9 +25,5 @@ var BSNotification = (function () {
     this.notification = model.notification;
   };
 
-  var _BSNotification = BSNotification;
-  BSNotification = _aureliaFramework.inject(_notificationController.NotificationController)(BSNotification) || BSNotification;
   return BSNotification;
-})();
-
-exports.BSNotification = BSNotification;
+}()) || _class);

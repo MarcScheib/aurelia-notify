@@ -1,21 +1,46 @@
-define(['exports', './notification-renderer', './bs-notification', './notification-level', './notification-service', './notification-controller'], function (exports, _notificationRenderer, _bsNotification, _notificationLevel, _notificationService, _notificationController) {
+define(['exports', './bs-notification', './notification-level', './notification-service', './notification-controller', './notification-renderer'], function (exports, _bsNotification, _notificationLevel, _notificationService, _notificationController, _notificationRenderer) {
   'use strict';
 
-  exports.__esModule = true;
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.keys(_bsNotification).forEach(function (key) {
+    if (key === "default") return;
+    Object.defineProperty(exports, key, {
+      enumerable: true,
+      get: function () {
+        return _bsNotification[key];
+      }
+    });
+  });
+  Object.keys(_notificationLevel).forEach(function (key) {
+    if (key === "default") return;
+    Object.defineProperty(exports, key, {
+      enumerable: true,
+      get: function () {
+        return _notificationLevel[key];
+      }
+    });
+  });
+  Object.keys(_notificationService).forEach(function (key) {
+    if (key === "default") return;
+    Object.defineProperty(exports, key, {
+      enumerable: true,
+      get: function () {
+        return _notificationService[key];
+      }
+    });
+  });
+  Object.keys(_notificationController).forEach(function (key) {
+    if (key === "default") return;
+    Object.defineProperty(exports, key, {
+      enumerable: true,
+      get: function () {
+        return _notificationController[key];
+      }
+    });
+  });
   exports.configure = configure;
-
-  function _interopExportWildcard(obj, defaults) { var newObj = defaults({}, obj); delete newObj['default']; return newObj; }
-
-  function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-  _defaults(exports, _interopExportWildcard(_bsNotification, _defaults));
-
-  _defaults(exports, _interopExportWildcard(_notificationLevel, _defaults));
-
-  _defaults(exports, _interopExportWildcard(_notificationService, _defaults));
-
-  _defaults(exports, _interopExportWildcard(_notificationController, _defaults));
-
   function configure(config, callback) {
     config.globalResources('./bs-notification');
 

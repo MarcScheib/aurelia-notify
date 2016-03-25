@@ -1,9 +1,13 @@
-System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (_export) {
-  'use strict';
+'use strict';
 
-  var Container, inject, Origin, CompositionEngine, invokeLifecycle, NotificationController, NotificationLevel, NotificationRenderer, NotificationService;
+System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (_export, _context) {
+  var Container, inject, Origin, CompositionEngine, invokeLifecycle, NotificationController, NotificationLevel, NotificationRenderer, _dec, _class, NotificationService;
 
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
 
   return {
     setters: [function (_aureliaDependencyInjection) {
@@ -24,9 +28,9 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
       NotificationRenderer = _notificationRenderer.NotificationRenderer;
     }],
     execute: function () {
-      NotificationService = (function () {
+      _export('NotificationService', NotificationService = (_dec = inject(CompositionEngine, Container, NotificationRenderer), _dec(_class = function () {
         function NotificationService(compositionEngine, container, notificationRenderer) {
-          _classCallCheck(this, _NotificationService);
+          _classCallCheck(this, NotificationService);
 
           this.compositionEngine = compositionEngine;
           this.container = container;
@@ -102,10 +106,8 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
           this.notify(message, settings, NotificationLevel.danger);
         };
 
-        var _NotificationService = NotificationService;
-        NotificationService = inject(CompositionEngine, Container, NotificationRenderer)(NotificationService) || NotificationService;
         return NotificationService;
-      })();
+      }()) || _class));
 
       _export('NotificationService', NotificationService);
     }

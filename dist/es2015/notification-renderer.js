@@ -1,6 +1,6 @@
-import {ViewSlot} from 'aurelia-templating';
+import { ViewSlot } from 'aurelia-templating';
 
-import {BSNotification} from './bs-notification';
+import { BSNotification } from './bs-notification';
 
 export let globalSettings = {
   append: false,
@@ -9,14 +9,15 @@ export let globalSettings = {
   viewModel: BSNotification
 };
 
-export class NotificationRenderer {
-  defaultSettings = globalSettings;
+export let NotificationRenderer = class NotificationRenderer {
 
   constructor() {
+    this.defaultSettings = globalSettings;
+
     this.notificationControllers = [];
   }
 
-  createNotificationHost(notificationController: NotificationController) {
+  createNotificationHost(notificationController) {
     let settings = notificationController.settings;
     let notificationHost = document.createElement('notification-host');
     let notificationContainer = this.getNotificationContainer(settings.containerSelector);
@@ -60,19 +61,19 @@ export class NotificationRenderer {
     return Promise.resolve();
   }
 
-  showNotification(notificationController: NotificationController) {
+  showNotification(notificationController) {
     return notificationController.showNotification();
   }
 
-  hideNotification(notificationController: NotificationController) {
+  hideNotification(notificationController) {
     return notificationController.hideNotification();
   }
 
-  destroyNotificationHost(notificationController: NotificationController) {
+  destroyNotificationHost(notificationController) {
     return notificationController.destroyNotificationHost();
   }
 
-  getNotificationContainer(containerSelector: string) {
+  getNotificationContainer(containerSelector) {
     let notificationContainer = document.querySelector(containerSelector);
     if (notificationContainer === null) {
       notificationContainer = document.body;
@@ -80,4 +81,4 @@ export class NotificationRenderer {
 
     return notificationContainer;
   }
-}
+};

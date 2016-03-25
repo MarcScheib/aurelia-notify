@@ -1,23 +1,24 @@
 'use strict';
 
-exports.__esModule = true;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NotificationRenderer = exports.globalSettings = undefined;
 
 var _aureliaTemplating = require('aurelia-templating');
 
 var _bsNotification = require('./bs-notification');
 
-var globalSettings = {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var globalSettings = exports.globalSettings = {
   append: false,
   containerSelector: 'body',
   timeout: 0,
   viewModel: _bsNotification.BSNotification
 };
 
-exports.globalSettings = globalSettings;
-
-var NotificationRenderer = (function () {
+var NotificationRenderer = exports.NotificationRenderer = function () {
   function NotificationRenderer() {
     _classCallCheck(this, NotificationRenderer);
 
@@ -94,6 +95,4 @@ var NotificationRenderer = (function () {
   };
 
   return NotificationRenderer;
-})();
-
-exports.NotificationRenderer = NotificationRenderer;
+}();

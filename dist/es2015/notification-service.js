@@ -1,16 +1,17 @@
-import {Container} from 'aurelia-dependency-injection';
-import {inject} from 'aurelia-framework';
-import {Origin} from 'aurelia-metadata';
-import {CompositionEngine} from 'aurelia-templating';
+var _dec, _class;
 
-import {invokeLifecycle} from './lifecycle';
-import {NotificationController} from './notification-controller';
-import {NotificationLevel} from './notification-level';
-import {NotificationRenderer} from './notification-renderer';
+import { Container } from 'aurelia-dependency-injection';
+import { inject } from 'aurelia-framework';
+import { Origin } from 'aurelia-metadata';
+import { CompositionEngine } from 'aurelia-templating';
 
-@inject(CompositionEngine, Container, NotificationRenderer)
-export class NotificationService {
-  constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer) {
+import { invokeLifecycle } from './lifecycle';
+import { NotificationController } from './notification-controller';
+import { NotificationLevel } from './notification-level';
+import { NotificationRenderer } from './notification-renderer';
+
+export let NotificationService = (_dec = inject(CompositionEngine, Container, NotificationRenderer), _dec(_class = class NotificationService {
+  constructor(compositionEngine, container, notificationRenderer) {
     this.compositionEngine = compositionEngine;
     this.container = container;
     this.notificationRenderer = notificationRenderer;
@@ -28,7 +29,7 @@ export class NotificationService {
     return Promise.resolve(compositionContext);
   }
 
-  notify(message: string, settings: any, level: string) {
+  notify(message, settings, level) {
     let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
@@ -67,19 +68,19 @@ export class NotificationService {
     });
   }
 
-  info(message: string, settings: any) {
+  info(message, settings) {
     this.notify(message, settings, NotificationLevel.info);
   }
 
-  success(message: string, settings: any) {
+  success(message, settings) {
     this.notify(message, settings, NotificationLevel.success);
   }
 
-  warning(message: string, settings: any) {
+  warning(message, settings) {
     this.notify(message, settings, NotificationLevel.warning);
   }
 
-  danger(message: string, settings: any) {
+  danger(message, settings) {
     this.notify(message, settings, NotificationLevel.danger);
   }
-}
+}) || _class);
