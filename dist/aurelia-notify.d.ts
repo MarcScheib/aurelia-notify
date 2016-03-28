@@ -1,4 +1,4 @@
-declare module 'aurelia-notification' {
+declare module 'aurelia-notify' {
   import {
     inject
   } from 'aurelia-framework';

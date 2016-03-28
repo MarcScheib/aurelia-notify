@@ -13,7 +13,7 @@ gulp.task('serve', ['build'], function(done) {
     server: {
       baseDir: paths.sample,
       routes: {
-        '/aurelia-notification': path.join(paths.output, 'amd')
+        '/aurelia-notify': path.join(paths.output, 'amd')
       }
     }
   }, done);

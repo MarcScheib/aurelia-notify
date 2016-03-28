@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import {NotificationService, Notification} from 'aurelia-notification';
+import {NotificationService, Notification} from 'aurelia-notify';
 
 @inject(NotificationService)
 export class App {

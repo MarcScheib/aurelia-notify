@@ -1,8 +1,8 @@
-# aurelia-notification
+# aurelia-notify
 
-[![Build Status](https://travis-ci.org/MarcScheib/aurelia-notification.svg?branch=master)](https://travis-ci.org/MarcScheib/aurelia-notification) 
-[![Coverage Status](https://coveralls.io/repos/MarcScheib/aurelia-notification/badge.svg?branch=master&service=github)](https://coveralls.io/github/MarcScheib/aurelia-notification?branch=master)
-[![devDependency Status](https://img.shields.io/david/dev/MarcScheib/aurelia-notification.svg)](https://david-dm.org/MarcScheib/aurelia-notification#info=devDependencies)
+[![Build Status](https://travis-ci.org/MarcScheib/aurelia-notify.svg?branch=master)](https://travis-ci.org/MarcScheib/aurelia-notify) 
+[![Coverage Status](https://coveralls.io/repos/MarcScheib/aurelia-notify/badge.svg?branch=master&service=github)](https://coveralls.io/github/MarcScheib/aurelia-notify?branch=master)
+[![devDependency Status](https://img.shields.io/david/dev/MarcScheib/aurelia-notify.svg)](https://david-dm.org/MarcScheib/aurelia-notify#info=devDependencies)
 
 A simple notification plugin for [Aurelia](http://www.aurelia.io/).
 
@@ -100,6 +100,6 @@ To run the sample code using this plugin proceed with these additional steps:
 
 ## Documentation
 
-- [Installing the plugin](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#installation)
-- [Getting started](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#getting-started)
-- [Configuration](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration)
+- [Installing the plugin](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#installation)
+- [Getting started](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#getting-started)
+- [Configuration](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration)

@@ -7,19 +7,19 @@ The plugin installation happens via JSPM. Go to your project and verify npm (```
 Now, you can install the notification plugin via the following command:
 
 ```
-jspm install aurelia-notification
+jspm install aurelia-notify
 ```
 
 The command will add the plugin source code to your _jspm_packages_ directory as well as a mapping into your _config.js_ which looks similar to the following:
 
 ```
-"aurelia-notification": "github:MarcScheib/aurelia-notification@x.y.z"
+"aurelia-notify": "github:MarcScheib/aurelia-notify@x.y.z"
 ```
 
 You can also add a specific branch to your application if you are looking for technical previews by executing the following command:
 
 ```
-jspm install aurelia-notification=github:MarcScheib/aurelia-notification@master
+jspm install aurelia-notify=github:MarcScheib/aurelia-notify@master
 ```
 
 This will add the current _master_ branch instead of the latest tagged version.
@@ -34,7 +34,7 @@ export function configure(aurelia) {
     .standardConfiguration()
     .developmentLogging()
     ...
-    .plugin('aurelia-notification'); // Add this line to load the plugin
+    .plugin('aurelia-notify'); // Add this line to load the plugin
 
   aurelia.start().then(a => a.setRoot('app', document.body));
 }
@@ -42,9 +42,9 @@ export function configure(aurelia) {
 
 # Getting started
 
-A simple introduction for the **aurelia-notification** plugin is shown by using the Aurelia demo application [skeleton-navigation](https://github.com/aurelia/skeleton-navigation).
+A simple introduction for the **aurelia-notify** plugin is shown by using the Aurelia demo application [skeleton-navigation](https://github.com/aurelia/skeleton-navigation).
 
-We start by setting up the project. Afterwards, we install and configure the plugin as shown in [Installation](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#installation).
+We start by setting up the project. Afterwards, we install and configure the plugin as shown in [Installation](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#installation).
 
 1. Clone the repository into your local project folder:
 
@@ -63,16 +63,16 @@ We start by setting up the project. Afterwards, we install and configure the plu
   ```
   jspm install
   ```
-4. Install the **aurelia-notification** dependency via _jspm_:
+4. Install the **aurelia-notify** dependency via _jspm_:
 
   ```
-  jspm install aurelia-notification
+  jspm install aurelia-notify
   ```
 
 The project is now set up together with the notification plugin and we can start using it. Via executing ```gulp watch``` you can start a server running the application.
 It is then available via the shown URL on the command line (e.g. http://localhost:9000).
 
-The next step is to configure the _aurelia-notification_ plugin. In your favored IDE, open the file _skeleton-navigation/skeleton-es2016/src/main.js_ and adjust it as follows:
+The next step is to configure the _aurelia-notify_ plugin. In your favored IDE, open the file _skeleton-navigation/skeleton-es2016/src/main.js_ and adjust it as follows:
 
 ```javascript
 import 'bootstrap';
@@ -81,7 +81,7 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin('aurelia-notification');
+    .plugin('aurelia-notify');
 
   //Uncomment the line below to enable animation.
   //aurelia.use.plugin('aurelia-animator-css');
@@ -95,7 +95,7 @@ export function configure(aurelia) {
 
 ```
 
-We simply added the ```.plugin('aurelia-notification')``` line. With this basic configuration, the plugin makes use of the available Bootstrap CSS styling. In case you want to use a different configuration, see the [Configuration](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration) section.
+We simply added the ```.plugin('aurelia-notify')``` line. With this basic configuration, the plugin makes use of the available Bootstrap CSS styling. In case you want to use a different configuration, see the [Configuration](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration) section.
 
 We can start adding notifications to our application now. The plugin exposes a **NotificationService** which is used to display our notifications. 
 Open the file _skeleton-navigation/skeleton-es2016/src/welcome.js_ and edit the file as follows:
@@ -103,7 +103,7 @@ Open the file _skeleton-navigation/skeleton-es2016/src/welcome.js_ and edit the 
 1. We need to import the **NotificationService** from the plugin. On top of the file, add the following line:
 
   ```javascript
-  import {NotificationService} from 'aurelia-notification';
+  import {NotificationService} from 'aurelia-notify';
   ```
 2. Inject the service into the constructor of the view-model as shown in the following snippet:
 
@@ -135,7 +135,7 @@ The notification is now displayed below the form and visible to the user directl
 
 Beside the ```info()``` notification, there are three different methods available which in the base configuration make use of Bootstraps alert styles. Those are ```success()```, ```warning()```, and ```danger()```.
 
-For more information on the configuration, see the Section [Configuration](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration). API information will be available soon.
+For more information on the configuration, see the Section [Configuration](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration). API information will be available soon.
  
 # Configuration
 
@@ -150,7 +150,7 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin('aurelia-notification', settings => {
+    .plugin('aurelia-notify', settings => {
       settings.timeout = 10000;
     });
 
@@ -158,7 +158,7 @@ export function configure(aurelia) {
 }
 ```
 
-For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration-parameters).
+For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration-parameters).
 
 ## Specialized Configuration
 
@@ -169,11 +169,11 @@ this.notificationService.info('This notification lasts for 5s before it is close
 this.notificationService.danger('This notification lasts for 10s before it is closed automatically.', {timeout: 10000});
 ```
 
-For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration-parameters).
+For all available configuration parameters, see Section [Configuration Parameters](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration-parameters).
 
 ## Configuration Parameters
 
-The **aurelia-notification** plugin provides the following configuration parameters:
+The **aurelia-notify** plugin provides the following configuration parameters:
 - `append`
   - Specifies whether notifications should be appended to the notification container instead of inserted as the first element.
   - **Default**: false
@@ -189,7 +189,7 @@ The **aurelia-notification** plugin provides the following configuration paramet
 
 # Customization
 
-The plugin allows several different customizations based on the [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration-parameters).
+The plugin allows several different customizations based on the [Configuration Parameters](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration-parameters).
 
 ## Customize service method calls
 
@@ -244,7 +244,7 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin('aurelia-notification', settings => {
+    .plugin('aurelia-notify', settings => {
       settings.viewModel = SimpleNotification;
     });
 

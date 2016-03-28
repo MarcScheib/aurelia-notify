@@ -4,7 +4,7 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin('aurelia-notification');
+    .plugin('aurelia-notify');
 
   aurelia.start().then(a => a.setRoot('src/app'));
 }
