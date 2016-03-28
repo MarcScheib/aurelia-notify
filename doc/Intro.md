@@ -189,4 +189,67 @@ The **aurelia-notification** plugin provides the following configuration paramet
 
 # Customization
 
-TBD
+The plugin allows several different customizations based on the [Configuration Parameters](https://github.com/MarcScheib/aurelia-notification/blob/master/doc/Intro.md#configuration-parameters).
+
+## Customize service method calls
+
+At the moment, the notification plugin supports four built in methods to show notifications:
+
+- ```info(message, settings)```
+- ```success(message, settings)```
+- ```warning(message, settings)```
+- ```danger(message, settings)```
+
+Each method takes a message parameter which is shown as the notification message and, optionally, a settings object base on above's configuration parameters.
+The methods internally call ```notify(message, settings, level)```, which can also be used to show notifications. It has a third parameter specifying the level or severity of the notification and, thus, the color of the notification box (when using the default).
+By default, the levels map to Bootstraps equivalents. The following code snippets show some examples:
+
+This snippet shows a success notification which hides automatically after 5 seconds.
+
+```javascript
+this.notificationService.notify('A success message', {timeout: 5}, NotificationLevel.success);
+```
+
+## Customize the notification element
+
+Instead of using the default Bootstrap notification view/view-model, it is also possible to use an own pair.
+
+First of all, it is necessary to specify a view file and a view-model, e.g. the following:
+
+The view may look like this:
+```html
+<template>
+  <div class="simple-notification">
+    ${notification}
+  </div>
+</template>
+```
+
+And the corresponding view-model:
+```javascript
+export class SimpleNotification {
+  activate(model) {
+    this.notification = model.notification;
+  }
+}
+```
+
+The next step is to configure the plugin to use this view/view-model (it is also possible to use it for one service call only by adjusting the settings of a service method).
+It may look like this:
+
+```javascript
+import {SimpleNotification} from './simple-notification';
+
+export function configure(aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .plugin('aurelia-notification', settings => {
+      settings.viewModel = SimpleNotification;
+    });
+
+  aurelia.start().then(a => a.setRoot('app', document.body));
+}
+```
+
+Now, the customized view/view-model is used instead of the default one.
