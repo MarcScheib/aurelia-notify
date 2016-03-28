@@ -1,14 +1,14 @@
 var isparta = require('isparta');
 var paths = require('./build/paths');
-var babelOptions = require('./build/babel-options');
 
 module.exports = function(config) {
   var configuration = {
+    basePath: '',
+
     frameworks: ['jspm', 'jasmine'],
 
     jspm: {
-      config: 'config.js',
-      loadFiles: [paths.tests],
+      loadFiles: ['test/unit/setup.js', paths.tests],
       serveFiles: [paths.source]
     },
 
@@ -22,7 +22,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       [paths.tests]: ['babel'],
-      [paths.source]: ['babel', 'sourcemap', 'coverage']
+      [paths.source]: ['babel', 'coverage']
     },
 
     'babelPreprocessor': {
