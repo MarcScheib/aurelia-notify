@@ -103,3 +103,4 @@ To run the sample code using this plugin proceed with these additional steps:
 - [Installing the plugin](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#installation)
 - [Getting started](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#getting-started)
 - [Configuration](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration)
+- [Customization](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#customization)
