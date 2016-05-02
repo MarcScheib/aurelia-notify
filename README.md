@@ -12,6 +12,13 @@ A simple notification plugin for [Aurelia](http://www.aurelia.io/).
 notification.info('A simple info notification');
 ```
 
+## Documentation
+
+- [Installing the plugin](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#installation)
+- [Getting started](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#getting-started)
+- [Configuration](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration)
+- [Customization](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#customization)
+
 ## Dependencies
 
 This plugin has no external library dependencies and is completely based on [Aurelia](http://www.aurelia.io/).
@@ -98,10 +105,3 @@ To run the sample code using this plugin proceed with these additional steps:
   cd ..
   gulp watch
   ```
-
-## Documentation
-
-- [Installing the plugin](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#installation)
-- [Getting started](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#getting-started)
-- [Configuration](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration)
-- [Customization](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#customization)
