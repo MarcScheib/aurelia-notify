@@ -1,3 +1,13 @@
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/MarcScheib/aurelia-notify/compare/0.2.2...v0.2.3) (2016-05-09)
+
+
+### Bug Fixes
+
+* **service:** make service method parameters optional ([c4d4dfc](https://github.com/MarcScheib/aurelia-notify/commit/c4d4dfc))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/MarcScheib/aurelia-notify/compare/0.2.1...v0.2.2) (2016-05-02)
 

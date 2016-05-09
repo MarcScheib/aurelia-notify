@@ -34,10 +34,10 @@ declare module 'aurelia-notify' {
   }
   export class NotificationService {
     constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer);
-    notify(message: string, settings: any, level: string): any;
-    info(message: string, settings: any): any;
-    success(message: string, settings: any): any;
-    warning(message: string, settings: any): any;
-    danger(message: string, settings: any): any;
+    notify(message: string, settings?: any, level?: string): any;
+    info(message: string, settings?: any): any;
+    success(message: string, settings?: any): any;
+    warning(message: string, settings?: any): any;
+    danger(message: string, settings?: any): any;
   }
 }
