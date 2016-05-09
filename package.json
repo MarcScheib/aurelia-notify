@@ -23,13 +23,19 @@
     "test": "gulp test",
     "ci": "gulp ci"
   },
-  "jspmNodeConversion": false,
   "jspm": {
     "registry": "npm",
+    "jspmPackage": true,
     "main": "index",
     "format": "amd",
     "directories": {
       "lib": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-dependency-injection": "^1.0.0-beta.1.2.2",
+      "aurelia-framework": "^1.0.0-beta.1.2.2",
+      "aurelia-metadata": "^1.0.0-beta.1.2.0",
+      "aurelia-templating": "^1.0.0-beta.1.2.3"
     },
     "dependencies": {
       "aurelia-dependency-injection": "^1.0.0-beta.1.2.2",

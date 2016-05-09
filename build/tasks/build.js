@@ -99,7 +99,7 @@ gulp.task('build-html-system', function () {
 });
 
 gulp.task('build-dts', function () {
-  var tdsPath = paths.output + paths.packageName + '/' + paths.packageName + '.d.ts';
+  var tdsPath = paths.output + paths.packageName + '.d.ts';
   return gulp.src(tdsPath)
     .pipe(rename(paths.packageName + '.d.ts'))
     .pipe(gulp.dest(paths.output + 'es2015'))
