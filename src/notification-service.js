@@ -28,7 +28,7 @@ export class NotificationService {
     return Promise.resolve(compositionContext);
   }
 
-  notify(message: string, settings: any, level: string) {
+  notify(message: string, settings?: any, level?: string) {
     let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
@@ -67,19 +67,19 @@ export class NotificationService {
     });
   }
 
-  info(message: string, settings: any) {
+  info(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.info);
   }
 
-  success(message: string, settings: any) {
+  success(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.success);
   }
 
-  warning(message: string, settings: any) {
+  warning(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.warning);
   }
 
-  danger(message: string, settings: any) {
+  danger(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.danger);
   }
 }
