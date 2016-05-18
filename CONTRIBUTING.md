@@ -211,3 +211,6 @@ The body should include the motivation for the change and contrast this with pre
 
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. 
 The rest of the commit message is then used for this.
+
+[github]: https://github.com/MarcScheib/aurelia-notify
+[stackoverflow]: http://stackoverflow.com/
