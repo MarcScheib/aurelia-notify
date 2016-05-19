@@ -186,6 +186,9 @@ The **aurelia-notify** plugin provides the following configuration parameters:
 - `viewModel`
   - Specifies which view model is used for the notification. This allows to specify own customized elements and data. The default settings makes use of Bootstrap styles.
   - **Default**: BSNotification
+- `limit`
+  - Specifies the amount of notifications that are shown at the same time. If additional notifications are added, the oldest ones are closed.
+  - **Default**: 5
 
 # Customization
 
