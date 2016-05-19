@@ -53,19 +53,22 @@ export class NotificationService {
 
       return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
         if (canActivate) {
-          return this.compositionEngine.createController(returnedCompositionContext);
-        }
-      }).then(controller => {
-        notificationController.controller = controller;
-        notificationController.view = controller.view;
-        controller.automate();
+          this.compositionEngine.createController(returnedCompositionContext)
+            .then(controller => {
+              notificationController.controller = controller;
+              notificationController.view = controller.view;
+              controller.automate();
 
-        return this.notificationRenderer.createNotificationHost(notificationController);
-      }).then(() => {
-        return this.notificationRenderer.showNotification(notificationController);
+              return this.notificationRenderer.createNotificationHost(notificationController);
+            })
+            .then(() => {
+              return this.notificationRenderer.showNotification(notificationController);
+            });
+        }
       });
     });
   }
+
 
   info(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.info);

@@ -11,14 +11,17 @@ export class NotificationController {
 
     return invokeLifecycle(this.viewModel, 'canDeactivate').then(canDeactivate => {
       if (canDeactivate) {
-        return invokeLifecycle(this.viewModel, 'deactivate');
+        invokeLifecycle(this.viewModel, 'deactivate')
+          .then(() => {
+            return this._renderer.hideNotification(this);
+          })
+          .then(() => {
+            return this._renderer.destroyNotificationHost(this);
+          })
+          .then(() => {
+            this.controller.unbind();
+          });
       }
-    }).then(() => {
-      return this._renderer.hideNotification(this);
-    }).then(() => {
-      return this._renderer.destroyNotificationHost(this);
-    }).then(() => {
-      this.controller.unbind();
     });
   }
 }
