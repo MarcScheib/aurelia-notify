@@ -6,7 +6,8 @@ export let globalSettings = {
   append: false,
   containerSelector: 'body',
   timeout: 0,
-  viewModel: BSNotification
+  viewModel: BSNotification,
+  limit: 5
 };
 
 export class NotificationRenderer {
@@ -31,7 +32,13 @@ export class NotificationRenderer {
     notificationController.slot.add(notificationController.view);
 
     notificationController.showNotification = () => {
+            
       this.notificationControllers.push(notificationController);
+     
+      if (this.notificationControllers.length >= (globalSettings.limit + 1)) {
+        this.notificationControllers[0].close(this.notificationControllers[0]);
+      }
+      
       notificationController.slot.attached();
 
       if (settings.timeout > 0) {
