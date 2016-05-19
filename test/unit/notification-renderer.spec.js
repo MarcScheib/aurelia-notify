@@ -6,7 +6,8 @@ export let defaultSettings = {
   append: false,
   containerSelector: 'body',
   timeout: 0,
-  viewModel: BSNotification
+  viewModel: BSNotification,
+  limit: 5
 };
 
 describe('the Notification Renderer', () => {

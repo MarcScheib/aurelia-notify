@@ -22,7 +22,8 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
         append: false,
         containerSelector: 'body',
         timeout: 0,
-        viewModel: BSNotification
+        viewModel: BSNotification,
+        limit: 5
       });
 
       _export('globalSettings', globalSettings);
@@ -54,6 +55,11 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
 
           notificationController.showNotification = function () {
             _this.notificationControllers.push(notificationController);
+
+            if (_this.notificationControllers.length >= settings.limit + 1) {
+              _this.notificationControllers[0].close(_this.notificationControllers[0]);
+            }
+
             notificationController.slot.attached();
 
             if (settings.timeout > 0) {

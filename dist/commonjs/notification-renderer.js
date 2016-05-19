@@ -15,7 +15,8 @@ var globalSettings = exports.globalSettings = {
   append: false,
   containerSelector: 'body',
   timeout: 0,
-  viewModel: _bsNotification.BSNotification
+  viewModel: _bsNotification.BSNotification,
+  limit: 5
 };
 
 var NotificationRenderer = exports.NotificationRenderer = function () {
@@ -45,6 +46,11 @@ var NotificationRenderer = exports.NotificationRenderer = function () {
 
     notificationController.showNotification = function () {
       _this.notificationControllers.push(notificationController);
+
+      if (_this.notificationControllers.length >= settings.limit + 1) {
+        _this.notificationControllers[0].close(_this.notificationControllers[0]);
+      }
+
       notificationController.slot.attached();
 
       if (settings.timeout > 0) {

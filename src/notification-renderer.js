@@ -32,13 +32,12 @@ export class NotificationRenderer {
     notificationController.slot.add(notificationController.view);
 
     notificationController.showNotification = () => {
-            
       this.notificationControllers.push(notificationController);
-     
-      if (this.notificationControllers.length >= (globalSettings.limit + 1)) {
+
+      if (this.notificationControllers.length >= (settings.limit + 1)) {
         this.notificationControllers[0].close(this.notificationControllers[0]);
       }
-      
+
       notificationController.slot.attached();
 
       if (settings.timeout > 0) {
