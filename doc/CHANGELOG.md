@@ -1,3 +1,13 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/MarcScheib/aurelia-notify/compare/0.2.5...v0.3.0) (2016-05-19)
+
+
+### Features
+
+* Added limit to number of notifications to be displayed at once. ([b74c8f7](https://github.com/MarcScheib/aurelia-notify/commit/b74c8f7))
+
+
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://github.com/MarcScheib/aurelia-notify/compare/0.2.4...v0.2.5) (2016-05-19)
 
