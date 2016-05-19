@@ -44,14 +44,17 @@ export class NotificationController {
 
     return invokeLifecycle(this.viewModel, 'canDeactivate').then(canDeactivate => {
       if (canDeactivate) {
-        return invokeLifecycle(this.viewModel, 'deactivate');
+        invokeLifecycle(this.viewModel, 'deactivate')
+          .then(() => {
+            return this._renderer.hideNotification(this);
+          })
+          .then(() => {
+            return this._renderer.destroyNotificationHost(this);
+          })
+          .then(() => {
+            this.controller.unbind();
+          });
       }
-    }).then(() => {
-      return this._renderer.hideNotification(this);
-    }).then(() => {
-      return this._renderer.destroyNotificationHost(this);
-    }).then(() => {
-      this.controller.unbind();
     });
   }
 }
@@ -188,19 +191,22 @@ export class NotificationService {
 
       return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
         if (canActivate) {
-          return this.compositionEngine.createController(returnedCompositionContext);
-        }
-      }).then(controller => {
-        notificationController.controller = controller;
-        notificationController.view = controller.view;
-        controller.automate();
+          this.compositionEngine.createController(returnedCompositionContext)
+            .then(controller => {
+              notificationController.controller = controller;
+              notificationController.view = controller.view;
+              controller.automate();
 
-        return this.notificationRenderer.createNotificationHost(notificationController);
-      }).then(() => {
-        return this.notificationRenderer.showNotification(notificationController);
+              return this.notificationRenderer.createNotificationHost(notificationController);
+            })
+            .then(() => {
+              return this.notificationRenderer.showNotification(notificationController);
+            });
+        }
       });
     });
   }
+
 
   info(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.info);

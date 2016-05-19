@@ -1,6 +1,8 @@
 'use strict';
 
 System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (_export, _context) {
+  "use strict";
+
   var Container, inject, Origin, CompositionEngine, invokeLifecycle, NotificationController, NotificationLevel, NotificationRenderer, _dec, _class, NotificationService;
 
   function _classCallCheck(instance, Constructor) {
@@ -76,16 +78,16 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
 
             return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
               if (canActivate) {
-                return _this.compositionEngine.createController(returnedCompositionContext);
-              }
-            }).then(function (controller) {
-              notificationController.controller = controller;
-              notificationController.view = controller.view;
-              controller.automate();
+                _this.compositionEngine.createController(returnedCompositionContext).then(function (controller) {
+                  notificationController.controller = controller;
+                  notificationController.view = controller.view;
+                  controller.automate();
 
-              return _this.notificationRenderer.createNotificationHost(notificationController);
-            }).then(function () {
-              return _this.notificationRenderer.showNotification(notificationController);
+                  return _this.notificationRenderer.createNotificationHost(notificationController);
+                }).then(function () {
+                  return _this.notificationRenderer.showNotification(notificationController);
+                });
+              }
             });
           });
         };

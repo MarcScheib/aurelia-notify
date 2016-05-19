@@ -66,14 +66,14 @@ var NotificationController = exports.NotificationController = function () {
 
     return invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
       if (canDeactivate) {
-        return invokeLifecycle(_this.viewModel, 'deactivate');
+        invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
+          return _this._renderer.hideNotification(_this);
+        }).then(function () {
+          return _this._renderer.destroyNotificationHost(_this);
+        }).then(function () {
+          _this.controller.unbind();
+        });
       }
-    }).then(function () {
-      return _this._renderer.hideNotification(_this);
-    }).then(function () {
-      return _this._renderer.destroyNotificationHost(_this);
-    }).then(function () {
-      _this.controller.unbind();
     });
   };
 
@@ -221,16 +221,16 @@ var NotificationService = exports.NotificationService = (_dec2 = (0, _aureliaFra
 
       return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
         if (canActivate) {
-          return _this3.compositionEngine.createController(returnedCompositionContext);
-        }
-      }).then(function (controller) {
-        notificationController.controller = controller;
-        notificationController.view = controller.view;
-        controller.automate();
+          _this3.compositionEngine.createController(returnedCompositionContext).then(function (controller) {
+            notificationController.controller = controller;
+            notificationController.view = controller.view;
+            controller.automate();
 
-        return _this3.notificationRenderer.createNotificationHost(notificationController);
-      }).then(function () {
-        return _this3.notificationRenderer.showNotification(notificationController);
+            return _this3.notificationRenderer.createNotificationHost(notificationController);
+          }).then(function () {
+            return _this3.notificationRenderer.showNotification(notificationController);
+          });
+        }
       });
     });
   };

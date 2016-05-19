@@ -27,14 +27,14 @@ define(['exports', './lifecycle'], function (exports, _lifecycle) {
 
       return (0, _lifecycle.invokeLifecycle)(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
         if (canDeactivate) {
-          return (0, _lifecycle.invokeLifecycle)(_this.viewModel, 'deactivate');
+          (0, _lifecycle.invokeLifecycle)(_this.viewModel, 'deactivate').then(function () {
+            return _this._renderer.hideNotification(_this);
+          }).then(function () {
+            return _this._renderer.destroyNotificationHost(_this);
+          }).then(function () {
+            _this.controller.unbind();
+          });
         }
-      }).then(function () {
-        return _this._renderer.hideNotification(_this);
-      }).then(function () {
-        return _this._renderer.destroyNotificationHost(_this);
-      }).then(function () {
-        _this.controller.unbind();
       });
     };
 

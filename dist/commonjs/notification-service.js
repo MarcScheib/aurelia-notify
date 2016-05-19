@@ -73,16 +73,16 @@ var NotificationService = exports.NotificationService = (_dec = (0, _aureliaFram
 
       return (0, _lifecycle.invokeLifecycle)(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
         if (canActivate) {
-          return _this.compositionEngine.createController(returnedCompositionContext);
-        }
-      }).then(function (controller) {
-        notificationController.controller = controller;
-        notificationController.view = controller.view;
-        controller.automate();
+          _this.compositionEngine.createController(returnedCompositionContext).then(function (controller) {
+            notificationController.controller = controller;
+            notificationController.view = controller.view;
+            controller.automate();
 
-        return _this.notificationRenderer.createNotificationHost(notificationController);
-      }).then(function () {
-        return _this.notificationRenderer.showNotification(notificationController);
+            return _this.notificationRenderer.createNotificationHost(notificationController);
+          }).then(function () {
+            return _this.notificationRenderer.showNotification(notificationController);
+          });
+        }
       });
     });
   };

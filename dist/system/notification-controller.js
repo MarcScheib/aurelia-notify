@@ -1,6 +1,8 @@
 'use strict';
 
 System.register(['./lifecycle'], function (_export, _context) {
+  "use strict";
+
   var invokeLifecycle, NotificationController;
 
   function _classCallCheck(instance, Constructor) {
@@ -29,14 +31,14 @@ System.register(['./lifecycle'], function (_export, _context) {
 
           return invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
             if (canDeactivate) {
-              return invokeLifecycle(_this.viewModel, 'deactivate');
+              invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
+                return _this._renderer.hideNotification(_this);
+              }).then(function () {
+                return _this._renderer.destroyNotificationHost(_this);
+              }).then(function () {
+                _this.controller.unbind();
+              });
             }
-          }).then(function () {
-            return _this._renderer.hideNotification(_this);
-          }).then(function () {
-            return _this._renderer.destroyNotificationHost(_this);
-          }).then(function () {
-            _this.controller.unbind();
           });
         };
 

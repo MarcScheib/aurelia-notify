@@ -1,6 +1,8 @@
 'use strict';
 
 System.register(['./notification-renderer', './bs-notification', './notification-level', './notification-service', './notification-controller'], function (_export, _context) {
+  "use strict";
+
   var globalSettings;
   return {
     setters: [function (_notificationRenderer) {

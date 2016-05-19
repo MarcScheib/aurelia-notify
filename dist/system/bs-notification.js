@@ -1,6 +1,8 @@
 'use strict';
 
 System.register(['aurelia-framework', './notification-controller'], function (_export, _context) {
+  "use strict";
+
   var inject, NotificationController, _dec, _class, BSNotification;
 
   function _classCallCheck(instance, Constructor) {

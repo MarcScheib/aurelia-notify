@@ -34,6 +34,7 @@ declare module 'aurelia-notify' {
   }
   export class NotificationService {
     constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer);
+    _getViewModel(compositionContext?: any): any;
     notify(message: string, settings?: any, level?: string): any;
     info(message: string, settings?: any): any;
     success(message: string, settings?: any): any;

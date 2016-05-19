@@ -54,16 +54,16 @@ export let NotificationService = (_dec = inject(CompositionEngine, Container, No
 
       return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
         if (canActivate) {
-          return this.compositionEngine.createController(returnedCompositionContext);
-        }
-      }).then(controller => {
-        notificationController.controller = controller;
-        notificationController.view = controller.view;
-        controller.automate();
+          this.compositionEngine.createController(returnedCompositionContext).then(controller => {
+            notificationController.controller = controller;
+            notificationController.view = controller.view;
+            controller.automate();
 
-        return this.notificationRenderer.createNotificationHost(notificationController);
-      }).then(() => {
-        return this.notificationRenderer.showNotification(notificationController);
+            return this.notificationRenderer.createNotificationHost(notificationController);
+          }).then(() => {
+            return this.notificationRenderer.showNotification(notificationController);
+          });
+        }
       });
     });
   }

@@ -497,7 +497,7 @@
                   "type": {
                     "type": "reference",
                     "name": "CompositionEngine",
-                    "id": 1692,
+                    "id": 1697,
                     "moduleName": "\"aurelia-templating\""
                   }
                 },
@@ -510,7 +510,7 @@
                   "type": {
                     "type": "reference",
                     "name": "Container",
-                    "id": 506,
+                    "id": 509,
                     "moduleName": "\"aurelia-dependency-injection\""
                   }
                 },
@@ -538,104 +538,8 @@
           ]
         },
         {
-          "id": 59,
-          "name": "danger",
-          "kind": 2048,
-          "kindString": "Method",
-          "flags": {
-            "isExported": true
-          },
-          "signatures": [
-            {
-              "id": 60,
-              "name": "danger",
-              "kind": 4096,
-              "kindString": "Call signature",
-              "flags": {},
-              "parameters": [
-                {
-                  "id": 61,
-                  "name": "message",
-                  "kind": 32768,
-                  "kindString": "Parameter",
-                  "flags": {},
-                  "type": {
-                    "type": "instrinct",
-                    "name": "string"
-                  }
-                },
-                {
-                  "id": 62,
-                  "name": "settings",
-                  "kind": 32768,
-                  "kindString": "Parameter",
-                  "flags": {
-                    "isOptional": true
-                  },
-                  "type": {
-                    "type": "instrinct",
-                    "name": "any"
-                  }
-                }
-              ],
-              "type": {
-                "type": "instrinct",
-                "name": "any"
-              }
-            }
-          ]
-        },
-        {
-          "id": 47,
-          "name": "info",
-          "kind": 2048,
-          "kindString": "Method",
-          "flags": {
-            "isExported": true
-          },
-          "signatures": [
-            {
-              "id": 48,
-              "name": "info",
-              "kind": 4096,
-              "kindString": "Call signature",
-              "flags": {},
-              "parameters": [
-                {
-                  "id": 49,
-                  "name": "message",
-                  "kind": 32768,
-                  "kindString": "Parameter",
-                  "flags": {},
-                  "type": {
-                    "type": "instrinct",
-                    "name": "string"
-                  }
-                },
-                {
-                  "id": 50,
-                  "name": "settings",
-                  "kind": 32768,
-                  "kindString": "Parameter",
-                  "flags": {
-                    "isOptional": true
-                  },
-                  "type": {
-                    "type": "instrinct",
-                    "name": "any"
-                  }
-                }
-              ],
-              "type": {
-                "type": "instrinct",
-                "name": "any"
-              }
-            }
-          ]
-        },
-        {
           "id": 42,
-          "name": "notify",
+          "name": "_getViewModel",
           "kind": 2048,
           "kindString": "Method",
           "flags": {
@@ -644,13 +548,50 @@
           "signatures": [
             {
               "id": 43,
-              "name": "notify",
+              "name": "_getViewModel",
               "kind": 4096,
               "kindString": "Call signature",
               "flags": {},
               "parameters": [
                 {
                   "id": 44,
+                  "name": "compositionContext",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {
+                    "isOptional": true
+                  },
+                  "type": {
+                    "type": "instrinct",
+                    "name": "any"
+                  }
+                }
+              ],
+              "type": {
+                "type": "instrinct",
+                "name": "any"
+              }
+            }
+          ]
+        },
+        {
+          "id": 62,
+          "name": "danger",
+          "kind": 2048,
+          "kindString": "Method",
+          "flags": {
+            "isExported": true
+          },
+          "signatures": [
+            {
+              "id": 63,
+              "name": "danger",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "parameters": [
+                {
+                  "id": 64,
                   "name": "message",
                   "kind": 32768,
                   "kindString": "Parameter",
@@ -661,7 +602,103 @@
                   }
                 },
                 {
-                  "id": 45,
+                  "id": 65,
+                  "name": "settings",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {
+                    "isOptional": true
+                  },
+                  "type": {
+                    "type": "instrinct",
+                    "name": "any"
+                  }
+                }
+              ],
+              "type": {
+                "type": "instrinct",
+                "name": "any"
+              }
+            }
+          ]
+        },
+        {
+          "id": 50,
+          "name": "info",
+          "kind": 2048,
+          "kindString": "Method",
+          "flags": {
+            "isExported": true
+          },
+          "signatures": [
+            {
+              "id": 51,
+              "name": "info",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "parameters": [
+                {
+                  "id": 52,
+                  "name": "message",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "instrinct",
+                    "name": "string"
+                  }
+                },
+                {
+                  "id": 53,
+                  "name": "settings",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {
+                    "isOptional": true
+                  },
+                  "type": {
+                    "type": "instrinct",
+                    "name": "any"
+                  }
+                }
+              ],
+              "type": {
+                "type": "instrinct",
+                "name": "any"
+              }
+            }
+          ]
+        },
+        {
+          "id": 45,
+          "name": "notify",
+          "kind": 2048,
+          "kindString": "Method",
+          "flags": {
+            "isExported": true
+          },
+          "signatures": [
+            {
+              "id": 46,
+              "name": "notify",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {},
+              "parameters": [
+                {
+                  "id": 47,
+                  "name": "message",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {},
+                  "type": {
+                    "type": "instrinct",
+                    "name": "string"
+                  }
+                },
+                {
+                  "id": 48,
                   "name": "settings",
                   "kind": 32768,
                   "kindString": "Parameter",
@@ -674,7 +711,7 @@
                   }
                 },
                 {
-                  "id": 46,
+                  "id": 49,
                   "name": "level",
                   "kind": 32768,
                   "kindString": "Parameter",
@@ -695,7 +732,7 @@
           ]
         },
         {
-          "id": 51,
+          "id": 54,
           "name": "success",
           "kind": 2048,
           "kindString": "Method",
@@ -704,14 +741,14 @@
           },
           "signatures": [
             {
-              "id": 52,
+              "id": 55,
               "name": "success",
               "kind": 4096,
               "kindString": "Call signature",
               "flags": {},
               "parameters": [
                 {
-                  "id": 53,
+                  "id": 56,
                   "name": "message",
                   "kind": 32768,
                   "kindString": "Parameter",
@@ -722,7 +759,7 @@
                   }
                 },
                 {
-                  "id": 54,
+                  "id": 57,
                   "name": "settings",
                   "kind": 32768,
                   "kindString": "Parameter",
@@ -743,7 +780,7 @@
           ]
         },
         {
-          "id": 55,
+          "id": 58,
           "name": "warning",
           "kind": 2048,
           "kindString": "Method",
@@ -752,14 +789,14 @@
           },
           "signatures": [
             {
-              "id": 56,
+              "id": 59,
               "name": "warning",
               "kind": 4096,
               "kindString": "Call signature",
               "flags": {},
               "parameters": [
                 {
-                  "id": 57,
+                  "id": 60,
                   "name": "message",
                   "kind": 32768,
                   "kindString": "Parameter",
@@ -770,7 +807,7 @@
                   }
                 },
                 {
-                  "id": 58,
+                  "id": 61,
                   "name": "settings",
                   "kind": 32768,
                   "kindString": "Parameter",
@@ -803,17 +840,18 @@
           "title": "Methods",
           "kind": 2048,
           "children": [
-            59,
-            47,
             42,
-            51,
-            55
+            62,
+            50,
+            45,
+            54,
+            58
           ]
         }
       ]
     },
     {
-      "id": 68,
+      "id": 71,
       "name": "NotificationLevel",
       "kind": 32,
       "kindString": "Variable",
@@ -826,7 +864,7 @@
       }
     },
     {
-      "id": 69,
+      "id": 72,
       "name": "globalSettings",
       "kind": 32,
       "kindString": "Variable",
@@ -839,7 +877,7 @@
       }
     },
     {
-      "id": 63,
+      "id": 66,
       "name": "invokeLifecycle",
       "kind": 64,
       "kindString": "Function",
@@ -848,14 +886,14 @@
       },
       "signatures": [
         {
-          "id": 64,
+          "id": 67,
           "name": "invokeLifecycle",
           "kind": 4096,
           "kindString": "Call signature",
           "flags": {},
           "parameters": [
             {
-              "id": 65,
+              "id": 68,
               "name": "instance",
               "kind": 32768,
               "kindString": "Parameter",
@@ -866,7 +904,7 @@
               }
             },
             {
-              "id": 66,
+              "id": 69,
               "name": "name",
               "kind": 32768,
               "kindString": "Parameter",
@@ -877,7 +915,7 @@
               }
             },
             {
-              "id": 67,
+              "id": 70,
               "name": "model",
               "kind": 32768,
               "kindString": "Parameter",
@@ -911,15 +949,15 @@
       "title": "Variables",
       "kind": 32,
       "children": [
-        68,
-        69
+        71,
+        72
       ]
     },
     {
       "title": "Functions",
       "kind": 64,
       "children": [
-        63
+        66
       ]
     }
   ]

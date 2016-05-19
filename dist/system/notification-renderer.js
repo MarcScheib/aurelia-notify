@@ -1,6 +1,8 @@
 'use strict';
 
 System.register(['aurelia-templating', './bs-notification'], function (_export, _context) {
+  "use strict";
+
   var ViewSlot, BSNotification, globalSettings, NotificationRenderer;
 
   function _classCallCheck(instance, Constructor) {
