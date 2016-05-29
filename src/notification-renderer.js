@@ -10,6 +10,29 @@ export let globalSettings = {
   limit: 5
 };
 
+let transitionEvent = (function() {
+  let transition = null;
+
+  return function() {
+    if (transition) return transition;
+
+    let t;
+    let el = document.createElement('fakeelement');
+    let transitions = {
+      'transition': 'transitionend',
+      'OTransition': 'oTransitionEnd',
+      'MozTransition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd'
+    };
+    for (t in transitions) {
+      if (el.style[t] !== undefined) {
+        transition = transitions[t];
+        return transition;
+      }
+    }
+  };
+}());
+
 export class NotificationRenderer {
   defaultSettings = globalSettings;
 
@@ -44,7 +67,20 @@ export class NotificationRenderer {
         notificationController.timer = setTimeout(notificationController.close.bind(notificationController), settings.timeout);
       }
 
-      return Promise.resolve();
+      return new Promise((resolve) => {
+        function onTransitionEnd(e) {
+          if (e.target !== notificationHost) {
+            return;
+          }
+          notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
+          resolve();
+        }
+
+        notificationHost.addEventListener(transitionEvent(), onTransitionEnd);
+        setTimeout(() => {
+          notificationHost.classList.add('notification-host-active');
+        }, 0);
+      });
     };
 
     notificationController.hideNotification = () => {
@@ -53,7 +89,15 @@ export class NotificationRenderer {
         this.notificationControllers.splice(i, 1);
       }
 
-      return Promise.resolve();
+      return new Promise((resolve) => {
+        function onTransitionEnd() {
+          notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
+          resolve();
+        }
+
+        notificationHost.addEventListener(transitionEvent(), onTransitionEnd);
+        notificationHost.classList.remove('notification-host-active');
+      });
     };
 
     notificationController.destroyNotificationHost = () => {

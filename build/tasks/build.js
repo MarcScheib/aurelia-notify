@@ -114,11 +114,25 @@ gulp.task('remove-dts-folder', function () {
     .pipe(vinylPaths(del));
 });
 
+gulp.task('build-css', function () {
+  var amdCSS = gulp.src(paths.style)
+    .pipe(gulp.dest(paths.output+"amd"));
+
+  var sysCSS = gulp.src(paths.style)
+    .pipe(gulp.dest(paths.output+"system"));
+
+  var commonCSS = gulp.src(paths.style)
+    .pipe(gulp.dest(paths.output+"commonjs"));
+
+  var es2015CSS = gulp.src(paths.style)
+    .pipe(gulp.dest(paths.output+"es2015"));
+});
+
 gulp.task('build', function (callback) {
   return runSequence(
     'clean',
     'build-index',
-    ['build-es2015-temp', 'build-commonjs', 'build-amd', 'build-system', 'build-es2015'],
+    ['build-es2015-temp', 'build-commonjs', 'build-amd', 'build-system', 'build-es2015', 'build-css'],
     'build-dts',
     callback
   );
