@@ -30,6 +30,8 @@ let transitionEvent = (function() {
         return transition;
       }
     }
+
+    return undefined;
   };
 }());
 
