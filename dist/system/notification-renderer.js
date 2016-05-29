@@ -3,7 +3,7 @@
 System.register(['aurelia-templating', './bs-notification'], function (_export, _context) {
   "use strict";
 
-  var ViewSlot, BSNotification, globalSettings, NotificationRenderer;
+  var ViewSlot, BSNotification, globalSettings, transitionEvent, NotificationRenderer;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -27,6 +27,31 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
       });
 
       _export('globalSettings', globalSettings);
+
+      transitionEvent = function () {
+        var transition = null;
+
+        return function () {
+          if (transition) return transition;
+
+          var t = void 0;
+          var el = document.createElement('fakeelement');
+          var transitions = {
+            'transition': 'transitionend',
+            'OTransition': 'oTransitionEnd',
+            'MozTransition': 'transitionend',
+            'WebkitTransition': 'webkitTransitionEnd'
+          };
+          for (t in transitions) {
+            if (el.style[t] !== undefined) {
+              transition = transitions[t];
+              return transition;
+            }
+          }
+
+          return undefined;
+        };
+      }();
 
       _export('NotificationRenderer', NotificationRenderer = function () {
         function NotificationRenderer() {
@@ -66,7 +91,20 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
               notificationController.timer = setTimeout(notificationController.close.bind(notificationController), settings.timeout);
             }
 
-            return Promise.resolve();
+            return new Promise(function (resolve) {
+              function onTransitionEnd(e) {
+                if (e.target !== notificationHost) {
+                  return;
+                }
+                notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
+                resolve();
+              }
+
+              notificationHost.addEventListener(transitionEvent(), onTransitionEnd);
+              setTimeout(function () {
+                notificationHost.classList.add('notification-host-active');
+              }, 0);
+            });
           };
 
           notificationController.hideNotification = function () {
@@ -75,7 +113,15 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
               _this.notificationControllers.splice(i, 1);
             }
 
-            return Promise.resolve();
+            return new Promise(function (resolve) {
+              function onTransitionEnd() {
+                notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
+                resolve();
+              }
+
+              notificationHost.addEventListener(transitionEvent(), onTransitionEnd);
+              notificationHost.classList.remove('notification-host-active');
+            });
           };
 
           notificationController.destroyNotificationHost = function () {

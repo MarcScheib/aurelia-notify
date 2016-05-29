@@ -1,3 +1,13 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/MarcScheib/aurelia-notify/compare/0.3.0...v0.4.0) (2016-05-29)
+
+
+### Features
+
+* add transitions on show/hide notification ([97438d6](https://github.com/MarcScheib/aurelia-notify/commit/97438d6))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/MarcScheib/aurelia-notify/compare/0.2.5...v0.3.0) (2016-05-19)
 

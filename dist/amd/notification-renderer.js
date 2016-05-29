@@ -20,6 +20,31 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
     limit: 5
   };
 
+  var transitionEvent = function () {
+    var transition = null;
+
+    return function () {
+      if (transition) return transition;
+
+      var t = void 0;
+      var el = document.createElement('fakeelement');
+      var transitions = {
+        'transition': 'transitionend',
+        'OTransition': 'oTransitionEnd',
+        'MozTransition': 'transitionend',
+        'WebkitTransition': 'webkitTransitionEnd'
+      };
+      for (t in transitions) {
+        if (el.style[t] !== undefined) {
+          transition = transitions[t];
+          return transition;
+        }
+      }
+
+      return undefined;
+    };
+  }();
+
   var NotificationRenderer = exports.NotificationRenderer = function () {
     function NotificationRenderer() {
       _classCallCheck(this, NotificationRenderer);
@@ -58,7 +83,20 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
           notificationController.timer = setTimeout(notificationController.close.bind(notificationController), settings.timeout);
         }
 
-        return Promise.resolve();
+        return new Promise(function (resolve) {
+          function onTransitionEnd(e) {
+            if (e.target !== notificationHost) {
+              return;
+            }
+            notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
+            resolve();
+          }
+
+          notificationHost.addEventListener(transitionEvent(), onTransitionEnd);
+          setTimeout(function () {
+            notificationHost.classList.add('notification-host-active');
+          }, 0);
+        });
       };
 
       notificationController.hideNotification = function () {
@@ -67,7 +105,15 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
           _this.notificationControllers.splice(i, 1);
         }
 
-        return Promise.resolve();
+        return new Promise(function (resolve) {
+          function onTransitionEnd() {
+            notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
+            resolve();
+          }
+
+          notificationHost.addEventListener(transitionEvent(), onTransitionEnd);
+          notificationHost.classList.remove('notification-host-active');
+        });
       };
 
       notificationController.destroyNotificationHost = function () {
