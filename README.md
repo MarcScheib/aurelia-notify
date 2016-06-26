@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/MarcScheib/aurelia-notify.svg?branch=master)](https://travis-ci.org/MarcScheib/aurelia-notify) 
 [![Coverage Status](https://coveralls.io/repos/MarcScheib/aurelia-notify/badge.svg?branch=master&service=github)](https://coveralls.io/github/MarcScheib/aurelia-notify?branch=master)
-[![devDependency Status](https://img.shields.io/david/dev/MarcScheib/aurelia-notify.svg)](https://david-dm.org/MarcScheib/aurelia-notify#info=devDependencies)
+[![Dependency Status](https://david-dm.org/MarcScheib/aurelia-notify.svg)](https://david-dm.org/MarcScheib/aurelia-notify)
+[![devDependency Status](https://david-dm.org/MarcScheib/aurelia-notify/dev-status.svg)](https://david-dm.org/MarcScheib/aurelia-notify#info=devDependencies)
 [![npm Version](https://img.shields.io/npm/v/aurelia-notify.svg)](https://www.npmjs.com/package/aurelia-notify)
 
 A simple notification plugin for [Aurelia](http://www.aurelia.io/).
-
 
 ``` javascript
 notification.info('A simple info notification');
