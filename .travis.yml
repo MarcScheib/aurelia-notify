@@ -27,4 +27,6 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - npm run ci
+  - ./node_modules/.bin/gulp build
+  - ./node_modules/.bin/gulp cover
+  - ./node_modules/.bin/gulp coveralls

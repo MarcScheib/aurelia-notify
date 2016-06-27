@@ -1,4 +1,3 @@
-var isparta = require('isparta');
 var paths = require('./build/paths');
 
 module.exports = function(config) {
@@ -22,13 +21,13 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       [paths.tests]: ['babel'],
-      [paths.source]: ['babel', 'coverage']
+      [paths.source]: ['babel']
     },
 
     'babelPreprocessor': {
       options: {
         sourceMap: 'inline',
-        presets: [ 'es2015-loose', 'stage-1'],
+        presets: ['es2015-loose', 'stage-1'],
         plugins: [
           'syntax-flow',
           'transform-decorators-legacy',
@@ -37,30 +36,7 @@ module.exports = function(config) {
       }
     },
 
-    reporters: ['coverage', 'progress'],
-
-    coverageReporter: {
-      instrumenters: {
-        isparta: isparta
-      },
-
-      instrumenter: {
-        [paths.source]: 'isparta'
-      },
-
-      dir: 'build/reports/coverage/',
-
-      reporters: [{
-        type: 'text-summary'
-      }, {
-        type: 'html',
-        subdir: 'html'
-      }, {
-        type: 'lcovonly',
-        subdir: 'lcov',
-        file: 'report-lcovonly.txt'
-      }]
-    },
+    reporters: ['progress'],
 
     port: 9876,
 

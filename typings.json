@@ -1,0 +1,10 @@
+{
+  "name": "aurelia-notify",
+  "main": "dist/aurelia-notify.d.ts",
+  "dependencies": {
+    "aurelia-dependency-injection": "github:aurelia/dependency-injection",
+    "aurelia-framework": "github:aurelia/framework",
+    "aurelia-metadata": "github:aurelia/metadata",
+    "aurelia-templating": "github:aurelia/templating"
+  }
+}

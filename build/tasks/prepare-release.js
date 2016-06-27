@@ -6,27 +6,22 @@ var fs = require('fs');
 var bump = require('gulp-bump');
 var args = require('../args');
 
-gulp.task('bump-version', function () {
+gulp.task('bump-version', function() {
   return gulp.src(['./package.json', './bower.json'])
     .pipe(bump({type: args.bump})) //major|minor|patch|prerelease
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('changelog', function () {
-  var pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
-
+gulp.task('changelog', function() {
   return gulp.src(paths.doc + '/CHANGELOG.md', {
-      buffer: false
-    })
-    .pipe(changelog({
-      preset: 'angular',
-      repository: pkg.repository.url,
-      version: pkg.version
-    }))
-    .pipe(gulp.dest(paths.doc + '/'));
+    buffer: false
+  }).pipe(conventionalChangelog({
+    preset: 'angular'
+  }))
+    .pipe(gulp.dest(paths.doc));
 });
 
-gulp.task('prepare-release', function (callback) {
+gulp.task('prepare-release', function(callback) {
   return runSequence(
     'build',
     'lint',
