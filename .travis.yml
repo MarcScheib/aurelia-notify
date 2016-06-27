@@ -28,5 +28,4 @@ before_script:
 
 script:
   - ./node_modules/.bin/gulp build
-  - ./node_modules/.bin/gulp cover
   - ./node_modules/.bin/gulp coveralls
