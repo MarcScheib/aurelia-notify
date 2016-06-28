@@ -27,6 +27,7 @@ Aurelia dependencies:
 
 * [aurelia-dependency-injection](https://github.com/aurelia/dependency-injection)
 * [aurelia-metadata](https://github.com/aurelia/metadata)
+* [aurelia-pal](https://github.com/aurelia/pal)
 * [aurelia-templating](https://github.com/aurelia/templating)
 
 ## Used By
