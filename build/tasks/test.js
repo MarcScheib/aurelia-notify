@@ -50,6 +50,6 @@ gulp.task('cover', function(done) {
  * Report coverage to coveralls
  */
 gulp.task('coveralls', ['cover'], function(done) {
-  gulp.src('build/reports/coverage/lcov/report-lcovonly.txt')
+  gulp.src('build/reports/coverage/lcov/lcov.info')
     .pipe(coveralls());
 });
