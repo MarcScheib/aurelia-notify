@@ -15,7 +15,7 @@ gulp.task('bump-version', function() {
 gulp.task('changelog', function() {
   return gulp.src(paths.doc + '/CHANGELOG.md', {
     buffer: false
-  }).pipe(conventionalChangelog({
+  }).pipe(changelog({
     preset: 'angular'
   }))
     .pipe(gulp.dest(paths.doc));
