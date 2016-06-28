@@ -1,9 +1,8 @@
-import {inject} from 'aurelia-framework';
-
 import {NotificationController} from './notification-controller';
 
-@inject(NotificationController)
 export class BSNotification {
+  static inject = [NotificationController];
+
   constructor(controller: NotificationController) {
     this.controller = controller;
   }

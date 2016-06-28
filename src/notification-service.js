@@ -1,5 +1,4 @@
 import {Container} from 'aurelia-dependency-injection';
-import {inject} from 'aurelia-framework';
 import {Origin} from 'aurelia-metadata';
 import {CompositionEngine} from 'aurelia-templating';
 
@@ -8,8 +7,9 @@ import {NotificationController} from './notification-controller';
 import {NotificationLevel} from './notification-level';
 import {NotificationRenderer} from './notification-renderer';
 
-@inject(CompositionEngine, Container, NotificationRenderer)
 export class NotificationService {
+  static inject = [CompositionEngine, Container, NotificationRenderer];
+
   constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer) {
     this.compositionEngine = compositionEngine;
     this.container = container;

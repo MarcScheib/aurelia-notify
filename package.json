@@ -26,9 +26,13 @@
     "directories": {
       "lib": "dist/amd"
     },
+    "peerDependencies": {
+      "aurelia-dependency-injection": "^1.0.0-rc.1.0.0",
+      "aurelia-metadata": "^1.0.0-rc.1.0.0",
+      "aurelia-templating": "^1.0.0-rc.1.0.0"
+    },
     "dependencies": {
       "aurelia-dependency-injection": "^1.0.0-rc.1.0.0",
-      "aurelia-framework": "^1.0.0-rc.1.0.0",
       "aurelia-metadata": "^1.0.0-rc.1.0.0",
       "aurelia-templating": "^1.0.0-rc.1.0.0"
     },
@@ -42,7 +46,6 @@
   },
   "dependencies": {
     "aurelia-dependency-injection": "^1.0.0-rc.1.0.0",
-    "aurelia-framework": "^1.0.0-rc.1.0.0",
     "aurelia-metadata": "^1.0.0-rc.1.0.0",
     "aurelia-templating": "^1.0.0-rc.1.0.0"
   },

@@ -26,7 +26,6 @@ This plugin has no external library dependencies and is completely based on [Aur
 Aurelia dependencies:
 
 * [aurelia-dependency-injection](https://github.com/aurelia/dependency-injection)
-* [aurelia-framework](https://github.com/aurelia/framework)
 * [aurelia-metadata](https://github.com/aurelia/metadata)
 * [aurelia-templating](https://github.com/aurelia/templating)
 
