@@ -27,8 +27,16 @@ var paths = {
   sort: true
 };
 
+paths.ignore = ['index.js'];
 paths.files = [
-  paths.source
-];
+  'bs-notification.js',
+  'lifecycle.js',
+  'notification-controller.js',
+  'notification-level.js',
+  'notification-renderer.js',
+  'notification-service.js'
+].map(function(file) {
+  return paths.root + file;
+});
 
 module.exports = paths;
