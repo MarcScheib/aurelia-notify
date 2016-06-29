@@ -1,4 +1,4 @@
-import {configure} from '../../src/index';
+import {configure} from '../../src/aurelia-notify';
 
 describe('testing aurelia configure routine', () => {
   var frameworkConfig = {
