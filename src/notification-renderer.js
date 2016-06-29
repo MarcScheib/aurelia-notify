@@ -1,3 +1,4 @@
+import {DOM} from 'aurelia-pal';
 import {ViewSlot} from 'aurelia-templating';
 
 import {BSNotification} from './bs-notification';
@@ -17,7 +18,7 @@ let transitionEvent = (function() {
     if (transition) return transition;
 
     let t;
-    let el = document.createElement('fakeelement');
+    let el = DOM.createElement('fakeelement');
     let transitions = {
       'transition': 'transitionend',
       'OTransition': 'oTransitionEnd',
@@ -44,7 +45,7 @@ export class NotificationRenderer {
 
   createNotificationHost(notificationController: NotificationController) {
     let settings = notificationController.settings;
-    let notificationHost = document.createElement('notification-host');
+    let notificationHost = DOM.createElement('notification-host');
     let notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
     if (settings.append === true) {
@@ -125,9 +126,9 @@ export class NotificationRenderer {
   }
 
   getNotificationContainer(containerSelector: string) {
-    let notificationContainer = document.querySelector(containerSelector);
+    let notificationContainer = DOM.querySelector(containerSelector);
     if (notificationContainer === null) {
-      notificationContainer = document.body;
+      notificationContainer = DOM.querySelectorAll('body')[0];
     }
 
     return notificationContainer;
