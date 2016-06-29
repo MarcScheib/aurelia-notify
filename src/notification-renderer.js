@@ -126,11 +126,11 @@ export class NotificationRenderer {
   }
 
   getNotificationContainer(containerSelector: string) {
-    let notificationContainer = DOM.querySelector(containerSelector);
+    let notificationContainer = DOM.querySelectorAll(containerSelector);
     if (notificationContainer === null) {
-      notificationContainer = DOM.querySelectorAll('body')[0];
+      notificationContainer = DOM.querySelectorAll('body');
     }
 
-    return notificationContainer;
+    return notificationContainer[0];
   }
 }
