@@ -102,6 +102,16 @@ compileToModules.forEach(function(moduleType) {
       .pipe(gulp.dest(paths.output + moduleType));
   });
 
+  gulp.task('build-html-' + moduleType, function() {
+    return gulp.src(paths.html)
+      .pipe(gulp.dest(paths.output + moduleType));
+  });
+
+  gulp.task('build-css-' + moduleType, function() {
+    return gulp.src(paths.style)
+      .pipe(gulp.dest(paths.output + moduleType));
+  });
+
   if (moduleType === 'native-modules') return; // typescript doesn't support the combination of: es5 + native modules
 
   gulp.task('build-ts-' + moduleType, function() {
@@ -133,11 +143,15 @@ gulp.task('build', function(callback) {
     'clean',
     'build-index',
     'build-es2015-temp',
-    compileToModules
-      .map(function(moduleType) {
-        return 'build-babel-' + moduleType;
-      })
-      .concat(paths.useTypeScriptForDTS ? ['build-dts'] : []),
+    compileToModules.map(function(moduleType) {
+      return 'build-babel-' + moduleType;
+    }).concat(paths.useTypeScriptForDTS ? ['build-dts'] : []),
+    compileToModules.map(function(moduleType) {
+      return 'build-html-' + moduleType;
+    }),
+    compileToModules.map(function(moduleType) {
+      return 'build-css-' + moduleType;
+    }),
     callback
   );
 });
