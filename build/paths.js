@@ -27,7 +27,7 @@ var paths = {
   sort: true
 };
 
-paths.ignore = ['index.js'];
+paths.ignore = ['aurelia-notify.js'];
 paths.files = [
   'bs-notification.js',
   'lifecycle.js',
