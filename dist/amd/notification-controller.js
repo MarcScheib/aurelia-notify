@@ -6,15 +6,11 @@ define(['exports', './lifecycle'], function (exports, _lifecycle) {
   });
   exports.NotificationController = undefined;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   var NotificationController = exports.NotificationController = function () {
     function NotificationController(renderer, settings) {
-      _classCallCheck(this, NotificationController);
+      
 
       this._renderer = renderer;
       this.settings = settings;

@@ -1,19 +1,14 @@
-import {inject} from 'aurelia-framework';
+import {DOM} from 'aurelia-pal';
 import {ViewSlot,CompositionEngine} from 'aurelia-templating';
 import {Container} from 'aurelia-dependency-injection';
 import {Origin} from 'aurelia-metadata';
 
-@inject(NotificationController)
-export class BSNotification {
-  constructor(controller: NotificationController) {
-    this.controller = controller;
-  }
-
-  activate(model: any) {
-    this.level = model.level;
-    this.notification = model.notification;
-  }
-}
+export let NotificationLevel = {
+  info: 'info',
+  success: 'success',
+  warning: 'warning',
+  danger: 'danger'
+};
 
 export function invokeLifecycle(instance: any, name: string, model: any) {
   if (typeof instance[name] === 'function') {
@@ -59,12 +54,18 @@ export class NotificationController {
   }
 }
 
-export let NotificationLevel = {
-  info: 'info',
-  success: 'success',
-  warning: 'warning',
-  danger: 'danger'
-};
+export class BSNotification {
+  static inject = [NotificationController];
+
+  constructor(controller: NotificationController) {
+    this.controller = controller;
+  }
+
+  activate(model: any) {
+    this.level = model.level;
+    this.notification = model.notification;
+  }
+}
 
 export let globalSettings = {
   append: false,
@@ -81,7 +82,7 @@ let transitionEvent = (function() {
     if (transition) return transition;
 
     let t;
-    let el = document.createElement('fakeelement');
+    let el = DOM.createElement('fakeelement');
     let transitions = {
       'transition': 'transitionend',
       'OTransition': 'oTransitionEnd',
@@ -108,7 +109,7 @@ export class NotificationRenderer {
 
   createNotificationHost(notificationController: NotificationController) {
     let settings = notificationController.settings;
-    let notificationHost = document.createElement('notification-host');
+    let notificationHost = DOM.createElement('notification-host');
     let notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
     if (settings.append === true) {
@@ -189,17 +190,18 @@ export class NotificationRenderer {
   }
 
   getNotificationContainer(containerSelector: string) {
-    let notificationContainer = document.querySelector(containerSelector);
+    let notificationContainer = DOM.querySelectorAll(containerSelector);
     if (notificationContainer === null) {
-      notificationContainer = document.body;
+      notificationContainer = DOM.querySelectorAll('body');
     }
 
-    return notificationContainer;
+    return notificationContainer[0];
   }
 }
 
-@inject(CompositionEngine, Container, NotificationRenderer)
 export class NotificationService {
+  static inject = [CompositionEngine, Container, NotificationRenderer];
+
   constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer) {
     this.compositionEngine = compositionEngine;
     this.container = container;

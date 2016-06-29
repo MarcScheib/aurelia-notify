@@ -5,11 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.NotificationService = undefined;
 
-var _dec, _class;
+var _class, _temp;
 
 var _aureliaDependencyInjection = require('aurelia-dependency-injection');
-
-var _aureliaFramework = require('aurelia-framework');
 
 var _aureliaMetadata = require('aurelia-metadata');
 
@@ -23,11 +21,11 @@ var _notificationLevel = require('./notification-level');
 
 var _notificationRenderer = require('./notification-renderer');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var NotificationService = exports.NotificationService = (_dec = (0, _aureliaFramework.inject)(_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer), _dec(_class = function () {
+
+var NotificationService = exports.NotificationService = (_temp = _class = function () {
   function NotificationService(compositionEngine, container, notificationRenderer) {
-    _classCallCheck(this, NotificationService);
+    
 
     this.compositionEngine = compositionEngine;
     this.container = container;
@@ -104,4 +102,4 @@ var NotificationService = exports.NotificationService = (_dec = (0, _aureliaFram
   };
 
   return NotificationService;
-}()) || _class);
+}(), _class.inject = [_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer], _temp);

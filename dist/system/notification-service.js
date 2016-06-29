@@ -1,21 +1,15 @@
 'use strict';
 
-System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (_export, _context) {
+System.register(['aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (_export, _context) {
   "use strict";
 
-  var Container, inject, Origin, CompositionEngine, invokeLifecycle, NotificationController, NotificationLevel, NotificationRenderer, _dec, _class, NotificationService;
+  var Container, Origin, CompositionEngine, invokeLifecycle, NotificationController, NotificationLevel, NotificationRenderer, _class, _temp, NotificationService;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   return {
     setters: [function (_aureliaDependencyInjection) {
       Container = _aureliaDependencyInjection.Container;
-    }, function (_aureliaFramework) {
-      inject = _aureliaFramework.inject;
     }, function (_aureliaMetadata) {
       Origin = _aureliaMetadata.Origin;
     }, function (_aureliaTemplating) {
@@ -30,9 +24,9 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
       NotificationRenderer = _notificationRenderer.NotificationRenderer;
     }],
     execute: function () {
-      _export('NotificationService', NotificationService = (_dec = inject(CompositionEngine, Container, NotificationRenderer), _dec(_class = function () {
+      _export('NotificationService', NotificationService = (_temp = _class = function () {
         function NotificationService(compositionEngine, container, notificationRenderer) {
-          _classCallCheck(this, NotificationService);
+          
 
           this.compositionEngine = compositionEngine;
           this.container = container;
@@ -109,7 +103,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-framework', 'aurelia-m
         };
 
         return NotificationService;
-      }()) || _class));
+      }(), _class.inject = [CompositionEngine, Container, NotificationRenderer], _temp));
 
       _export('NotificationService', NotificationService);
     }

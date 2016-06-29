@@ -5,11 +5,7 @@ System.register(['./lifecycle'], function (_export, _context) {
 
   var invokeLifecycle, NotificationController;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   return {
     setters: [function (_lifecycle) {
@@ -18,7 +14,7 @@ System.register(['./lifecycle'], function (_export, _context) {
     execute: function () {
       _export('NotificationController', NotificationController = function () {
         function NotificationController(renderer, settings) {
-          _classCallCheck(this, NotificationController);
+          
 
           this._renderer = renderer;
           this.settings = settings;

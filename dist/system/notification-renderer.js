@@ -1,18 +1,16 @@
 'use strict';
 
-System.register(['aurelia-templating', './bs-notification'], function (_export, _context) {
+System.register(['aurelia-pal', 'aurelia-templating', './bs-notification'], function (_export, _context) {
   "use strict";
 
-  var ViewSlot, BSNotification, globalSettings, transitionEvent, NotificationRenderer;
+  var DOM, ViewSlot, BSNotification, globalSettings, transitionEvent, NotificationRenderer;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   return {
-    setters: [function (_aureliaTemplating) {
+    setters: [function (_aureliaPal) {
+      DOM = _aureliaPal.DOM;
+    }, function (_aureliaTemplating) {
       ViewSlot = _aureliaTemplating.ViewSlot;
     }, function (_bsNotification) {
       BSNotification = _bsNotification.BSNotification;
@@ -35,7 +33,7 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
           if (transition) return transition;
 
           var t = void 0;
-          var el = document.createElement('fakeelement');
+          var el = DOM.createElement('fakeelement');
           var transitions = {
             'transition': 'transitionend',
             'OTransition': 'oTransitionEnd',
@@ -55,7 +53,7 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
 
       _export('NotificationRenderer', NotificationRenderer = function () {
         function NotificationRenderer() {
-          _classCallCheck(this, NotificationRenderer);
+          
 
           this.defaultSettings = globalSettings;
 
@@ -66,7 +64,7 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
           var _this = this;
 
           var settings = notificationController.settings;
-          var notificationHost = document.createElement('notification-host');
+          var notificationHost = DOM.createElement('notification-host');
           var notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
           if (settings.append === true) {
@@ -147,12 +145,12 @@ System.register(['aurelia-templating', './bs-notification'], function (_export, 
         };
 
         NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
-          var notificationContainer = document.querySelector(containerSelector);
+          var notificationContainer = DOM.querySelectorAll(containerSelector);
           if (notificationContainer === null) {
-            notificationContainer = document.body;
+            notificationContainer = DOM.querySelectorAll('body');
           }
 
-          return notificationContainer;
+          return notificationContainer[0];
         };
 
         return NotificationRenderer;

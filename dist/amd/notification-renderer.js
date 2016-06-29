@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-templating', './bs-notification'], function (exports, _aureliaTemplating, _bsNotification) {
+define(['exports', 'aurelia-pal', 'aurelia-templating', './bs-notification'], function (exports, _aureliaPal, _aureliaTemplating, _bsNotification) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -6,11 +6,7 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
   });
   exports.NotificationRenderer = exports.globalSettings = undefined;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   var globalSettings = exports.globalSettings = {
     append: false,
@@ -27,7 +23,7 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
       if (transition) return transition;
 
       var t = void 0;
-      var el = document.createElement('fakeelement');
+      var el = _aureliaPal.DOM.createElement('fakeelement');
       var transitions = {
         'transition': 'transitionend',
         'OTransition': 'oTransitionEnd',
@@ -47,7 +43,7 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
 
   var NotificationRenderer = exports.NotificationRenderer = function () {
     function NotificationRenderer() {
-      _classCallCheck(this, NotificationRenderer);
+      
 
       this.defaultSettings = globalSettings;
 
@@ -58,7 +54,7 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
       var _this = this;
 
       var settings = notificationController.settings;
-      var notificationHost = document.createElement('notification-host');
+      var notificationHost = _aureliaPal.DOM.createElement('notification-host');
       var notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
       if (settings.append === true) {
@@ -139,12 +135,12 @@ define(['exports', 'aurelia-templating', './bs-notification'], function (exports
     };
 
     NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
-      var notificationContainer = document.querySelector(containerSelector);
+      var notificationContainer = _aureliaPal.DOM.querySelectorAll(containerSelector);
       if (notificationContainer === null) {
-        notificationContainer = document.body;
+        notificationContainer = _aureliaPal.DOM.querySelectorAll('body');
       }
 
-      return notificationContainer;
+      return notificationContainer[0];
     };
 
     return NotificationRenderer;

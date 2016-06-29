@@ -1,15 +1,8 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NotificationController = undefined;
-
-var _lifecycle = require('./lifecycle');
 
 
+import { invokeLifecycle } from './lifecycle';
 
-var NotificationController = exports.NotificationController = function () {
+export var NotificationController = function () {
   function NotificationController(renderer, settings) {
     
 
@@ -22,9 +15,9 @@ var NotificationController = exports.NotificationController = function () {
 
     clearTimeout(this.timer);
 
-    return (0, _lifecycle.invokeLifecycle)(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
+    return invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
       if (canDeactivate) {
-        (0, _lifecycle.invokeLifecycle)(_this.viewModel, 'deactivate').then(function () {
+        invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
           return _this._renderer.hideNotification(_this);
         }).then(function () {
           return _this._renderer.destroyNotificationHost(_this);

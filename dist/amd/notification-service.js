@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (exports, _aureliaDependencyInjection, _aureliaFramework, _aureliaMetadata, _aureliaTemplating, _lifecycle, _notificationController, _notificationLevel, _notificationRenderer) {
+define(['exports', 'aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-templating', './lifecycle', './notification-controller', './notification-level', './notification-renderer'], function (exports, _aureliaDependencyInjection, _aureliaMetadata, _aureliaTemplating, _lifecycle, _notificationController, _notificationLevel, _notificationRenderer) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -6,17 +6,13 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
   });
   exports.NotificationService = undefined;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
-  var _dec, _class;
+  var _class, _temp;
 
-  var NotificationService = exports.NotificationService = (_dec = (0, _aureliaFramework.inject)(_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer), _dec(_class = function () {
+  var NotificationService = exports.NotificationService = (_temp = _class = function () {
     function NotificationService(compositionEngine, container, notificationRenderer) {
-      _classCallCheck(this, NotificationService);
+      
 
       this.compositionEngine = compositionEngine;
       this.container = container;
@@ -93,5 +89,5 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-framework', 'aurelia
     };
 
     return NotificationService;
-  }()) || _class);
+  }(), _class.inject = [_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer], _temp);
 });

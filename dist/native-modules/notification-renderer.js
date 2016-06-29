@@ -1,9 +1,11 @@
+
+
 import { DOM } from 'aurelia-pal';
 import { ViewSlot } from 'aurelia-templating';
 
 import { BSNotification } from './bs-notification';
 
-export let globalSettings = {
+export var globalSettings = {
   append: false,
   containerSelector: 'body',
   timeout: 0,
@@ -11,15 +13,15 @@ export let globalSettings = {
   limit: 5
 };
 
-let transitionEvent = function () {
-  let transition = null;
+var transitionEvent = function () {
+  var transition = null;
 
   return function () {
     if (transition) return transition;
 
-    let t;
-    let el = DOM.createElement('fakeelement');
-    let transitions = {
+    var t = void 0;
+    var el = DOM.createElement('fakeelement');
+    var transitions = {
       'transition': 'transitionend',
       'OTransition': 'oTransitionEnd',
       'MozTransition': 'transitionend',
@@ -36,18 +38,21 @@ let transitionEvent = function () {
   };
 }();
 
-export let NotificationRenderer = class NotificationRenderer {
+export var NotificationRenderer = function () {
+  function NotificationRenderer() {
+    
 
-  constructor() {
     this.defaultSettings = globalSettings;
 
     this.notificationControllers = [];
   }
 
-  createNotificationHost(notificationController) {
-    let settings = notificationController.settings;
-    let notificationHost = DOM.createElement('notification-host');
-    let notificationContainer = this.getNotificationContainer(settings.containerSelector);
+  NotificationRenderer.prototype.createNotificationHost = function createNotificationHost(notificationController) {
+    var _this = this;
+
+    var settings = notificationController.settings;
+    var notificationHost = DOM.createElement('notification-host');
+    var notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
     if (settings.append === true) {
       notificationContainer.appendChild(notificationHost);
@@ -58,11 +63,11 @@ export let NotificationRenderer = class NotificationRenderer {
     notificationController.slot = new ViewSlot(notificationHost, true);
     notificationController.slot.add(notificationController.view);
 
-    notificationController.showNotification = () => {
-      this.notificationControllers.push(notificationController);
+    notificationController.showNotification = function () {
+      _this.notificationControllers.push(notificationController);
 
-      if (this.notificationControllers.length >= settings.limit + 1) {
-        this.notificationControllers[0].close(this.notificationControllers[0]);
+      if (_this.notificationControllers.length >= settings.limit + 1) {
+        _this.notificationControllers[0].close(_this.notificationControllers[0]);
       }
 
       notificationController.slot.attached();
@@ -71,7 +76,7 @@ export let NotificationRenderer = class NotificationRenderer {
         notificationController.timer = setTimeout(notificationController.close.bind(notificationController), settings.timeout);
       }
 
-      return new Promise(resolve => {
+      return new Promise(function (resolve) {
         function onTransitionEnd(e) {
           if (e.target !== notificationHost) {
             return;
@@ -81,19 +86,19 @@ export let NotificationRenderer = class NotificationRenderer {
         }
 
         notificationHost.addEventListener(transitionEvent(), onTransitionEnd);
-        setTimeout(() => {
+        setTimeout(function () {
           notificationHost.classList.add('notification-host-active');
         }, 0);
       });
     };
 
-    notificationController.hideNotification = () => {
-      let i = this.notificationControllers.indexOf(notificationController);
+    notificationController.hideNotification = function () {
+      var i = _this.notificationControllers.indexOf(notificationController);
       if (i !== -1) {
-        this.notificationControllers.splice(i, 1);
+        _this.notificationControllers.splice(i, 1);
       }
 
-      return new Promise(resolve => {
+      return new Promise(function (resolve) {
         function onTransitionEnd() {
           notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
           resolve();
@@ -104,7 +109,7 @@ export let NotificationRenderer = class NotificationRenderer {
       });
     };
 
-    notificationController.destroyNotificationHost = () => {
+    notificationController.destroyNotificationHost = function () {
       notificationContainer.removeChild(notificationHost);
       notificationController.slot.detached();
 
@@ -112,26 +117,28 @@ export let NotificationRenderer = class NotificationRenderer {
     };
 
     return Promise.resolve();
-  }
+  };
 
-  showNotification(notificationController) {
+  NotificationRenderer.prototype.showNotification = function showNotification(notificationController) {
     return notificationController.showNotification();
-  }
+  };
 
-  hideNotification(notificationController) {
+  NotificationRenderer.prototype.hideNotification = function hideNotification(notificationController) {
     return notificationController.hideNotification();
-  }
+  };
 
-  destroyNotificationHost(notificationController) {
+  NotificationRenderer.prototype.destroyNotificationHost = function destroyNotificationHost(notificationController) {
     return notificationController.destroyNotificationHost();
-  }
+  };
 
-  getNotificationContainer(containerSelector) {
-    let notificationContainer = DOM.querySelectorAll(containerSelector);
+  NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
+    var notificationContainer = DOM.querySelectorAll(containerSelector);
     if (notificationContainer === null) {
       notificationContainer = DOM.querySelectorAll('body');
     }
 
     return notificationContainer[0];
-  }
-};
+  };
+
+  return NotificationRenderer;
+}();

@@ -1,3 +1,14 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/MarcScheib/aurelia-notify/compare/0.4.0...v0.5.0) (2016-06-29)
+
+
+### Bug Fixes
+
+* **renderer:** fix dom query selector call ([451d32d](https://github.com/MarcScheib/aurelia-notify/commit/451d32d))
+* **sample:** add aurelia-pal ([30ee1ba](https://github.com/MarcScheib/aurelia-notify/commit/30ee1ba))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/MarcScheib/aurelia-notify/compare/0.3.0...v0.4.0) (2016-05-29)
 

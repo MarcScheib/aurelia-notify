@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotificationService = exports.NotificationRenderer = exports.globalSettings = exports.NotificationLevel = exports.NotificationController = exports.BSNotification = undefined;
+exports.NotificationService = exports.NotificationRenderer = exports.globalSettings = exports.BSNotification = exports.NotificationController = exports.NotificationLevel = undefined;
 
-var _dec, _class, _dec2, _class3;
+var _class, _temp, _class3, _temp2;
 
 exports.invokeLifecycle = invokeLifecycle;
 
-var _aureliaFramework = require('aurelia-framework');
+var _aureliaPal = require('aurelia-pal');
 
 var _aureliaTemplating = require('aurelia-templating');
 
@@ -19,20 +19,13 @@ var _aureliaMetadata = require('aurelia-metadata');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var BSNotification = exports.BSNotification = (_dec = (0, _aureliaFramework.inject)(NotificationController), _dec(_class = function () {
-  function BSNotification(controller) {
-    _classCallCheck(this, BSNotification);
+var NotificationLevel = exports.NotificationLevel = {
+  info: 'info',
+  success: 'success',
+  warning: 'warning',
+  danger: 'danger'
+};
 
-    this.controller = controller;
-  }
-
-  BSNotification.prototype.activate = function activate(model) {
-    this.level = model.level;
-    this.notification = model.notification;
-  };
-
-  return BSNotification;
-}()) || _class);
 function invokeLifecycle(instance, name, model) {
   if (typeof instance[name] === 'function') {
     var result = instance[name](model);
@@ -80,13 +73,20 @@ var NotificationController = exports.NotificationController = function () {
   return NotificationController;
 }();
 
-var NotificationLevel = exports.NotificationLevel = {
-  info: 'info',
-  success: 'success',
-  warning: 'warning',
-  danger: 'danger'
-};
+var BSNotification = exports.BSNotification = (_temp = _class = function () {
+  function BSNotification(controller) {
+    _classCallCheck(this, BSNotification);
 
+    this.controller = controller;
+  }
+
+  BSNotification.prototype.activate = function activate(model) {
+    this.level = model.level;
+    this.notification = model.notification;
+  };
+
+  return BSNotification;
+}(), _class.inject = [NotificationController], _temp);
 var globalSettings = exports.globalSettings = {
   append: false,
   containerSelector: 'body',
@@ -102,7 +102,7 @@ var transitionEvent = function () {
     if (transition) return transition;
 
     var t = void 0;
-    var el = document.createElement('fakeelement');
+    var el = _aureliaPal.DOM.createElement('fakeelement');
     var transitions = {
       'transition': 'transitionend',
       'OTransition': 'oTransitionEnd',
@@ -133,7 +133,7 @@ var NotificationRenderer = exports.NotificationRenderer = function () {
     var _this2 = this;
 
     var settings = notificationController.settings;
-    var notificationHost = document.createElement('notification-host');
+    var notificationHost = _aureliaPal.DOM.createElement('notification-host');
     var notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
     if (settings.append === true) {
@@ -214,18 +214,18 @@ var NotificationRenderer = exports.NotificationRenderer = function () {
   };
 
   NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
-    var notificationContainer = document.querySelector(containerSelector);
+    var notificationContainer = _aureliaPal.DOM.querySelectorAll(containerSelector);
     if (notificationContainer === null) {
-      notificationContainer = document.body;
+      notificationContainer = _aureliaPal.DOM.querySelectorAll('body');
     }
 
-    return notificationContainer;
+    return notificationContainer[0];
   };
 
   return NotificationRenderer;
 }();
 
-var NotificationService = exports.NotificationService = (_dec2 = (0, _aureliaFramework.inject)(_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, NotificationRenderer), _dec2(_class3 = function () {
+var NotificationService = exports.NotificationService = (_temp2 = _class3 = function () {
   function NotificationService(compositionEngine, container, notificationRenderer) {
     _classCallCheck(this, NotificationService);
 
@@ -304,4 +304,4 @@ var NotificationService = exports.NotificationService = (_dec2 = (0, _aureliaFra
   };
 
   return NotificationService;
-}()) || _class3);
+}(), _class3.inject = [_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, NotificationRenderer], _temp2);
