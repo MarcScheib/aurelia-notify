@@ -14,7 +14,8 @@
   },
   "license": "MIT",
   "author": "Marc Scheib <marc.scheib@cycrilab.com>",
-  "main": "dist/commonjs/index.js",
+  "main": "dist/commonjs/aurelia-notify.js",
+  "typings": "dist/aurelia-notify.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/MarcScheib/aurelia-notify"

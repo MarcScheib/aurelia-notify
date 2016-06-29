@@ -18,7 +18,7 @@ System.config({
     "/aurelia-notify": {
       "main": "index",
       "dependencies": {
-        "aurelia-framework": "npm:aurelia-framework@1.0.0-beta.1.1.3"
+        "aurelia-framework": "npm:aurelia-framework@1.0.0-rc.1.0.0"
       }
     }
   },
