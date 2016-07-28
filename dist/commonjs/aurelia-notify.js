@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var _bsNotification = require('./bs-notification');
 
 Object.keys(_bsNotification).forEach(function (key) {
-  if (key === "default") return;
+  if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
@@ -19,7 +19,7 @@ Object.keys(_bsNotification).forEach(function (key) {
 var _notificationLevel = require('./notification-level');
 
 Object.keys(_notificationLevel).forEach(function (key) {
-  if (key === "default") return;
+  if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
@@ -31,7 +31,7 @@ Object.keys(_notificationLevel).forEach(function (key) {
 var _notificationService = require('./notification-service');
 
 Object.keys(_notificationService).forEach(function (key) {
-  if (key === "default") return;
+  if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
@@ -43,7 +43,7 @@ Object.keys(_notificationService).forEach(function (key) {
 var _notificationController = require('./notification-controller');
 
 Object.keys(_notificationController).forEach(function (key) {
-  if (key === "default") return;
+  if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {

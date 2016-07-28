@@ -1,3 +1,9 @@
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/MarcScheib/aurelia-notify/compare/0.5.0...v0.6.0) (2016-07-28)
+
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/MarcScheib/aurelia-notify/compare/0.4.0...v0.5.0) (2016-06-29)
 

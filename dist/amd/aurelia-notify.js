@@ -5,7 +5,7 @@ define(['exports', './bs-notification', './notification-level', './notification-
     value: true
   });
   Object.keys(_bsNotification).forEach(function (key) {
-    if (key === "default") return;
+    if (key === "default" || key === "__esModule") return;
     Object.defineProperty(exports, key, {
       enumerable: true,
       get: function () {
@@ -14,7 +14,7 @@ define(['exports', './bs-notification', './notification-level', './notification-
     });
   });
   Object.keys(_notificationLevel).forEach(function (key) {
-    if (key === "default") return;
+    if (key === "default" || key === "__esModule") return;
     Object.defineProperty(exports, key, {
       enumerable: true,
       get: function () {
@@ -23,7 +23,7 @@ define(['exports', './bs-notification', './notification-level', './notification-
     });
   });
   Object.keys(_notificationService).forEach(function (key) {
-    if (key === "default") return;
+    if (key === "default" || key === "__esModule") return;
     Object.defineProperty(exports, key, {
       enumerable: true,
       get: function () {
@@ -32,7 +32,7 @@ define(['exports', './bs-notification', './notification-level', './notification-
     });
   });
   Object.keys(_notificationController).forEach(function (key) {
-    if (key === "default") return;
+    if (key === "default" || key === "__esModule") return;
     Object.defineProperty(exports, key, {
       enumerable: true,
       get: function () {

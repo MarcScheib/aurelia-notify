@@ -8,7 +8,7 @@ System.register(['./aurelia-notify'], function (_export, _context) {
       var _exportObj = {};
 
       for (var _key in _aureliaNotify) {
-        if (_key !== "default") _exportObj[_key] = _aureliaNotify[_key];
+        if (_key !== "default" && key !== "__esModule") _exportObj[_key] = _aureliaNotify[_key];
       }
 
       _export(_exportObj);
