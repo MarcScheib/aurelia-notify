@@ -1,0 +1,22 @@
+{
+  "name": "aurelia-notify",
+  "version": "0.6.0",
+  "description": "A notification plugin for Aurelia.",
+  "keywords": [
+    "aurelia",
+    "notify",
+    "notifications",
+    "plugin"
+  ],
+  "homepage": "http://aurelia.io",
+  "main": "dist/commonjs/aurelia-notify.js",
+  "moduleType": "node",
+  "license": "MIT",
+  "authors": [
+    "Marc Scheib <marc.scheib@cycrilab.com> (http://cycrilab.com/)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarcScheib/aurelia-notify"
+  }
+}
