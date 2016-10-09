@@ -1,3 +1,5 @@
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _class, _temp;
 
 
@@ -32,14 +34,27 @@ export var NotificationService = (_temp = _class = function () {
     return Promise.resolve(compositionContext);
   };
 
-  NotificationService.prototype.notify = function notify(message, settings, level) {
+  NotificationService.prototype.notify = function notify(model, settings, level) {
     var _this = this;
 
     var notificationLevel = level || NotificationLevel.info;
     var _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
+    var notification = void 0;
+    if (typeof model === 'string') {
+      notification = model;
+    } else if ((typeof model === 'undefined' ? 'undefined' : _typeof(model)) === 'object') {
+      if (model.notification === undefined) {
+        throw new Error('model must implement `notification` property.');
+      }
+      notification = model.notification;
+    } else {
+      throw new Error('type is not supported by `notify()`.');
+    }
+
     _settings.model = {
-      notification: message,
+      notification: notification,
+      data: model,
       level: notificationLevel
     };
 

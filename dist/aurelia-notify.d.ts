@@ -34,8 +34,11 @@ export declare class NotificationRenderer {
 }
 export declare class NotificationService {
   static inject: any;
+  compositionEngine: CompositionEngine;
+  container: Container;
+  notificationRenderer: NotificationRenderer;
   constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer);
-  notify(message: string, settings?: any, level?: string): any;
+  notify(model: any, settings?: any, level?: string): any;
   info(message: string, settings?: any): any;
   success(message: string, settings?: any): any;
   warning(message: string, settings?: any): any;

@@ -29,12 +29,25 @@ export let NotificationService = (_temp = _class = class NotificationService {
     return Promise.resolve(compositionContext);
   }
 
-  notify(message, settings, level) {
+  notify(model, settings, level) {
     let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
+    let notification;
+    if (typeof model === 'string') {
+      notification = model;
+    } else if (typeof model === 'object') {
+      if (model.notification === undefined) {
+        throw new Error('model must implement `notification` property.');
+      }
+      notification = model.notification;
+    } else {
+      throw new Error('type is not supported by `notify()`.');
+    }
+
     _settings.model = {
-      notification: message,
+      notification: notification,
+      data: model,
       level: notificationLevel
     };
 

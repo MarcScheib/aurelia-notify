@@ -1,3 +1,13 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/MarcScheib/aurelia-notify/compare/0.6.0...v0.7.0) (2016-10-09)
+
+
+### Features
+
+* **service:** add support for additional model data ([7c054ce](https://github.com/MarcScheib/aurelia-notify/commit/7c054ce))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/MarcScheib/aurelia-notify/compare/0.5.0...v0.6.0) (2016-07-28)
 
