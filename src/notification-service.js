@@ -10,6 +10,10 @@ import {NotificationRenderer} from './notification-renderer';
 export class NotificationService {
   static inject = [CompositionEngine, Container, NotificationRenderer];
 
+  compositionEngine: CompositionEngine;
+  container: Container;
+  notificationRenderer: NotificationRenderer;
+
   constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer) {
     this.compositionEngine = compositionEngine;
     this.container = container;
@@ -28,12 +32,25 @@ export class NotificationService {
     return Promise.resolve(compositionContext);
   }
 
-  notify(message: string, settings?: any, level?: string) {
+  notify(model: any, settings?: any, level?: string) {
     let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
 
+    let notification;
+    if (typeof model === 'string') {
+      notification = model;
+    } else if (typeof model === 'object') {
+      if (model.notification === undefined) {
+        throw new Error('model must implement `notification` property.');
+      }
+      notification = model.notification;
+    } else {
+      throw new Error('type is not supported by `notify()`.');
+    }
+
     _settings.model = {
-      notification: message,
+      notification: notification,
+      data: model,
       level: notificationLevel
     };
 

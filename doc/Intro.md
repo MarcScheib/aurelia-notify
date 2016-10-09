@@ -196,7 +196,7 @@ The plugin allows several different customizations based on the [Configuration P
 
 ## Customize service method calls
 
-At the moment, the notification plugin supports four built in methods to show notifications:
+At the moment, the notification plugin supports four built-in methods to show notifications:
 
 - ```info(message, settings)```
 - ```success(message, settings)```
@@ -204,7 +204,7 @@ At the moment, the notification plugin supports four built in methods to show no
 - ```danger(message, settings)```
 
 Each method takes a message parameter which is shown as the notification message and, optionally, a settings object base on above's configuration parameters.
-The methods internally call ```notify(message, settings, level)```, which can also be used to show notifications. It has a third parameter specifying the level or severity of the notification and, thus, the color of the notification box (when using the default).
+The methods internally call ```notify(model, settings, level)```, which can also be used to show notifications. It has a third parameter specifying the level or severity of the notification and, thus, the color of the notification box (when using the default).
 By default, the levels map to Bootstraps equivalents. The following code snippets show some examples:
 
 This snippet shows a success notification which hides automatically after 5 seconds.
@@ -255,4 +255,24 @@ export function configure(aurelia) {
 }
 ```
 
-Now, the customized view/view-model is used instead of the default one.
+Now, the customized view/view-model is used instead of the default one. 
+
+It is also possible to hand over additional data to the view model beside the notification message and the notification level.
+The ```notify(model, settings, level)``` method can take a complete data object as the first argument. It must at least contain a ```notification``` property, otherwise, an exception is thrown.
+The data is available in the view models ```activate()``` method via the ```data``` property of the activation parameter, e.g:
+
+```javascript
+export class SimpleNotification {
+  activate(model) {
+    this.notification = model.notification;
+    this.date = model.data.date;
+    this.username = model.data.username;
+  }
+}
+```
+
+And the corresponding service call:
+
+```javascript
+this.notificationService.notify({notification: 'A success message', date: '2016/10/09', username: 'Marc'}, {timeout: 5}, NotificationLevel.success);
+```

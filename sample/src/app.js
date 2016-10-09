@@ -22,4 +22,8 @@ export class App {
   danger() {
     this.notificationService.danger('Danger Message');
   }
+
+  custom() {
+    this.notificationService.notify({notification: 'test'}, {}, 'info');
+  }
 }

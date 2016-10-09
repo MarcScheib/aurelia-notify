@@ -10,7 +10,6 @@ var concat = require('gulp-concat');
 var insert = require('gulp-insert');
 var rename = require('gulp-rename');
 var tools = require('aurelia-tools');
-var sourcemaps = require('gulp-sourcemaps');
 var ts = require('gulp-typescript');
 var gutil = require('gulp-util');
 var gulpIgnore = require('gulp-ignore');
@@ -98,10 +97,8 @@ function srcForTypeScript() {
 compileToModules.forEach(function(moduleType) {
   gulp.task('build-babel-' + moduleType, function() {
     return srcForBabel()
-      .pipe(sourcemaps.init())
       .pipe(to5(assign({}, removeDTSPlugin(compilerOptions[moduleType]()))))
       .pipe(cleanGeneratedCode())
-      .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest(paths.output + moduleType));
   });
 
