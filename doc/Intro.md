@@ -1,8 +1,30 @@
 # Installation
 
+## Plugin Installation for Aurelia CLI
+
+For the plugin installation in a project created via Aurelia CLI, navigate to your project root and exute the following command:
+
+```
+npm install aurelia-notify --save
+```
+
+This will download the plugin and add it to your `package.json`. After that, open the `aurelia_project/aurelia.json` file and scroll down to the `build.bundles` section. Add the following to the `dependencies` section:
+
+```json
+{
+  "name": "aurelia-notify",
+  "path": "../node_modules/aurelia-notify/dist/amd",
+  "main": "aurelia-notify",
+  "resources": [
+    "bs-notification.html",
+    "style.css"
+  ]
+}
+```
+
 ## Plugin Installation via JSPM
 
-The plugin installation happens via JSPM. Go to your project and verify npm (```npm install```) and jspm (```jspm install```) installation was already executed.
+For the plugin installation via JSPM, go to your project root and verify npm (```npm install```) and jspm (```jspm install```) installation was already executed.
 
 Now, you can install the notification plugin via the following command:
 
