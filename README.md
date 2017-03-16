@@ -14,7 +14,7 @@ notification.info('A simple info notification');
 
 ## Documentation
 
-- [Installing the plugin](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#installation)
+- [Installation](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#installation)
 - [Getting started](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#getting-started)
 - [Configuration](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#configuration)
 - [Customization](https://github.com/MarcScheib/aurelia-notify/blob/master/doc/Intro.md#customization)
