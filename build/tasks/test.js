@@ -32,7 +32,7 @@ gulp.task('cover', function(done) {
     reporters: ['coverage'],
     preprocessors: {
       'test/**/*.js': ['babel'],
-      'src/**/*.js': ['babel', 'coverage']
+      'src/**/*.js': ['babel']
     },
     coverageReporter: {
       dir: 'build/reports/coverage',
