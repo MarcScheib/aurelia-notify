@@ -24,7 +24,7 @@ describe('the lifecycle util', () => {
   });
 
   it('should return the promise of the invocation', () => {
-    var result = invokeLifecycle(instance, 'activatePromise', model);
+    let result = invokeLifecycle(instance, 'activatePromise', model);
 
     expect(result instanceof Promise).toBe(true);
     result.then(result => {
@@ -33,7 +33,7 @@ describe('the lifecycle util', () => {
   });
 
   it('should return a resolved promise if function does not return one', () => {
-    var result = invokeLifecycle(instance, 'activateNonPromise', model);
+    let result = invokeLifecycle(instance, 'activateNonPromise', model);
 
     expect(result instanceof Promise).toBe(true);
     result.then(result => {
@@ -43,7 +43,7 @@ describe('the lifecycle util', () => {
   });
 
   it('should return a resolved promise if function returns nothing', () => {
-    var result = invokeLifecycle(instance, 'activateNonReturn', model);
+    let result = invokeLifecycle(instance, 'activateNonReturn', model);
 
     expect(result instanceof Promise).toBe(true);
     result.then(result => {
@@ -52,7 +52,7 @@ describe('the lifecycle util', () => {
   });
 
   it('should return a resolved promise if no function is given', () => {
-    var result = invokeLifecycle(instance, 'param', model);
+    let result = invokeLifecycle(instance, 'param', model);
 
     expect(result instanceof Promise).toBe(true);
     result.then(result => {

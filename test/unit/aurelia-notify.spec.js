@@ -1,7 +1,7 @@
 import {configure} from '../../src/aurelia-notify';
 
 describe('testing aurelia configure routine', () => {
-  var frameworkConfig = {
+  let frameworkConfig = {
     globalResources: () => {
 
     },
