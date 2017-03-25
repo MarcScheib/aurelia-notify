@@ -13,7 +13,7 @@ var NotificationController = exports.NotificationController = function () {
   function NotificationController(renderer, settings) {
     
 
-    this._renderer = renderer;
+    this.renderer = renderer;
     this.settings = settings;
   }
 
@@ -25,9 +25,9 @@ var NotificationController = exports.NotificationController = function () {
     return (0, _lifecycle.invokeLifecycle)(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
       if (canDeactivate) {
         (0, _lifecycle.invokeLifecycle)(_this.viewModel, 'deactivate').then(function () {
-          return _this._renderer.hideNotification(_this);
+          return _this.renderer.hideNotification(_this);
         }).then(function () {
-          return _this._renderer.destroyNotificationHost(_this);
+          return _this.renderer.destroyNotificationHost(_this);
         }).then(function () {
           _this.controller.unbind();
         });

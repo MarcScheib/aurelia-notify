@@ -26,11 +26,11 @@ export declare let globalSettings: any;
 export declare class NotificationRenderer {
   defaultSettings: any;
   constructor();
-  createNotificationHost(notificationController: NotificationController): any;
-  showNotification(notificationController: NotificationController): any;
-  hideNotification(notificationController: NotificationController): any;
-  destroyNotificationHost(notificationController: NotificationController): any;
-  getNotificationContainer(containerSelector: string): any;
+  createNotificationHost(notificationController?: any): any;
+  showNotification(notificationController?: any): any;
+  hideNotification(notificationController?: any): any;
+  destroyNotificationHost(notificationController?: any): any;
+  getNotificationContainer(containerSelector?: any): any;
 }
 export declare class NotificationService {
   static inject: any;

@@ -25,18 +25,6 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-
       this.notificationRenderer = notificationRenderer;
     }
 
-    NotificationService.prototype._getViewModel = function _getViewModel(compositionContext) {
-      if (typeof compositionContext.viewModel === 'function') {
-        compositionContext.viewModel = _aureliaMetadata.Origin.get(compositionContext.viewModel).moduleId;
-      }
-
-      if (typeof compositionContext.viewModel === 'string') {
-        return this.compositionEngine.ensureViewModel(compositionContext);
-      }
-
-      return Promise.resolve(compositionContext);
-    };
-
     NotificationService.prototype.notify = function notify(model, settings, level) {
       var _this = this;
 
@@ -72,7 +60,7 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-
 
       childContainer.registerInstance(_notificationController.NotificationController, notificationController);
 
-      return this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
+      return _getViewModel(compositionContext, this.compositionEngine).then(function (returnedCompositionContext) {
         notificationController.viewModel = returnedCompositionContext.viewModel;
 
         return (0, _lifecycle.invokeLifecycle)(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
@@ -109,4 +97,17 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-
 
     return NotificationService;
   }(), _class.inject = [_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer], _temp);
+
+
+  function _getViewModel(compositionContext, compositionEngine) {
+    if (typeof compositionContext.viewModel === 'function') {
+      compositionContext.viewModel = _aureliaMetadata.Origin.get(compositionContext.viewModel).moduleId;
+    }
+
+    if (typeof compositionContext.viewModel === 'string') {
+      return compositionEngine.ensureViewModel(compositionContext);
+    }
+
+    return Promise.resolve(compositionContext);
+  }
 });

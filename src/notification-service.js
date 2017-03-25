@@ -20,18 +20,6 @@ export class NotificationService {
     this.notificationRenderer = notificationRenderer;
   }
 
-  _getViewModel(compositionContext) {
-    if (typeof compositionContext.viewModel === 'function') {
-      compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
-    }
-
-    if (typeof compositionContext.viewModel === 'string') {
-      return this.compositionEngine.ensureViewModel(compositionContext);
-    }
-
-    return Promise.resolve(compositionContext);
-  }
-
   notify(model: any, settings?: any, level?: string) {
     let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
@@ -65,27 +53,28 @@ export class NotificationService {
 
     childContainer.registerInstance(NotificationController, notificationController);
 
-    return this._getViewModel(compositionContext).then(returnedCompositionContext => {
-      notificationController.viewModel = returnedCompositionContext.viewModel;
+    return _getViewModel(compositionContext, this.compositionEngine)
+      .then(returnedCompositionContext => {
+        notificationController.viewModel = returnedCompositionContext.viewModel;
 
-      return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
-        if (canActivate) {
-          this.compositionEngine.createController(returnedCompositionContext)
-            .then(controller => {
-              notificationController.controller = controller;
-              notificationController.view = controller.view;
-              controller.automate();
+        return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model)
+          .then(canActivate => {
+            if (canActivate) {
+              this.compositionEngine.createController(returnedCompositionContext)
+                .then(controller => {
+                  notificationController.controller = controller;
+                  notificationController.view = controller.view;
+                  controller.automate();
 
-              return this.notificationRenderer.createNotificationHost(notificationController);
-            })
-            .then(() => {
-              return this.notificationRenderer.showNotification(notificationController);
-            });
-        }
+                  return this.notificationRenderer.createNotificationHost(notificationController);
+                })
+                .then(() => {
+                  return this.notificationRenderer.showNotification(notificationController);
+                });
+            }
+          });
       });
-    });
   }
-
 
   info(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.info);
@@ -102,4 +91,16 @@ export class NotificationService {
   danger(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.danger);
   }
+}
+
+function _getViewModel(compositionContext, compositionEngine) {
+  if (typeof compositionContext.viewModel === 'function') {
+    compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
+  }
+
+  if (typeof compositionContext.viewModel === 'string') {
+    return compositionEngine.ensureViewModel(compositionContext);
+  }
+
+  return Promise.resolve(compositionContext);
 }

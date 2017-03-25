@@ -6,7 +6,7 @@ export var NotificationController = function () {
   function NotificationController(renderer, settings) {
     
 
-    this._renderer = renderer;
+    this.renderer = renderer;
     this.settings = settings;
   }
 
@@ -18,9 +18,9 @@ export var NotificationController = function () {
     return invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
       if (canDeactivate) {
         invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
-          return _this._renderer.hideNotification(_this);
+          return _this.renderer.hideNotification(_this);
         }).then(function () {
-          return _this._renderer.destroyNotificationHost(_this);
+          return _this.renderer.destroyNotificationHost(_this);
         }).then(function () {
           _this.controller.unbind();
         });

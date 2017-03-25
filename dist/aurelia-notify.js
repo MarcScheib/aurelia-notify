@@ -30,27 +30,28 @@ export function invokeLifecycle(instance: any, name: string, model: any) {
 
 export class NotificationController {
   constructor(renderer: NotificationRenderer, settings: any) {
-    this._renderer = renderer;
+    this.renderer = renderer;
     this.settings = settings;
   }
 
   close() {
     clearTimeout(this.timer);
 
-    return invokeLifecycle(this.viewModel, 'canDeactivate').then(canDeactivate => {
-      if (canDeactivate) {
-        invokeLifecycle(this.viewModel, 'deactivate')
-          .then(() => {
-            return this._renderer.hideNotification(this);
-          })
-          .then(() => {
-            return this._renderer.destroyNotificationHost(this);
-          })
-          .then(() => {
-            this.controller.unbind();
-          });
-      }
-    });
+    return invokeLifecycle(this.viewModel, 'canDeactivate')
+      .then(canDeactivate => {
+        if (canDeactivate) {
+          invokeLifecycle(this.viewModel, 'deactivate')
+            .then(() => {
+              return this.renderer.hideNotification(this);
+            })
+            .then(() => {
+              return this.renderer.destroyNotificationHost(this);
+            })
+            .then(() => {
+              this.controller.unbind();
+            });
+        }
+      });
   }
 }
 
@@ -107,7 +108,7 @@ export class NotificationRenderer {
     this.notificationControllers = [];
   }
 
-  createNotificationHost(notificationController: NotificationController) {
+  createNotificationHost(notificationController) {
     let settings = notificationController.settings;
     let notificationHost = DOM.createElement('notification-host');
     let notificationContainer = this.getNotificationContainer(settings.containerSelector);
@@ -177,19 +178,19 @@ export class NotificationRenderer {
     return Promise.resolve();
   }
 
-  showNotification(notificationController: NotificationController) {
+  showNotification(notificationController) {
     return notificationController.showNotification();
   }
 
-  hideNotification(notificationController: NotificationController) {
+  hideNotification(notificationController) {
     return notificationController.hideNotification();
   }
 
-  destroyNotificationHost(notificationController: NotificationController) {
+  destroyNotificationHost(notificationController) {
     return notificationController.destroyNotificationHost();
   }
 
-  getNotificationContainer(containerSelector: string) {
+  getNotificationContainer(containerSelector) {
     let notificationContainer = DOM.querySelectorAll(containerSelector);
     if (notificationContainer === null) {
       notificationContainer = DOM.querySelectorAll('body');
@@ -210,18 +211,6 @@ export class NotificationService {
     this.compositionEngine = compositionEngine;
     this.container = container;
     this.notificationRenderer = notificationRenderer;
-  }
-
-  _getViewModel(compositionContext) {
-    if (typeof compositionContext.viewModel === 'function') {
-      compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
-    }
-
-    if (typeof compositionContext.viewModel === 'string') {
-      return this.compositionEngine.ensureViewModel(compositionContext);
-    }
-
-    return Promise.resolve(compositionContext);
   }
 
   notify(model: any, settings?: any, level?: string) {
@@ -257,27 +246,28 @@ export class NotificationService {
 
     childContainer.registerInstance(NotificationController, notificationController);
 
-    return this._getViewModel(compositionContext).then(returnedCompositionContext => {
-      notificationController.viewModel = returnedCompositionContext.viewModel;
+    return _getViewModel(compositionContext, this.compositionEngine)
+      .then(returnedCompositionContext => {
+        notificationController.viewModel = returnedCompositionContext.viewModel;
 
-      return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
-        if (canActivate) {
-          this.compositionEngine.createController(returnedCompositionContext)
-            .then(controller => {
-              notificationController.controller = controller;
-              notificationController.view = controller.view;
-              controller.automate();
+        return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model)
+          .then(canActivate => {
+            if (canActivate) {
+              this.compositionEngine.createController(returnedCompositionContext)
+                .then(controller => {
+                  notificationController.controller = controller;
+                  notificationController.view = controller.view;
+                  controller.automate();
 
-              return this.notificationRenderer.createNotificationHost(notificationController);
-            })
-            .then(() => {
-              return this.notificationRenderer.showNotification(notificationController);
-            });
-        }
+                  return this.notificationRenderer.createNotificationHost(notificationController);
+                })
+                .then(() => {
+                  return this.notificationRenderer.showNotification(notificationController);
+                });
+            }
+          });
       });
-    });
   }
-
 
   info(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.info);
@@ -294,4 +284,16 @@ export class NotificationService {
   danger(message: string, settings?: any) {
     this.notify(message, settings, NotificationLevel.danger);
   }
+}
+
+function _getViewModel(compositionContext, compositionEngine) {
+  if (typeof compositionContext.viewModel === 'function') {
+    compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
+  }
+
+  if (typeof compositionContext.viewModel === 'string') {
+    return compositionEngine.ensureViewModel(compositionContext);
+  }
+
+  return Promise.resolve(compositionContext);
 }

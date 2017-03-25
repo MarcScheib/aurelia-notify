@@ -17,18 +17,6 @@ export let NotificationService = (_temp = _class = class NotificationService {
     this.notificationRenderer = notificationRenderer;
   }
 
-  _getViewModel(compositionContext) {
-    if (typeof compositionContext.viewModel === 'function') {
-      compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
-    }
-
-    if (typeof compositionContext.viewModel === 'string') {
-      return this.compositionEngine.ensureViewModel(compositionContext);
-    }
-
-    return Promise.resolve(compositionContext);
-  }
-
   notify(model, settings, level) {
     let notificationLevel = level || NotificationLevel.info;
     let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
@@ -62,7 +50,7 @@ export let NotificationService = (_temp = _class = class NotificationService {
 
     childContainer.registerInstance(NotificationController, notificationController);
 
-    return this._getViewModel(compositionContext).then(returnedCompositionContext => {
+    return _getViewModel(compositionContext, this.compositionEngine).then(returnedCompositionContext => {
       notificationController.viewModel = returnedCompositionContext.viewModel;
 
       return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(canActivate => {
@@ -97,3 +85,15 @@ export let NotificationService = (_temp = _class = class NotificationService {
     this.notify(message, settings, NotificationLevel.danger);
   }
 }, _class.inject = [CompositionEngine, Container, NotificationRenderer], _temp);
+
+function _getViewModel(compositionContext, compositionEngine) {
+  if (typeof compositionContext.viewModel === 'function') {
+    compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
+  }
+
+  if (typeof compositionContext.viewModel === 'string') {
+    return compositionEngine.ensureViewModel(compositionContext);
+  }
+
+  return Promise.resolve(compositionContext);
+}

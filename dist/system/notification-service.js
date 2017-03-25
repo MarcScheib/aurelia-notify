@@ -7,6 +7,17 @@ System.register(['aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-te
 
   
 
+  function _getViewModel(compositionContext, compositionEngine) {
+    if (typeof compositionContext.viewModel === 'function') {
+      compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
+    }
+
+    if (typeof compositionContext.viewModel === 'string') {
+      return compositionEngine.ensureViewModel(compositionContext);
+    }
+
+    return Promise.resolve(compositionContext);
+  }
   return {
     setters: [function (_aureliaDependencyInjection) {
       Container = _aureliaDependencyInjection.Container;
@@ -38,18 +49,6 @@ System.register(['aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-te
           this.container = container;
           this.notificationRenderer = notificationRenderer;
         }
-
-        NotificationService.prototype._getViewModel = function _getViewModel(compositionContext) {
-          if (typeof compositionContext.viewModel === 'function') {
-            compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
-          }
-
-          if (typeof compositionContext.viewModel === 'string') {
-            return this.compositionEngine.ensureViewModel(compositionContext);
-          }
-
-          return Promise.resolve(compositionContext);
-        };
 
         NotificationService.prototype.notify = function notify(model, settings, level) {
           var _this = this;
@@ -86,7 +85,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-te
 
           childContainer.registerInstance(NotificationController, notificationController);
 
-          return this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
+          return _getViewModel(compositionContext, this.compositionEngine).then(function (returnedCompositionContext) {
             notificationController.viewModel = returnedCompositionContext.viewModel;
 
             return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {

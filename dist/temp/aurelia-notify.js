@@ -50,7 +50,7 @@ var NotificationController = exports.NotificationController = function () {
   function NotificationController(renderer, settings) {
     _classCallCheck(this, NotificationController);
 
-    this._renderer = renderer;
+    this.renderer = renderer;
     this.settings = settings;
   }
 
@@ -62,9 +62,9 @@ var NotificationController = exports.NotificationController = function () {
     return invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
       if (canDeactivate) {
         invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
-          return _this._renderer.hideNotification(_this);
+          return _this.renderer.hideNotification(_this);
         }).then(function () {
-          return _this._renderer.destroyNotificationHost(_this);
+          return _this.renderer.destroyNotificationHost(_this);
         }).then(function () {
           _this.controller.unbind();
         });
@@ -236,18 +236,6 @@ var NotificationService = exports.NotificationService = (_temp2 = _class3 = func
     this.notificationRenderer = notificationRenderer;
   }
 
-  NotificationService.prototype._getViewModel = function _getViewModel(compositionContext) {
-    if (typeof compositionContext.viewModel === 'function') {
-      compositionContext.viewModel = _aureliaMetadata.Origin.get(compositionContext.viewModel).moduleId;
-    }
-
-    if (typeof compositionContext.viewModel === 'string') {
-      return this.compositionEngine.ensureViewModel(compositionContext);
-    }
-
-    return Promise.resolve(compositionContext);
-  };
-
   NotificationService.prototype.notify = function notify(model, settings, level) {
     var _this3 = this;
 
@@ -283,7 +271,7 @@ var NotificationService = exports.NotificationService = (_temp2 = _class3 = func
 
     childContainer.registerInstance(NotificationController, notificationController);
 
-    return this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
+    return _getViewModel(compositionContext, this.compositionEngine).then(function (returnedCompositionContext) {
       notificationController.viewModel = returnedCompositionContext.viewModel;
 
       return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
@@ -320,3 +308,16 @@ var NotificationService = exports.NotificationService = (_temp2 = _class3 = func
 
   return NotificationService;
 }(), _class3.inject = [_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, NotificationRenderer], _temp2);
+
+
+function _getViewModel(compositionContext, compositionEngine) {
+  if (typeof compositionContext.viewModel === 'function') {
+    compositionContext.viewModel = _aureliaMetadata.Origin.get(compositionContext.viewModel).moduleId;
+  }
+
+  if (typeof compositionContext.viewModel === 'string') {
+    return compositionEngine.ensureViewModel(compositionContext);
+  }
+
+  return Promise.resolve(compositionContext);
+}

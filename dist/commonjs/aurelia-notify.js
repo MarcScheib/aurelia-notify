@@ -3,55 +3,44 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.NotificationController = exports.NotificationService = exports.NotificationLevel = exports.BSNotification = undefined;
 
 var _bsNotification = require('./bs-notification');
 
-Object.keys(_bsNotification).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _bsNotification[key];
-    }
-  });
+Object.defineProperty(exports, 'BSNotification', {
+  enumerable: true,
+  get: function get() {
+    return _bsNotification.BSNotification;
+  }
 });
+exports.configure = configure;
 
 var _notificationLevel = require('./notification-level');
 
-Object.keys(_notificationLevel).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _notificationLevel[key];
-    }
-  });
+Object.defineProperty(exports, 'NotificationLevel', {
+  enumerable: true,
+  get: function get() {
+    return _notificationLevel.NotificationLevel;
+  }
 });
 
 var _notificationService = require('./notification-service');
 
-Object.keys(_notificationService).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _notificationService[key];
-    }
-  });
+Object.defineProperty(exports, 'NotificationService', {
+  enumerable: true,
+  get: function get() {
+    return _notificationService.NotificationService;
+  }
 });
 
 var _notificationController = require('./notification-controller');
 
-Object.keys(_notificationController).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _notificationController[key];
-    }
-  });
+Object.defineProperty(exports, 'NotificationController', {
+  enumerable: true,
+  get: function get() {
+    return _notificationController.NotificationController;
+  }
 });
-exports.configure = configure;
 
 var _notificationRenderer = require('./notification-renderer');
 
