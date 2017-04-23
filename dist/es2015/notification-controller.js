@@ -2,19 +2,21 @@ import { invokeLifecycle } from './lifecycle';
 
 export let NotificationController = class NotificationController {
   constructor(renderer, settings) {
-    this._renderer = renderer;
+    this.renderer = renderer;
     this.settings = settings;
   }
 
   close() {
+    if (this.closePromise) {
+      return this.closePromise;
+    }
     clearTimeout(this.timer);
-
-    return invokeLifecycle(this.viewModel, 'canDeactivate').then(canDeactivate => {
+    return this.closePromise = invokeLifecycle(this.viewModel, 'canDeactivate').then(canDeactivate => {
       if (canDeactivate) {
         invokeLifecycle(this.viewModel, 'deactivate').then(() => {
-          return this._renderer.hideNotification(this);
+          return this.renderer.hideNotification(this);
         }).then(() => {
-          return this._renderer.destroyNotificationHost(this);
+          return this.renderer.destroyNotificationHost(this);
         }).then(() => {
           this.controller.unbind();
         });

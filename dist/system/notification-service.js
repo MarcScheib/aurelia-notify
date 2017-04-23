@@ -7,6 +7,45 @@ System.register(['aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-te
 
   
 
+  function _createSettings(model, settings, level) {
+    var notification = void 0;
+    if (typeof model === 'string') {
+      notification = model;
+    } else if ((typeof model === 'undefined' ? 'undefined' : _typeof(model)) === 'object') {
+      if (model.notification === undefined) {
+        throw new Error('model must implement `notification` property.');
+      }
+      notification = model.notification;
+    } else {
+      throw new Error('type is not supported by `notify()`.');
+    }
+
+    settings.model = {
+      notification: notification,
+      data: model,
+      level: level || NotificationLevel.info
+    };
+    return settings;
+  }
+
+  function _getViewModel(container, childContainer, compositionEngine, notificationController) {
+    var compositionContext = {
+      container: container,
+      childContainer: childContainer,
+      model: notificationController.settings.model,
+      viewModel: notificationController.settings.viewModel
+    };
+
+    if (typeof compositionContext.viewModel === 'function') {
+      compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
+    }
+
+    if (typeof compositionContext.viewModel === 'string') {
+      return compositionEngine.ensureViewModel(compositionContext);
+    }
+
+    return Promise.resolve(compositionContext);
+  }
   return {
     setters: [function (_aureliaDependencyInjection) {
       Container = _aureliaDependencyInjection.Container;
@@ -39,54 +78,15 @@ System.register(['aurelia-dependency-injection', 'aurelia-metadata', 'aurelia-te
           this.notificationRenderer = notificationRenderer;
         }
 
-        NotificationService.prototype._getViewModel = function _getViewModel(compositionContext) {
-          if (typeof compositionContext.viewModel === 'function') {
-            compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
-          }
-
-          if (typeof compositionContext.viewModel === 'string') {
-            return this.compositionEngine.ensureViewModel(compositionContext);
-          }
-
-          return Promise.resolve(compositionContext);
-        };
-
         NotificationService.prototype.notify = function notify(model, settings, level) {
           var _this = this;
 
-          var notificationLevel = level || NotificationLevel.info;
           var _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
-
-          var notification = void 0;
-          if (typeof model === 'string') {
-            notification = model;
-          } else if ((typeof model === 'undefined' ? 'undefined' : _typeof(model)) === 'object') {
-            if (model.notification === undefined) {
-              throw new Error('model must implement `notification` property.');
-            }
-            notification = model.notification;
-          } else {
-            throw new Error('type is not supported by `notify()`.');
-          }
-
-          _settings.model = {
-            notification: notification,
-            data: model,
-            level: notificationLevel
-          };
-
-          var notificationController = new NotificationController(this.notificationRenderer, _settings);
+          var notificationController = new NotificationController(this.notificationRenderer, _createSettings(model, _settings, level));
           var childContainer = this.container.createChild();
-          var compositionContext = {
-            viewModel: _settings.viewModel,
-            container: this.container,
-            childContainer: childContainer,
-            model: _settings.model
-          };
-
           childContainer.registerInstance(NotificationController, notificationController);
 
-          return this._getViewModel(compositionContext).then(function (returnedCompositionContext) {
+          return _getViewModel(this.container, childContainer, this.compositionEngine, notificationController).then(function (returnedCompositionContext) {
             notificationController.viewModel = returnedCompositionContext.viewModel;
 
             return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {

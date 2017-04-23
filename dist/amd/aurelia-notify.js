@@ -4,43 +4,32 @@ define(['exports', './bs-notification', './notification-level', './notification-
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  Object.keys(_bsNotification).forEach(function (key) {
-    if (key === "default" || key === "__esModule") return;
-    Object.defineProperty(exports, key, {
-      enumerable: true,
-      get: function () {
-        return _bsNotification[key];
-      }
-    });
-  });
-  Object.keys(_notificationLevel).forEach(function (key) {
-    if (key === "default" || key === "__esModule") return;
-    Object.defineProperty(exports, key, {
-      enumerable: true,
-      get: function () {
-        return _notificationLevel[key];
-      }
-    });
-  });
-  Object.keys(_notificationService).forEach(function (key) {
-    if (key === "default" || key === "__esModule") return;
-    Object.defineProperty(exports, key, {
-      enumerable: true,
-      get: function () {
-        return _notificationService[key];
-      }
-    });
-  });
-  Object.keys(_notificationController).forEach(function (key) {
-    if (key === "default" || key === "__esModule") return;
-    Object.defineProperty(exports, key, {
-      enumerable: true,
-      get: function () {
-        return _notificationController[key];
-      }
-    });
+  exports.NotificationController = exports.NotificationService = exports.NotificationLevel = exports.BSNotification = undefined;
+  Object.defineProperty(exports, 'BSNotification', {
+    enumerable: true,
+    get: function () {
+      return _bsNotification.BSNotification;
+    }
   });
   exports.configure = configure;
+  Object.defineProperty(exports, 'NotificationLevel', {
+    enumerable: true,
+    get: function () {
+      return _notificationLevel.NotificationLevel;
+    }
+  });
+  Object.defineProperty(exports, 'NotificationService', {
+    enumerable: true,
+    get: function () {
+      return _notificationService.NotificationService;
+    }
+  });
+  Object.defineProperty(exports, 'NotificationController', {
+    enumerable: true,
+    get: function () {
+      return _notificationController.NotificationController;
+    }
+  });
   function configure(config, callback) {
     config.globalResources('./bs-notification');
 
