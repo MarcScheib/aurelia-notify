@@ -7,9 +7,11 @@ export class NotificationController {
   }
 
   close() {
+    if (this.closePromise) {
+      return this.closePromise;
+    }
     clearTimeout(this.timer);
-
-    return invokeLifecycle(this.viewModel, 'canDeactivate')
+    return this.closePromise = invokeLifecycle(this.viewModel, 'canDeactivate')
       .then(canDeactivate => {
         if (canDeactivate) {
           invokeLifecycle(this.viewModel, 'deactivate')
