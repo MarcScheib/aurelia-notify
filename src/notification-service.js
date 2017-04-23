@@ -45,8 +45,8 @@ export class NotificationService {
                   return this.notificationRenderer.showNotification(notificationController);
                 });
             }
-        });
-    });
+          });
+      });
   }
 
   info(message: string, settings?: any) {
