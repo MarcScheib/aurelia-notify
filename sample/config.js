@@ -18,7 +18,7 @@ System.config({
     "/aurelia-notify": {
       "main": "index",
       "dependencies": {
-        "aurelia-framework": "npm:aurelia-framework@1.0.0-rc.1.0.0"
+        "aurelia-framework": "npm:aurelia-framework@1.1.2"
       }
     }
   },
@@ -29,6 +29,7 @@ System.config({
     "aurelia-framework": "npm:aurelia-framework@1.1.2",
     "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
     "aurelia-pal": "npm:aurelia-pal@1.3.0",
+    "aurelia-pal-browser": "npm:aurelia-pal-browser@1.2.1",
     "aurelia-templating": "npm:aurelia-templating@1.4.2",
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
