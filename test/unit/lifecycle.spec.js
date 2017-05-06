@@ -37,8 +37,7 @@ describe('the lifecycle util', () => {
 
     expect(result instanceof Promise).toBe(true);
     result.then(result => {
-      expect(result).toBe(true);
-      expect(result).not.toEqual('no promise');
+      expect(result).toEqual('no promise');
     });
   });
 
