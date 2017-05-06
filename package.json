@@ -22,7 +22,7 @@
   },
   "jspm": {
     "registry": "npm",
-    "main": "index",
+    "main": "aurelia-notify",
     "format": "amd",
     "directories": {
       "lib": "dist/amd"
