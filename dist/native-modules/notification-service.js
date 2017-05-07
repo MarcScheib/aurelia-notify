@@ -1,19 +1,29 @@
+'use strict';
+
+exports.__esModule = true;
+exports.NotificationService = undefined;
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _class, _temp;
 
+var _aureliaDependencyInjection = require('aurelia-dependency-injection');
+
+var _aureliaMetadata = require('aurelia-metadata');
+
+var _aureliaTemplating = require('aurelia-templating');
+
+var _lifecycle = require('./lifecycle');
+
+var _notificationController = require('./notification-controller');
+
+var _notificationLevel = require('./notification-level');
+
+var _notificationRenderer = require('./notification-renderer');
 
 
-import { Container } from 'aurelia-dependency-injection';
-import { Origin } from 'aurelia-metadata';
-import { CompositionEngine } from 'aurelia-templating';
 
-import { invokeLifecycle } from './lifecycle';
-import { NotificationController } from './notification-controller';
-import { NotificationLevel } from './notification-level';
-import { NotificationRenderer } from './notification-renderer';
-
-export var NotificationService = (_temp = _class = function () {
+var NotificationService = exports.NotificationService = (_temp = _class = function () {
   function NotificationService(compositionEngine, container, notificationRenderer) {
     
 
@@ -26,14 +36,14 @@ export var NotificationService = (_temp = _class = function () {
     var _this = this;
 
     var _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
-    var notificationController = new NotificationController(this.notificationRenderer, _createSettings(model, _settings, level));
+    var notificationController = new _notificationController.NotificationController(this.notificationRenderer, _createSettings(model, _settings, level));
     var childContainer = this.container.createChild();
-    childContainer.registerInstance(NotificationController, notificationController);
+    childContainer.registerInstance(_notificationController.NotificationController, notificationController);
 
     return _getViewModel(this.container, childContainer, this.compositionEngine, notificationController).then(function (returnedCompositionContext) {
       notificationController.viewModel = returnedCompositionContext.viewModel;
 
-      return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
+      return (0, _lifecycle.invokeLifecycle)(returnedCompositionContext.viewModel, 'canActivate', _settings.model).then(function (canActivate) {
         if (canActivate) {
           _this.compositionEngine.createController(returnedCompositionContext).then(function (controller) {
             notificationController.controller = controller;
@@ -50,23 +60,24 @@ export var NotificationService = (_temp = _class = function () {
   };
 
   NotificationService.prototype.info = function info(message, settings) {
-    this.notify(message, settings, NotificationLevel.info);
+    this.notify(message, settings, _notificationLevel.NotificationLevel.info);
   };
 
   NotificationService.prototype.success = function success(message, settings) {
-    this.notify(message, settings, NotificationLevel.success);
+    this.notify(message, settings, _notificationLevel.NotificationLevel.success);
   };
 
   NotificationService.prototype.warning = function warning(message, settings) {
-    this.notify(message, settings, NotificationLevel.warning);
+    this.notify(message, settings, _notificationLevel.NotificationLevel.warning);
   };
 
   NotificationService.prototype.danger = function danger(message, settings) {
-    this.notify(message, settings, NotificationLevel.danger);
+    this.notify(message, settings, _notificationLevel.NotificationLevel.danger);
   };
 
   return NotificationService;
-}(), _class.inject = [CompositionEngine, Container, NotificationRenderer], _temp);
+}(), _class.inject = [_aureliaTemplating.CompositionEngine, _aureliaDependencyInjection.Container, _notificationRenderer.NotificationRenderer], _temp);
+
 
 function _createSettings(model, settings, level) {
   var notification = void 0;
@@ -84,7 +95,7 @@ function _createSettings(model, settings, level) {
   settings.model = {
     notification: notification,
     data: model,
-    level: level || NotificationLevel.info
+    level: level || _notificationLevel.NotificationLevel.info
   };
   return settings;
 }
@@ -98,7 +109,7 @@ function _getViewModel(container, childContainer, compositionEngine, notificatio
   };
 
   if (typeof compositionContext.viewModel === 'function') {
-    compositionContext.viewModel = Origin.get(compositionContext.viewModel).moduleId;
+    compositionContext.viewModel = _aureliaMetadata.Origin.get(compositionContext.viewModel).moduleId;
   }
 
   if (typeof compositionContext.viewModel === 'string') {

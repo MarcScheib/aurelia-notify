@@ -1,15 +1,21 @@
+'use strict';
+
+exports.__esModule = true;
+exports.NotificationRenderer = exports.globalSettings = undefined;
+
+var _aureliaPal = require('aurelia-pal');
+
+var _aureliaTemplating = require('aurelia-templating');
+
+var _bsNotification = require('./bs-notification');
 
 
-import { DOM } from 'aurelia-pal';
-import { ViewSlot } from 'aurelia-templating';
 
-import { BSNotification } from './bs-notification';
-
-export var globalSettings = {
+var globalSettings = exports.globalSettings = {
   append: false,
   containerSelector: 'body',
   timeout: 0,
-  viewModel: BSNotification,
+  viewModel: _bsNotification.BSNotification,
   limit: 5
 };
 
@@ -20,7 +26,7 @@ var transitionEvent = function () {
     if (transition) return transition;
 
     var t = void 0;
-    var el = DOM.createElement('fakeelement');
+    var el = _aureliaPal.DOM.createElement('fakeelement');
     var transitions = {
       'transition': 'transitionend',
       'OTransition': 'oTransitionEnd',
@@ -38,7 +44,7 @@ var transitionEvent = function () {
   };
 }();
 
-export var NotificationRenderer = function () {
+var NotificationRenderer = exports.NotificationRenderer = function () {
   function NotificationRenderer() {
     
 
@@ -51,7 +57,7 @@ export var NotificationRenderer = function () {
     var _this = this;
 
     var settings = notificationController.settings;
-    var notificationHost = DOM.createElement('notification-host');
+    var notificationHost = _aureliaPal.DOM.createElement('notification-host');
     var notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
     if (settings.append === true) {
@@ -60,7 +66,7 @@ export var NotificationRenderer = function () {
       notificationContainer.insertBefore(notificationHost, notificationContainer.firstChild);
     }
 
-    notificationController.slot = new ViewSlot(notificationHost, true);
+    notificationController.slot = new _aureliaTemplating.ViewSlot(notificationHost, true);
     notificationController.slot.add(notificationController.view);
 
     notificationController.showNotification = function () {
@@ -132,9 +138,9 @@ export var NotificationRenderer = function () {
   };
 
   NotificationRenderer.prototype.getNotificationContainer = function getNotificationContainer(containerSelector) {
-    var notificationContainer = DOM.querySelectorAll(containerSelector);
+    var notificationContainer = _aureliaPal.DOM.querySelectorAll(containerSelector);
     if (notificationContainer === null) {
-      notificationContainer = DOM.querySelectorAll('body');
+      notificationContainer = _aureliaPal.DOM.querySelectorAll('body');
     }
 
     return notificationContainer[0];

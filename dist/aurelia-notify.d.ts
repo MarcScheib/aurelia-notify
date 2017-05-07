@@ -12,7 +12,7 @@ import {
   Origin
 } from 'aurelia-metadata';
 export declare let NotificationLevel: any;
-export declare function invokeLifecycle(instance: any, name: string, model: any): any;
+export declare function invokeLifecycle(instance: any, name: string, model?: any): Promise<any>;
 export declare class NotificationController {
   constructor(renderer: NotificationRenderer, settings: any);
   close(): any;

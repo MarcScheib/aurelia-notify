@@ -1,17 +1,17 @@
-export function invokeLifecycle(instance, name, model) {
+'use strict';
+
+exports.__esModule = true;
+exports.invokeLifecycle = invokeLifecycle;
+function invokeLifecycle(instance, name, model) {
   if (typeof instance[name] === 'function') {
-    var result = instance[name](model);
-
-    if (result instanceof Promise) {
-      return result;
-    }
-
-    if (result !== null && result !== undefined) {
-      return Promise.resolve(result);
-    }
-
-    return Promise.resolve(true);
+    return new Promise(function (resolve) {
+      resolve(instance[name](model));
+    }).then(function (result) {
+      if (result !== null && result !== undefined) {
+        return result;
+      }
+      return true;
+    });
   }
-
   return Promise.resolve(true);
 }

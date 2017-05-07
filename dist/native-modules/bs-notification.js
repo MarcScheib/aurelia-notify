@@ -1,10 +1,15 @@
+'use strict';
+
+exports.__esModule = true;
+exports.BSNotification = undefined;
+
 var _class, _temp;
 
+var _notificationController = require('./notification-controller');
 
 
-import { NotificationController } from './notification-controller';
 
-export var BSNotification = (_temp = _class = function () {
+var BSNotification = exports.BSNotification = (_temp = _class = function () {
   function BSNotification(controller) {
     
 
@@ -17,4 +22,4 @@ export var BSNotification = (_temp = _class = function () {
   };
 
   return BSNotification;
-}(), _class.inject = [NotificationController], _temp);
+}(), _class.inject = [_notificationController.NotificationController], _temp);
