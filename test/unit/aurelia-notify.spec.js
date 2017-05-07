@@ -1,15 +1,12 @@
+import {Container} from 'aurelia-dependency-injection';
 import {configure} from '../../src/aurelia-notify';
 
 describe('testing aurelia configure routine', () => {
-  let frameworkConfig = {
-    globalResources: () => {
-
+  const frameworkConfig = {
+    container: new Container(),
+    globalResources() {
     },
-    container: {
-      registerInstance: (type, callback) => {
-
-      },
-      get: (type) => { return new type(); }
+    transient() {
     }
   };
 
