@@ -2789,14 +2789,13 @@ gulp-typedoc@^2.0.2:
     event-stream "^3.3.4"
     gulp-util "^3.0.8"
 
-gulp-typescript@^2.13.6:
-  version "2.14.1"
-  resolved "https://registry.yarnpkg.com/gulp-typescript/-/gulp-typescript-2.14.1.tgz#bc00edf2ee71f09bda53fd1d0b873b571371d4de"
+gulp-typescript@^3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/gulp-typescript/-/gulp-typescript-3.1.6.tgz#6c67b84364cf3589a9ad6fdea2e3c0bc525c435e"
   dependencies:
     gulp-util "~3.0.7"
     source-map "~0.5.3"
     through2 "~2.0.1"
-    typescript "1.8.10"
     vinyl-fs "~2.4.3"
 
 gulp-util@*, gulp-util@^3.0.0, gulp-util@^3.0.4, gulp-util@^3.0.6, gulp-util@^3.0.8, gulp-util@~3.0.1, gulp-util@~3.0.7:
