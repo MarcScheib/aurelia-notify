@@ -1,9 +1,9 @@
+import { PLATFORM } from 'aurelia-pal';
 import {globalSettings} from './notification-renderer';
-export {BSNotification} from './bs-notification';
 
 export function configure(config, callback) {
   config.globalResources(
-    './bs-notification'
+    PLATFORM.moduleName('./bs-notification')
   );
 
   if (typeof callback === 'function') {
@@ -11,6 +11,7 @@ export function configure(config, callback) {
   }
 }
 
+export {BSNotification} from './bs-notification';
 export {NotificationLevel} from './notification-level';
 export {NotificationService} from './notification-service';
 export {NotificationController} from './notification-controller';

@@ -104,6 +104,12 @@
     "yargs": "^8.0.1"
   },
   "aurelia": {
+    "build": {
+      "resources": [
+        "bs-notification",
+        "bs-notification.html"
+      ]
+    },
     "usedBy": [],
     "documentation": {
       "links": [

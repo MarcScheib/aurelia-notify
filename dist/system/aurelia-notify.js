@@ -1,11 +1,11 @@
 'use strict';
 
-System.register(['./notification-renderer', './bs-notification', './notification-level', './notification-service', './notification-controller'], function (_export, _context) {
+System.register(['aurelia-pal', './notification-renderer', './bs-notification', './notification-level', './notification-service', './notification-controller'], function (_export, _context) {
   "use strict";
 
-  var globalSettings;
+  var PLATFORM, globalSettings;
   function configure(config, callback) {
-    config.globalResources('./bs-notification');
+    config.globalResources(PLATFORM.moduleName('./bs-notification'));
 
     if (typeof callback === 'function') {
       callback(globalSettings);
@@ -15,7 +15,9 @@ System.register(['./notification-renderer', './bs-notification', './notification
   _export('configure', configure);
 
   return {
-    setters: [function (_notificationRenderer) {
+    setters: [function (_aureliaPal) {
+      PLATFORM = _aureliaPal.PLATFORM;
+    }, function (_notificationRenderer) {
       globalSettings = _notificationRenderer.globalSettings;
     }, function (_bsNotification) {
       var _exportObj = {};
