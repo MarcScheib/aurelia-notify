@@ -2,6 +2,7 @@
 
 exports.__esModule = true;
 exports.NotificationController = exports.NotificationService = exports.NotificationLevel = exports.BSNotification = undefined;
+exports.configure = configure;
 
 var _bsNotification = require('./bs-notification');
 
@@ -11,7 +12,6 @@ Object.defineProperty(exports, 'BSNotification', {
     return _bsNotification.BSNotification;
   }
 });
-exports.configure = configure;
 
 var _notificationLevel = require('./notification-level');
 
@@ -40,10 +40,12 @@ Object.defineProperty(exports, 'NotificationController', {
   }
 });
 
+var _aureliaPal = require('aurelia-pal');
+
 var _notificationRenderer = require('./notification-renderer');
 
 function configure(config, callback) {
-  config.globalResources('./bs-notification');
+  config.globalResources(_aureliaPal.PLATFORM.moduleName('./bs-notification'));
 
   if (typeof callback === 'function') {
     callback(_notificationRenderer.globalSettings);

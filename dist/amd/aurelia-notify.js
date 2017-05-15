@@ -1,17 +1,17 @@
-define(['exports', './bs-notification', './notification-level', './notification-service', './notification-controller', './notification-renderer'], function (exports, _bsNotification, _notificationLevel, _notificationService, _notificationController, _notificationRenderer) {
+define(['exports', './bs-notification', './notification-level', './notification-service', './notification-controller', 'aurelia-pal', './notification-renderer'], function (exports, _bsNotification, _notificationLevel, _notificationService, _notificationController, _aureliaPal, _notificationRenderer) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.NotificationController = exports.NotificationService = exports.NotificationLevel = exports.BSNotification = undefined;
+  exports.configure = configure;
   Object.defineProperty(exports, 'BSNotification', {
     enumerable: true,
     get: function () {
       return _bsNotification.BSNotification;
     }
   });
-  exports.configure = configure;
   Object.defineProperty(exports, 'NotificationLevel', {
     enumerable: true,
     get: function () {
@@ -31,7 +31,7 @@ define(['exports', './bs-notification', './notification-level', './notification-
     }
   });
   function configure(config, callback) {
-    config.globalResources('./bs-notification');
+    config.globalResources(_aureliaPal.PLATFORM.moduleName('./bs-notification'));
 
     if (typeof callback === 'function') {
       callback(_notificationRenderer.globalSettings);
