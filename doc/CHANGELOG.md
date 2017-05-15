@@ -1,3 +1,13 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/MarcScheib/aurelia-notify/compare/0.7.1...0.8.0) (2017-05-15)
+
+
+### Features
+
+* **webpack:** add webpack resources ([8404de9](https://github.com/MarcScheib/aurelia-notify/commit/8404de9))
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/MarcScheib/aurelia-notify/compare/0.7.0...0.7.1) (2017-04-23)
 
