@@ -29,7 +29,7 @@ System.register(['./lifecycle'], function (_export, _context) {
           clearTimeout(this.timer);
           return this.closePromise = invokeLifecycle(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
             if (canDeactivate) {
-              invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
+              return invokeLifecycle(_this.viewModel, 'deactivate').then(function () {
                 return _this.renderer.hideNotification(_this);
               }).then(function () {
                 return _this.renderer.destroyNotificationHost(_this);

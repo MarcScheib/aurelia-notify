@@ -25,7 +25,7 @@ define(['exports', './lifecycle'], function (exports, _lifecycle) {
       clearTimeout(this.timer);
       return this.closePromise = (0, _lifecycle.invokeLifecycle)(this.viewModel, 'canDeactivate').then(function (canDeactivate) {
         if (canDeactivate) {
-          (0, _lifecycle.invokeLifecycle)(_this.viewModel, 'deactivate').then(function () {
+          return (0, _lifecycle.invokeLifecycle)(_this.viewModel, 'deactivate').then(function () {
             return _this.renderer.hideNotification(_this);
           }).then(function () {
             return _this.renderer.destroyNotificationHost(_this);

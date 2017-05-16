@@ -13,7 +13,7 @@ export let NotificationController = class NotificationController {
     clearTimeout(this.timer);
     return this.closePromise = invokeLifecycle(this.viewModel, 'canDeactivate').then(canDeactivate => {
       if (canDeactivate) {
-        invokeLifecycle(this.viewModel, 'deactivate').then(() => {
+        return invokeLifecycle(this.viewModel, 'deactivate').then(() => {
           return this.renderer.hideNotification(this);
         }).then(() => {
           return this.renderer.destroyNotificationHost(this);

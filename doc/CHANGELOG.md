@@ -1,3 +1,13 @@
+<a name="0.8.1"></a>
+## [0.8.1](https://github.com/MarcScheib/aurelia-notify/compare/0.8.0...0.8.1) (2017-05-16)
+
+
+### Bug Fixes
+
+* **controller:** return deactivation lifecycle promise ([58c647a](https://github.com/MarcScheib/aurelia-notify/commit/58c647a))
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/MarcScheib/aurelia-notify/compare/0.7.1...0.8.0) (2017-05-15)
 
