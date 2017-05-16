@@ -1,4 +1,4 @@
-import { PLATFORM } from 'aurelia-pal';
+import {PLATFORM} from 'aurelia-pal';
 import {globalSettings} from './notification-renderer';
 
 export function configure(config, callback) {

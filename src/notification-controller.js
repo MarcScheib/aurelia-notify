@@ -14,7 +14,7 @@ export class NotificationController {
     return this.closePromise = invokeLifecycle(this.viewModel, 'canDeactivate')
       .then(canDeactivate => {
         if (canDeactivate) {
-          invokeLifecycle(this.viewModel, 'deactivate')
+          return invokeLifecycle(this.viewModel, 'deactivate')
             .then(() => {
               return this.renderer.hideNotification(this);
             })
