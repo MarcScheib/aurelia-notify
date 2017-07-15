@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/travis/MarcScheib/aurelia-notify/master.svg?style=flat-square)](https://travis-ci.org/MarcScheib/aurelia-notify) 
 [![Coverage Status](https://img.shields.io/coveralls/MarcScheib/aurelia-notify/master.svg?style=flat-square)](https://coveralls.io/github/MarcScheib/aurelia-notify?branch=master)
 [![Dependency Status](https://img.shields.io/david/MarcScheib/aurelia-notify.svg?style=flat-square)](https://david-dm.org/MarcScheib/aurelia-notify)
-[![devDependency Status](https://img.shields.io/david/dev/MarcScheib/aurelia-notify.svg?style=flat-square)](https://david-dm.org/MarcScheib/aurelia-notify#info=devDependencies)
+[![devDependency Status](https://img.shields.io/david/dev/MarcScheib/aurelia-notify.svg?style=flat-square)](https://david-dm.org/MarcScheib/aurelia-notify?type=dev)
 [![npm Version](https://img.shields.io/npm/v/aurelia-notify.svg?style=flat-square)](https://www.npmjs.com/package/aurelia-notify)
 
 A simple notification plugin for [Aurelia](http://www.aurelia.io/).
