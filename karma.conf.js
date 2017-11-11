@@ -1,67 +1,69 @@
-let paths = require('./build/paths');
+// Karma configuration
+// Generated on Sun Aug 28 2016 19:03:27 GMT-0400 (Eastern Daylight Time)
 
 module.exports = function (config) {
-  let configuration = {
+  config.set({
+
+    // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-    frameworks: ['jspm', 'jasmine'],
 
-    jspm: {
-      loadFiles: ['test/unit/setup.js', paths.tests],
-      serveFiles: [paths.source]
-    },
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: ['jasmine', 'requirejs'],
+
 
     // list of files / patterns to load in the browser
-    files: [],
+    files: [
+      'dist/test/test/main.js',
+      {pattern: 'dist/test/**/*.js', included: false, watched: true},
+      {pattern: 'node_modules/**/*.js', included: false, watched: false}
+    ],
+
 
     // list of files to exclude
     exclude: [],
 
+
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      [paths.tests]: ['babel'],
-      [paths.source]: ['babel']
-    },
+    preprocessors: {},
 
-    'babelPreprocessor': {
-      options: {
-        sourceMap: 'inline',
-        presets: [['es2015', {loose: true}], 'stage-1'],
-        plugins: [
-          'syntax-flow',
-          'transform-decorators-legacy',
-          'transform-flow-strip-types',
-          'istanbul'
-        ]
-      }
-    },
 
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 
+
+    // web server port
     port: 9876,
 
+
+    // enable / disable colors in the output (reporters and logs)
     colors: true,
 
+
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
+
+    // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-    customLaunchers: {
-      Chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    },
 
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
-    singleRun: false
-  };
 
-  if (process.env.TRAVIS) {
-    configuration.browsers = ['Chrome_travis_ci'];
-  }
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: false,
 
-  config.set(configuration);
-};
+    // Concurrency level
+    // how many browser should be started simultaneous
+    concurrency: Infinity
+  })
+}
