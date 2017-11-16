@@ -1,11 +1,11 @@
-import {BSNotification} from '../../src/bs-notification';
-import {NotificationController} from '../../src/notification-controller';
-import {NotificationRenderer} from '../../src/notification-renderer';
+import { BSNotification } from '../../src/bs-notification';
+import { NotificationController } from '../../src/notification-controller';
+import { NotificationRenderer } from '../../src/notification-renderer';
 
 describe('the BSNotification View Model', () => {
   let renderer;
-  let controller;
-  let sut;
+  let controller: NotificationController;
+  let sut: BSNotification;
 
   beforeEach(() => {
     renderer = new NotificationRenderer();
@@ -18,7 +18,7 @@ describe('the BSNotification View Model', () => {
   });
 
   it('should save the message and info on activation', () => {
-    let model = {
+    const model = {
       level: 'info',
       notification: 'message'
     };

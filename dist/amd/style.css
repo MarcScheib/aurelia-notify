@@ -1,9 +1,0 @@
-notification-host {
-  display: block;
-  transition: opacity .2s linear;
-  opacity: 0;
-}
-
-.notification-host-active {
-  opacity: 1;
-}

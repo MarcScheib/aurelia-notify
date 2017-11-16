@@ -1,12 +1,14 @@
-import {NotificationController} from '../../src/notification-controller';
+import { NotificationController } from '../../src/notification-controller';
+import { NotificationRenderer } from '../../src/notification-renderer';
 
 describe('the Notification Controller', () => {
-  let renderer;
-  let settings;
-  let sut;
+  let renderer: NotificationRenderer;
+  let settings: any;
+  let sut: NotificationController;
 
   beforeEach(() => {
-    settings = { name: 'Notification' };
+    renderer = new NotificationRenderer();
+    settings = {name: 'Notification'};
     sut = new NotificationController(renderer, settings);
   });
 

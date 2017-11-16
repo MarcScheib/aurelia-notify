@@ -1,13 +1,17 @@
-import {NotificationController} from './notification-controller';
+import { NotificationController } from './notification-controller';
 
 export class BSNotification {
-  static inject = [NotificationController];
+  public static inject = [NotificationController];
+
+  public controller: NotificationController;
+  public level: any;
+  public notification: any;
 
   constructor(controller: NotificationController) {
     this.controller = controller;
   }
 
-  activate(model: any) {
+  public activate(model: any): void {
     this.level = model.level;
     this.notification = model.notification;
   }

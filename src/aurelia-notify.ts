@@ -1,8 +1,10 @@
-import {PLATFORM} from 'aurelia-pal';
-import {globalSettings} from './notification-renderer';
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { PLATFORM } from 'aurelia-pal';
+import { globalSettings } from './notification-renderer';
 
-export function configure(config, callback) {
-  config.globalResources(
+export function configure(frameworkConfig: FrameworkConfiguration,
+                          callback?: (config: any) => void) {
+  frameworkConfig.globalResources(
     PLATFORM.moduleName('./bs-notification')
   );
 
@@ -11,7 +13,7 @@ export function configure(config, callback) {
   }
 }
 
-export {BSNotification} from './bs-notification';
-export {NotificationLevel} from './notification-level';
-export {NotificationService} from './notification-service';
-export {NotificationController} from './notification-controller';
+export { BSNotification } from './bs-notification';
+export { NotificationLevel } from './notification-level';
+export { NotificationService } from './notification-service';
+export { NotificationController } from './notification-controller';

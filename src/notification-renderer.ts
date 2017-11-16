@@ -1,7 +1,8 @@
-import {DOM} from 'aurelia-pal';
-import {ViewSlot} from 'aurelia-templating';
+import { DOM } from 'aurelia-pal';
+import { ViewSlot } from 'aurelia-templating';
 
-import {BSNotification} from './bs-notification';
+import { BSNotification } from './bs-notification';
+import { NotificationController } from './notification-controller';
 
 export let globalSettings = {
   append: false,
@@ -11,42 +12,45 @@ export let globalSettings = {
   limit: 5
 };
 
-let transitionEvent = (function() {
-  let transition = null;
-
-  return function() {
-    if (transition) return transition;
+const transitionEvent = (() => {
+  let transition: string | undefined;
+  return (): string => {
+    if (transition) {
+      return transition;
+    }
 
     let t;
-    let el = DOM.createElement('fakeelement');
-    let transitions = {
-      'transition': 'transitionend',
-      'OTransition': 'oTransitionEnd',
-      'MozTransition': 'transitionend',
-      'WebkitTransition': 'webkitTransitionEnd'
+    const el: HTMLElement = DOM.createElement('fakeelement') as HTMLElement;
+    const transitions: { [key: string]: string; } = {
+      transition: 'transitionend',
+      OTransition: 'oTransitionEnd',
+      MozTransition: 'transitionend',
+      WebkitTransition: 'webkitTransitionEnd'
     };
     for (t in transitions) {
-      if (el.style[t] !== undefined) {
+      if ((el.style as any)[t] !== undefined) {
         transition = transitions[t];
         return transition;
       }
     }
 
-    return undefined;
+    return '';
   };
-}());
+})();
 
 export class NotificationRenderer {
-  defaultSettings = globalSettings;
+  private notificationControllers: NotificationController[];
+
+  public defaultSettings = globalSettings;
 
   constructor() {
     this.notificationControllers = [];
   }
 
-  createNotificationHost(notificationController: NotificationController) {
-    let settings = notificationController.settings;
-    let notificationHost = DOM.createElement('notification-host');
-    let notificationContainer = this.getNotificationContainer(settings.containerSelector);
+  public createNotificationHost(notificationController: NotificationController) {
+    const settings = notificationController.settings;
+    const notificationHost = DOM.createElement('notification-host');
+    const notificationContainer = this.getNotificationContainer(settings.containerSelector);
 
     if (settings.append === true) {
       notificationContainer.appendChild(notificationHost);
@@ -61,17 +65,18 @@ export class NotificationRenderer {
       this.notificationControllers.push(notificationController);
 
       if (this.notificationControllers.length >= (settings.limit + 1)) {
-        this.notificationControllers[0].close(this.notificationControllers[0]);
+        this.notificationControllers[0].close();
       }
 
       notificationController.slot.attached();
 
       if (settings.timeout > 0) {
+        // tslint:disable-next-line:max-line-length
         notificationController.timer = setTimeout(notificationController.close.bind(notificationController), settings.timeout);
       }
 
-      return new Promise((resolve) => {
-        function onTransitionEnd(e) {
+      return new Promise((resolve: any) => {
+        function onTransitionEnd(e: TransitionEvent) {
           if (e.target !== notificationHost) {
             return;
           }
@@ -87,12 +92,12 @@ export class NotificationRenderer {
     };
 
     notificationController.hideNotification = () => {
-      let i = this.notificationControllers.indexOf(notificationController);
+      const i = this.notificationControllers.indexOf(notificationController);
       if (i !== -1) {
         this.notificationControllers.splice(i, 1);
       }
 
-      return new Promise((resolve) => {
+      return new Promise((resolve: any) => {
         function onTransitionEnd() {
           notificationHost.removeEventListener(transitionEvent(), onTransitionEnd);
           resolve();
@@ -113,19 +118,19 @@ export class NotificationRenderer {
     return Promise.resolve();
   }
 
-  showNotification(notificationController: NotificationController) {
+  public showNotification(notificationController: NotificationController) {
     return notificationController.showNotification();
   }
 
-  hideNotification(notificationController: NotificationController) {
+  public hideNotification(notificationController: NotificationController) {
     return notificationController.hideNotification();
   }
 
-  destroyNotificationHost(notificationController: NotificationController) {
+  public destroyNotificationHost(notificationController: NotificationController) {
     return notificationController.destroyNotificationHost();
   }
 
-  getNotificationContainer(containerSelector: string) {
+  public getNotificationContainer(containerSelector: string) {
     let notificationContainer = DOM.querySelectorAll(containerSelector);
     if (notificationContainer === null) {
       notificationContainer = DOM.querySelectorAll('body');

@@ -1,6 +1,6 @@
-import {NotificationController} from '../../src/notification-controller';
-import {NotificationRenderer} from '../../src/notification-renderer';
-import {BSNotification} from '../../src/bs-notification';
+import { NotificationController } from '../../src/notification-controller';
+import { NotificationRenderer } from '../../src/notification-renderer';
+import { BSNotification } from '../../src/bs-notification';
 
 export let defaultSettings = {
   append: false,

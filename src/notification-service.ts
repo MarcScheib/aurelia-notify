@@ -1,40 +1,36 @@
-import {Container} from 'aurelia-dependency-injection';
-import {Origin} from 'aurelia-metadata';
-import {CompositionEngine} from 'aurelia-templating';
+import { Container } from 'aurelia-dependency-injection';
+import { Origin } from 'aurelia-metadata';
+import { CompositionContext, CompositionEngine, Controller, ViewSlot } from 'aurelia-templating';
 
-import {invokeLifecycle} from './lifecycle';
-import {NotificationController} from './notification-controller';
-import {NotificationLevel} from './notification-level';
-import {NotificationRenderer} from './notification-renderer';
+import { invokeLifecycle } from './lifecycle';
+import { NotificationController } from './notification-controller';
+import { NotificationLevel } from './notification-level';
+import { NotificationRenderer } from './notification-renderer';
 
 export class NotificationService {
-  static inject = [CompositionEngine, Container, NotificationRenderer];
+  public static inject = [CompositionEngine, Container, NotificationRenderer];
 
-  compositionEngine: CompositionEngine;
-  container: Container;
-  notificationRenderer: NotificationRenderer;
-
-  constructor(compositionEngine: CompositionEngine, container: Container, notificationRenderer: NotificationRenderer) {
-    this.compositionEngine = compositionEngine;
-    this.container = container;
-    this.notificationRenderer = notificationRenderer;
+  constructor(private compositionEngine: CompositionEngine,
+              private container: Container,
+              private notificationRenderer: NotificationRenderer) {
   }
 
-  notify(model: any, settings?: any, level?: string) {
-    let _settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
-    let notificationController = new NotificationController(this.notificationRenderer, _createSettings(model, _settings, level));
-    let childContainer = this.container.createChild();
+  public notify(model: any, settings?: any, level?: string) {
+    settings = Object.assign({}, this.notificationRenderer.defaultSettings, settings);
+    // tslint:disable-next-line:max-line-length
+    const notificationController = new NotificationController(this.notificationRenderer, _createSettings(model, settings, level));
+    const childContainer = this.container.createChild();
     childContainer.registerInstance(NotificationController, notificationController);
 
     return _getViewModel(this.container, childContainer, this.compositionEngine, notificationController)
-      .then(returnedCompositionContext => {
+      .then((returnedCompositionContext: CompositionContext) => {
         notificationController.viewModel = returnedCompositionContext.viewModel;
 
-        return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', _settings.model)
+        return invokeLifecycle(returnedCompositionContext.viewModel, 'canActivate', settings.model)
           .then(canActivate => {
             if (canActivate) {
               this.compositionEngine.createController(returnedCompositionContext)
-                .then(controller => {
+                .then((controller: Controller) => {
                   notificationController.controller = controller;
                   notificationController.view = controller.view;
                   controller.automate();
@@ -49,24 +45,24 @@ export class NotificationService {
       });
   }
 
-  info(message: string, settings?: any) {
-    this.notify(message, settings, NotificationLevel.info);
+  public info(message: string, settings?: any) {
+    return this.notify(message, settings, NotificationLevel.info);
   }
 
-  success(message: string, settings?: any) {
-    this.notify(message, settings, NotificationLevel.success);
+  public success(message: string, settings?: any) {
+    return this.notify(message, settings, NotificationLevel.success);
   }
 
-  warning(message: string, settings?: any) {
-    this.notify(message, settings, NotificationLevel.warning);
+  public warning(message: string, settings?: any) {
+    return this.notify(message, settings, NotificationLevel.warning);
   }
 
-  danger(message: string, settings?: any) {
-    this.notify(message, settings, NotificationLevel.danger);
+  public danger(message: string, settings?: any) {
+    return this.notify(message, settings, NotificationLevel.danger);
   }
 }
 
-function _createSettings(model, settings, level) {
+function _createSettings(model: any, settings: any, level?: string) {
   let notification;
   if (typeof model === 'string') {
     notification = model;
@@ -80,19 +76,25 @@ function _createSettings(model, settings, level) {
   }
 
   settings.model = {
-    notification: notification,
+    notification,
     data: model,
     level: level || NotificationLevel.info
   };
   return settings;
 }
 
-function _getViewModel(container, childContainer, compositionEngine, notificationController) {
-  let compositionContext = {
-    container: container,
-    childContainer: childContainer,
+function _getViewModel(container: Container,
+                       childContainer: Container,
+                       compositionEngine: CompositionEngine,
+                       notificationController: NotificationController) {
+  const compositionContext: CompositionContext = {
+    container,
+    childContainer,
+    bindingContext: null,
+    viewResources: null as any,
     model: notificationController.settings.model,
-    viewModel: notificationController.settings.viewModel
+    viewModel: notificationController.settings.viewModel,
+    viewSlot: new ViewSlot(undefined, true),
   };
 
   if (typeof compositionContext.viewModel === 'function') {
